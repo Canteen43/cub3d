@@ -1,0 +1,12 @@
+Wall height and field of view:
+Projected Height=Wall Height × Projection Plane Distance​ / Distance to Wall
+
+Projection Plane Distance= Screen Width​ / 2⋅tan(FOV/2)
+
+Angles: Sine notation instead of degrees. type: double (for precision)
+
+Coordinates: floats (for easier computation)
+
+Project Plan:
+1 Super simple design for mandatory part to get the math working.
+2 Nice design for bonus.
