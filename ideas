@@ -5,6 +5,8 @@ Projection Plane Distance= Screen Width​ / 2⋅tan(FOV/2)
 
 Angles: Sine notation instead of degrees. type: double (for precision)
 
+use distance and width of monitor for realistic feel
+
 Coordinates: floats (for easier computation)
 
 Project Plan:
