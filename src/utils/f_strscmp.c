@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_strchr.c                                         :+:      :+:    :+:   */
+/*   f_strscmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/05 12:26:31 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/08 17:53:52 by kweihman         ###   ########.fr       */
+/*   Created: 2024/11/16 10:13:28 by kweihman          #+#    #+#             */
+/*   Updated: 2025/01/08 18:06:06 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "minishell.h"
 
-/*Analogous to memchr, s and c will be interpreted as unsigned char. 'A' + 256 
-will be interpreted as 'A'.*/
-char	*f_strchr(const char *s, int c)
+/*Uses f_strcmp to compare n strings and returns the first string that
+is equal.*/
+char	*f_strscmp(char *str1, int n, ...)
 {
-	while (*s)
+	va_list	strs;
+	char	*str;
+
+	va_start(strs, n);
+	while (n)
 	{
-		if (*(unsigned char *)s == (unsigned char)c)
-			return ((char *)s);
-		s++;
+		str = va_arg(strs, char *);
+		if (f_strcmp(str, str1) == 0)
+		{
+			va_end(strs);
+			return (str);
+		}
+		n--;
 	}
-	if ((unsigned char)c == '\0')
-		return ((char *)s);
+	va_end(strs);
 	return (NULL);
 }

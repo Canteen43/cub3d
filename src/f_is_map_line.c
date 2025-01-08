@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_strchr.c                                         :+:      :+:    :+:   */
+/*   f_is_map_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/05 12:26:31 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/08 17:53:52 by kweihman         ###   ########.fr       */
+/*   Created: 2025/01/08 19:04:04 by kweihman          #+#    #+#             */
+/*   Updated: 2025/01/08 19:10:05 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/*Analogous to memchr, s and c will be interpreted as unsigned char. 'A' + 256 
-will be interpreted as 'A'.*/
-char	*f_strchr(const char *s, int c)
+/*Returns whether the given str qualifies as a valid line in the map.*/
+bool	f_is_map_line(char *str)
 {
-	while (*s)
+	bool	start_pos_found;
+
+	start_pos_found = false;
+	if (!str)
+		return (false);
+	while (*str)
 	{
-		if (*(unsigned char *)s == (unsigned char)c)
-			return ((char *)s);
-		s++;
+		if (!f_strchr(" 10NSWE", *str))
+			return (false);
+		if (f_strchr("NSWE", *str))
+		{
+			if (start_pos_found)
+				return (false);
+			else
+				start_pos_found = true;
+		}
+		str++;
 	}
-	if ((unsigned char)c == '\0')
-		return ((char *)s);
-	return (NULL);
+	return (true);
 }
