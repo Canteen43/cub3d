@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/11 18:13:13 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/11 18:16:38 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ bool				f_is_config_complete(t_main *main);
 void				f_check_args(int argc, char **argv);
 void				f_set_config_data(t_main *main, char **cublines);
 t_line_typ			f_set_input_line_type(char *line);
+void				f_handle_cub_input(t_main *main, char **argv);
 
 // Core
 void				f_print_error(char *func, char *message);
