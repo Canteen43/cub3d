@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/11 16:11:38 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/11 18:13:13 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <unistd.h>
 // For printf()
 # include <stdio.h>
-// For malloc(), free()
+// For f_gc_malloc(main, ), free()
 # include <stdlib.h>
 // For perror(), strerror()
 # include <string.h>
@@ -45,42 +45,57 @@ typedef enum e_line_type
 	CEILING,
 	MAP,
 	WRONG,
-}			t_line_type;
+}					t_line_type;
+
+// Garbage collection struct
+typedef struct s_gnode
+{
+	void			*ptr;
+	struct s_gnode	*next;
+}					t_gnode;
 
 // Main struct
 typedef struct s_main
 {
-	char	*no_txtr_path;
-	char	*ea_txtr_path;
-	char	*so_txtr_path;
-	char	*we_txtr_path;
-	int		floor_color;
-	int		ceiling_color;
-}			t_main;
+	t_gnode			*gc_head;
+	char			*no_txtr_path;
+	char			*ea_txtr_path;
+	char			*so_txtr_path;
+	char			*we_txtr_path;
+	int				floor_color;
+	int				ceiling_color;
+	char			*entire_cubfile;
+	char			**cubfile_line_by_line;
+	int				cubfile_fd;
+}					t_main;
 
 // Function declarations
 // Utils
-void		f_bzero(void *s, size_t n);
-char		*f_readfile(int fd);
-int			f_strcmp(char *str1, char *str2);
-char		*f_strjoin(char const *s1, char const *s2);
-size_t		f_strlen(const char *s);
-int			f_char_count(char *str, char c);
-char		*f_strchr(const char *s, int c);
-void		*f_memcpy(void *dest, const void *src, size_t n);
-char		**f_splitlines(char *text);
-char		**f_split(char const *s, char c);
-void		f_free_split(char **array);
-char		*f_strscmp(char *str1, int n, ...);
-char		*f_strdup(const char *s);
+void				f_bzero(void *s, size_t n);
+char				*f_readfile(int fd);
+int					f_strcmp(char *str1, char *str2);
+char				*f_strjoin(char const *s1, char const *s2);
+size_t				f_strlen(const char *s);
+int					f_char_count(char *str, char c);
+char				*f_strchr(const char *s, int c);
+void				*f_memcpy(void *dest, const void *src, size_t n);
+char				**f_splitlines(char *text);
+char				**f_split(char const *s, char c);
+void				f_free_split(char **array);
+char				*f_strscmp(char *str1, int n, ...);
+char				*f_strdup(const char *s);
 
 // Parsing
-bool		f_is_map_line(char *str);
-void		f_set_color_config(t_main *main, t_line_type type, char *line);
-bool		f_is_config_complete(t_main *main);
+bool				f_is_map_line(char *str);
+void				f_set_color_config(t_main *main, t_line_type type,
+						char *line);
+bool				f_is_config_complete(t_main *main);
+void				f_check_args(int argc, char **argv);
+void				f_set_config_data(t_main *main, char **cublines);
+t_line_typ			f_set_input_line_type(char *line);
 
 // Core
-void		f_error_and_exit(char *error, int exit_code);
-void		f_check_args(int argc, char **argv);
-void		f_print_error(char *func, char *message);
+void				f_print_error(char *func, char *message);
+void				*f_gc_f_gc_malloc(main, t_main *main, size_t size);
+void				f_gc_clean(t_main *main);
 #endif // CUB3D_H

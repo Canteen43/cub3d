@@ -6,14 +6,14 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 11:52:45 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/11 13:21:24 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/11 18:14:43 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// TODO: write function description
-// TODO: figure out return value and/or freeing mechanism
+/* Checks if given line fits texture-path-line-format and sets texture path
+if so. Exits on error. */
 void	f_set_texture_path(t_main *main, t_line_type type, char *line)
 {
 	char	*target;
@@ -28,16 +28,15 @@ void	f_set_texture_path(t_main *main, t_line_type type, char *line)
 	if (type == WEST)
 		target = main->we_txtr_path;
 	if (target != NULL)
-		f_print_error(__func__, "Redefintion of texture path.");
+		f_graceful_exit(main, 1, __func__, "Redefintion of texture path.");
 	split_res = f_split(line, ' ');
 	if (!split_res || !split_res[0])
-		f_print_error(__func__, "Split() failed.");
+		f_graceful_exit(main, 1, __func__, "Split() failed.");
 	if (!split_res[1])
-		f_print_error(__func__, "Too few args in texture line.");
+		f_graceful_exit(main, 1, __func__, "Too few args in texture line.");
 	if (split_res[2])
-		f_print_error(__func__, "Too many args in texture line.");
+		f_graceful_exit(main, 1, __func__, "Too many args in texture line.");
 	target = f_strdup(res[1]);
 	if (target == NULL)
-		f_print_error(__func__, "Strdup() failed.");
-	f_free_split(split_res);
+		f_graceful_exit(main, 1, __func__, "Strdup() failed.");
 }

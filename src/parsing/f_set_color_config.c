@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 13:31:10 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/11 15:56:42 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/11 17:55:25 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@ void	f_set_color_config(t_main *main, t_line_type type, char *line)
 	if (type == CEILING)
 		target = &main->ceiling_color;
 	if (*target != -1)
-		f_print_error(__func__, "Redefintion of color config.");
+		f_graceful_exit(main, 1, __func__, "Redefintion of color config.");
 	i = 1;
 	if (sf_get_value(main, line, &i, 'r'))
-		f_print_error(__func__, "Wrong value for red color config.");
+		f_graceful_exit(main, 1, __func__, "Wrong value for red config.");
 	if (sf_check_comma(line, &i))
-		f_print_error(__func__, "Comma missing after color config.");
+		f_graceful_exit(main, 1, __func__, "Comma missing after color config.");
 	if (sf_get_value(main, line, &i, 'g'))
-		f_print_error(__func__, "Wrong value for green color config.");
+		f_graceful_exit(main, 1, __func__, "Wrong value for green config.");
 	if (sf_check_comma(line, &i))
-		f_print_error(__func__, "Comma missing after color config.");
+		f_graceful_exit(main, 1, __func__, "Comma missing after color config.");
 	if (sf_get_value(main, line, &i, 'b'))
-		f_print_error(__func__, "Wrong value for blue color config.");
+		f_graceful_exit(main, 1, __func__, "Wrong value for blue config.");
 	if (line[i] != '\0')
-		f_print_error(__func__, "Extra argument for color config.");
+		f_graceful_exit(main, 1, __func__, "Extra argument for color config.");
 }
 
 void	sf_skip_spaces(char *line, int *i)

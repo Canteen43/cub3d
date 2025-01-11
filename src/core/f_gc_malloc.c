@@ -1,33 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_strdup.c                                         :+:      :+:    :+:   */
+/*   f_gc_malloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/11 12:04:13 by kweihman          #+#    #+#             */
+/*   Created: 2024/11/17 15:16:46 by glevin            #+#    #+#             */
 /*   Updated: 2025/01/11 18:11:45 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "minishell.h"
 
-char	*f_strdup(const char *s)
+// Function to add a node to the garbage collector list
+t_gnode	*f_gc_add_node(t_main *main, void *ptr)
 {
-	char	*str;
-	int		i;
+	t_gnode	*new_node;
 
-	if (!s)
+	new_node = (t_gnode *)f_gc_malloc(main, sizeof(t_gnode));
+	if (!new_node)
 		return (NULL);
-	str = f_gc_malloc(main, (ft_strlen(s) + 1) * sizeof(char));
-	if (!str)
+	new_node->ptr = ptr;
+	new_node->next = main->gc_head;
+	main->gc_head = new_node;
+	return (new_node);
+}
+
+// Wrapper for malloc that integrates with garbage collector
+void	*f_gc_f_gc_malloc(main, t_main *main, size_t size)
+{
+	void	*ptr;
+
+	ptr = f_gc_malloc(main, size);
+	if (ptr == NULL)
 		return (NULL);
-	i = 0;
-	while (s[i])
+	if (f_gc_add_node(main, ptr) == NULL)
 	{
-		str[i] = s[i];
-		i++;
+		free(ptr);
+		return (NULL);
 	}
-	str[i] = '\0';
-	return (str);
+	return (ptr);
 }

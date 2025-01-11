@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 14:40:33 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/04 14:42:04 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/11 18:11:45 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*f_readfile(int fd)
 	char	buf[BUFFER_SIZE];
 	int		read_rt;
 
-	str = malloc(sizeof(char));
+	str = f_gc_malloc(main, sizeof(char));
 	if (str == NULL)
 		return (NULL);
 	*str = '\0';

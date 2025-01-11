@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:11:19 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/08 18:03:08 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/11 18:11:45 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ char	**f_split(char const *s, char c)
 	sub_cnt = 0;
 	while (index_substr(s, sub_cnt, c))
 		sub_cnt++;
-	ptr = malloc((sub_cnt + 1) * sizeof(void *));
+	ptr = f_gc_malloc(main, (sub_cnt + 1) * sizeof(void *));
 	if (ptr == NULL)
 		return (NULL);
 	i = 0;
 	while (i < sub_cnt)
 	{
-		ptr[i] = malloc((substr_len(s, c, i) + 1) * sizeof(char));
+		ptr[i] = f_gc_malloc(main, (substr_len(s, c, i) + 1) * sizeof(char));
 		if (ptr[i] == NULL)
 		{
 			f_free_split(ptr);

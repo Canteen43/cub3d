@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_error_and_exit.c                                 :+:      :+:    :+:   */
+/*   f_graceful_exit.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/04 14:11:46 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/08 18:32:23 by kweihman         ###   ########.fr       */
+/*   Created: 2025/01/11 17:41:41 by kweihman          #+#    #+#             */
+/*   Updated: 2025/01/11 18:13:36 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	f_error_and_exit(char *error, int exit_code)
+void	f_graceful_exit(t_main *main, int exit_code, char *func, char *message)
 {
-	write(2, error, strlen(error));
+	if (exit_code)
+		f_print_error(func, message);
+	f_gc_clean(main);
 	exit(exit_code);
 }

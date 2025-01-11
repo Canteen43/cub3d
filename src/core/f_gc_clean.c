@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_strjoin.c                                        :+:      :+:    :+:   */
+/*   f_gc_clean.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/04 14:43:22 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/11 18:11:45 by kweihman         ###   ########.fr       */
+/*   Created: 2024/11/21 14:00:37 by glevin            #+#    #+#             */
+/*   Updated: 2024/11/26 13:40:49 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "minishell.h"
 
-char	*f_strjoin(char const *s1, char const *s2)
+// Function to clean all allocated memory in the garbage collector
+void	f_gc_clean(t_main *main)
 {
-	size_t	size_needed;
-	char	*s3;
+	t_gnode	*tmp;
+	t_gnode	*current;
 
-	size_needed = f_strlen(s1) + f_strlen(s2) + 1;
-	s3 = f_gc_malloc(main, size_needed * sizeof(char));
-	if (!s3)
-		return (NULL);
-	while (*s1)
-		*s3++ = *s1++;
-	while (*s2)
-		*s3++ = *s2++;
-	*s3 = '\0';
-	s3 -= (size_needed - 1);
-	return (s3);
+	current = main->gc_head;
+	while (current)
+	{
+		if (current->ptr)
+			free(current->ptr);
+		tmp = current;
+		current = current->next;
+		free(tmp);
+	}
+	main->gc_head = NULL;
 }
