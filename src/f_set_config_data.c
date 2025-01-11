@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 13:35:13 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/08 19:15:26 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/11 11:14:02 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,20 @@ void	f_set_config_data(t_main *main, char **cublines)
 {
 	int			i;
 	t_line_typ	type;
+	bool		config_complete;
 
 	i = 0;
+	config_complete = false;
 	while (cublines[i])
 	{
 		type = f_set_input_line_type(cublines[i]);
+		if (type == WRONG)
+			error wrong line;
+		if (type == MAP && config_complete)
+			end function;
+		if (type == MAP && !config_complete)
+			error uncomplete config before map;
+		if (type is config)
+			set config;
 	}
-}
-
-static void	sf_line_to_data(char *line)
-{
-	char	**res;
-
-	res = f_split(line, ' ');
-	if (!res || res[1] || res[2])
-		something;
-	if (!f_strscmp(res[i], 6, "NO", "EA", "SO", "WE", "F", "C"))
-		f_error_and_exit("Found unexpected line", 1);
-	f_free_split(res);
 }
