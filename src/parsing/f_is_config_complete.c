@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_handle_cub_input.c                               :+:      :+:    :+:   */
+/*   f_is_config_complete.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/04 16:27:30 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/08 17:49:10 by kweihman         ###   ########.fr       */
+/*   Created: 2025/01/11 16:06:12 by kweihman          #+#    #+#             */
+/*   Updated: 2025/01/11 16:10:05 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	f_handle_cub_input(t_main *main, char **argv)
+/*Returns whether all config data has been set or not.*/
+bool	f_is_config_complete(t_main *main)
 {
-	int fd;
-	char **cublines;
-
-	fd = open(argv[1], O_RDONLY, NULL);
-	cublines = f_splitlines(f_readfile(fd));
-	f_set_config_data(main, cublines);
+	if (main->no_txtr_path && main->ea_txtr_path && main->so_txtr_path
+		&& main->we_txtr_path && main->ceiling_color != -1
+		&& main->floor_color != -1)
+		return (true);
+	return (false);
+}

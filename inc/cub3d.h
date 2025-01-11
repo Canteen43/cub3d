@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/08 19:10:26 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/11 16:11:38 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,15 @@ char		**f_splitlines(char *text);
 char		**f_split(char const *s, char c);
 void		f_free_split(char **array);
 char		*f_strscmp(char *str1, int n, ...);
+char		*f_strdup(const char *s);
 
+// Parsing
+bool		f_is_map_line(char *str);
+void		f_set_color_config(t_main *main, t_line_type type, char *line);
+bool		f_is_config_complete(t_main *main);
+
+// Core
 void		f_error_and_exit(char *error, int exit_code);
 void		f_check_args(int argc, char **argv);
-bool		f_is_map_line(char *str);
+void		f_print_error(char *func, char *message);
 #endif // CUB3D_H
