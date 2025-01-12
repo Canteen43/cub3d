@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 13:45:06 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/08 17:47:04 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/12 13:51:34 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 	t_main	*main;
 
 	f_check_args(argc, argv);
-	f_handle_cub_input(&main);
+	f_handle_cub_file(&main, argv);
 	// mlx_hook
 	// init_sim
 	// run_sim

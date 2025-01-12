@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/12 11:16:57 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/12 13:52:07 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_main
 	int				cubfile_fd;
 	int				map_line_count;
 	int				map_line_width;
+	char			**map;
 }					t_main;
 
 // Function declarations
@@ -94,14 +95,20 @@ void				f_set_color_config(t_main *main, t_line_type type,
 bool				f_is_config_complete(t_main *main);
 void				f_check_args(int argc, char **argv);
 void				f_set_config_data(t_main *main, char **cublines);
-t_line_typ			f_set_input_line_type(char *line);
-void				f_handle_cub_input(t_main *main, char **argv);
+t_line_type			f_set_input_line_type(char *line);
+void				f_handle_cub_file(t_main *main, char **argv);
 void				f_set_map(t_main *main);
 void				f_check_for_invalid_map_lines(t_main *main);
+void				f_set_map_dimensions(t_main *main);
+void				f_create_map_array(t_main *main);
+void				f_fill_map_array(t_main *main);
+void				f_check_open_walls(t_main *main);
+void				f_check_single_starting_pos(t_main *main);
+void				f_import_cub_file(t_main *main, char **argv);
 
 // Core
 void				f_print_error(char *func, char *message);
-void				*f_gc_f_gc_malloc(main, t_main *main, size_t size);
+void				*f_gc_malloc(t_main *main, size_t size);
 void				f_gc_clean(t_main *main);
 void				f_graceful_exit(t_main *main, int exit_code, char *func,
 						char *message);

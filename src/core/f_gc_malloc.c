@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:16:46 by glevin            #+#    #+#             */
-/*   Updated: 2025/01/11 18:11:45 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/12 12:19:20 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_gnode	*f_gc_add_node(t_main *main, void *ptr)
 }
 
 // Wrapper for malloc that integrates with garbage collector
-void	*f_gc_f_gc_malloc(main, t_main *main, size_t size)
+void	*f_gc_malloc(main, t_main *main, size_t size)
 {
 	void	*ptr;
 

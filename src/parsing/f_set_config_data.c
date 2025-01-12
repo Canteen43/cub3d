@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 13:35:13 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/11 17:53:48 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/12 13:14:56 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	f_set_config_data(t_main *main)
 {
 	int			i;
-	t_line_typ	type;
+	t_line_type	type;
 	char		**lines;
 
 	lines = main->cubfile_line_by_line;
