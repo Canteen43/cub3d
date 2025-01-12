@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/11 18:16:38 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/12 11:16:57 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ typedef struct s_main
 	char			*entire_cubfile;
 	char			**cubfile_line_by_line;
 	int				cubfile_fd;
+	int				map_line_count;
+	int				map_line_width;
 }					t_main;
 
 // Function declarations
@@ -94,9 +96,13 @@ void				f_check_args(int argc, char **argv);
 void				f_set_config_data(t_main *main, char **cublines);
 t_line_typ			f_set_input_line_type(char *line);
 void				f_handle_cub_input(t_main *main, char **argv);
+void				f_set_map(t_main *main);
+void				f_check_for_invalid_map_lines(t_main *main);
 
 // Core
 void				f_print_error(char *func, char *message);
 void				*f_gc_f_gc_malloc(main, t_main *main, size_t size);
 void				f_gc_clean(t_main *main);
+void				f_graceful_exit(t_main *main, int exit_code, char *func,
+						char *message);
 #endif // CUB3D_H
