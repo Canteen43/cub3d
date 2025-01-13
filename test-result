@@ -251,9 +251,22 @@ Main->map:
 11111
 ----------------------------------------
 Testing with config: maps/good/test_whitespace.cub
-Exit Status: 139
+Exit Status: 0
 Output:
-
+Main->map:
+11111                
+10001                
+10S01                
+10001                
+10001                
+10001                
+11001                
+10001                
+10001                
+10001                
+10001                
+10001                
+11111                
 ----------------------------------------
 Testing with config: maps/good/works.cub
 Exit Status: 0
@@ -297,9 +310,10 @@ Error
 f_set_config_data: Map line before config over.
 ----------------------------------------
 Testing with config: maps/bad/empty.cub
-Exit Status: 139
+Exit Status: 1
 Output:
-
+Error
+f_import_cub_file: Empty .cub-file.
 ----------------------------------------
 Testing with config: maps/bad/file_letter_end.cub
 Exit Status: 1
@@ -332,9 +346,10 @@ Error
 f_set_config_data: Map line before config over.
 ----------------------------------------
 Testing with config: maps/bad/map_missing.cub
-Exit Status: 139
+Exit Status: 1
 Output:
-
+Error
+f_check_for_invalid_map_lines: No map line found.
 ----------------------------------------
 Testing with config: maps/bad/map_only.cub
 Exit Status: 1
@@ -343,11 +358,10 @@ Error
 f_set_config_data: Map line before config over.
 ----------------------------------------
 Testing with config: maps/bad/map_too_small.cub
-Exit Status: 0
+Exit Status: 1
 Output:
-Main->map:
-111
-111
+Error
+f_check_single_starting_pos: No start pos found.
 ----------------------------------------
 Testing with config: maps/bad/player_multiple.cub
 Exit Status: 1
@@ -356,22 +370,10 @@ Error
 f_check_single_starting_pos: Multiple start pos.
 ----------------------------------------
 Testing with config: maps/bad/player_none.cub
-Exit Status: 0
+Exit Status: 1
 Output:
-Main->map:
-11111
-10001
-10001
-10001
-10001
-10001
-11001
-10001
-10001
-10001
-10001
-10001
-11111
+Error
+f_check_single_starting_pos: No start pos found.
 ----------------------------------------
 Testing with config: maps/bad/player_on_edge.cub
 Exit Status: 1
@@ -380,22 +382,10 @@ Error
 f_check_open_walls: Open wall found.
 ----------------------------------------
 Testing with config: maps/bad/textures_dir.cub
-Exit Status: 0
+Exit Status: 1
 Output:
-Main->map:
-11111
-10001
-10S01
-10001
-10001
-10001
-11001
-10001
-10001
-10001
-10001
-10001
-11111
+Error
+f_set_texture_path: Texture not ending with .xpm.
 ----------------------------------------
 Testing with config: maps/bad/textures_duplicates.cub
 Exit Status: 1
@@ -403,41 +393,11 @@ Output:
 Error
 f_set_texture_path: Redefintion of texture path.
 ----------------------------------------
-Testing with config: maps/bad/textures_forbidden.cub
-Exit Status: 0
-Output:
-Main->map:
-11111
-10001
-10S01
-10001
-10001
-10001
-11001
-10001
-10001
-10001
-10001
-10001
-11111
-----------------------------------------
 Testing with config: maps/bad/textures_invalid.cub
-Exit Status: 0
+Exit Status: 1
 Output:
-Main->map:
-11111
-10001
-10S01
-10001
-10001
-10001
-11001
-10001
-10001
-10001
-10001
-10001
-11111
+Error
+f_set_texture_path: Texture not ending with .xpm.
 ----------------------------------------
 Testing with config: maps/bad/textures_missing.cub
 Exit Status: 1
@@ -452,22 +412,10 @@ Error
 f_set_config_data: Map line before config over.
 ----------------------------------------
 Testing with config: maps/bad/textures_not_xpm.cub
-Exit Status: 0
+Exit Status: 1
 Output:
-Main->map:
-11111
-10001
-10S01
-10001
-10001
-10001
-11001
-10001
-10001
-10001
-10001
-10001
-11111
+Error
+f_set_texture_path: Texture not ending with .xpm.
 ----------------------------------------
 Testing with config: maps/bad/wall_hole_east.cub
 Exit Status: 1

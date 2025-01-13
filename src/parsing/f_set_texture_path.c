@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 11:52:45 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/12 18:11:50 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/13 13:35:22 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,7 @@ void	f_set_texture_path(t_main *main, t_line_type type, char *line)
 		f_graceful_exit(main, 1, __func__, "Too few args in texture line.");
 	if (words[2])
 		f_graceful_exit(main, 1, __func__, "Too many args in texture line.");
+	if (strcmp(".xpm", words[1] + f_strlen(words[1]) - 4))
+		f_graceful_exit(main, 1, __func__, "Texture not ending with .xpm.");
 	*target = words[1];
 }
