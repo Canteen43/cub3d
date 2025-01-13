@@ -1,1 +1,2 @@
-obj/core/f_graceful_exit.o: src/core/f_graceful_exit.c inc/cub3d.h
+obj/core/f_graceful_exit.o: src/core/f_graceful_exit.c inc/cub3d.h \
+  minilibx-linux/mlx.h

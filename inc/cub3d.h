@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/13 13:24:45 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:48:36 by glevin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,24 @@
 # include <sys/time.h>
 // For booleans
 # include <stdbool.h>
+// For MLX
+# include "mlx.h"
 
 // Macros
 # define ERR_ARGNBR "Wrong number of args. Argc needs to be 2"
 # define ERR_ARGNAME "Wrong name of arg. Arg needs to have .cub extension"
 # define BUFFER_SIZE 256
+
+# define WIDTH 1280
+# define HEIGHT 720
+
+# define W 119
+# define A 97
+# define S 115
+# define D 100
+
+# define PI 3.14159265359
+# define SPEED 5.0
 
 // Token Type enum
 typedef enum e_line_type
@@ -56,10 +69,36 @@ typedef struct s_gnode
 	struct s_gnode	*next;
 }					t_gnode;
 
+// MLX struct
+typedef struct s_player
+{
+	float			x;
+	float			y;
+	bool			key_up;
+	bool			key_right;
+	bool			key_left;
+	bool			key_down;
+}					t_player;
+
+typedef struct s_game
+{
+	t_player		player;
+	void			*mlx;
+	void			*win;
+	void			*img;
+
+	char			*data;
+	int				bpp;
+	int				size_line;
+	int				endian;
+
+}					t_game;
+
 // Main struct
 typedef struct s_main
 {
 	t_gnode			*gc_head;
+	//t_game			*game;
 	char			*no_txtr_path;
 	char			*ea_txtr_path;
 	char			*so_txtr_path;

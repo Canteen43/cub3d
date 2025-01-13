@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_check_single_starting_pos.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 13:05:33 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/13 13:28:26 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:48:46 by glevin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	f_check_single_starting_pos(t_main *main)
 
 	i = 0;
 	j = 0;
+	startpos_found = false;
 	while (main->map[i])
 	{
 		while (main->map[i][j])

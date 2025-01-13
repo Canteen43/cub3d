@@ -1,1 +1,2 @@
-obj/debug/f_print_map.o: src/debug/f_print_map.c inc/cub3d.h
+obj/debug/f_print_map.o: src/debug/f_print_map.c inc/cub3d.h \
+  minilibx-linux/mlx.h
