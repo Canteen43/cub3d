@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 10:34:32 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/13 11:12:03 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/13 13:26:23 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ void	f_check_for_invalid_map_lines(t_main *main)
 
 	lines = main->cubfile_line_by_line;
 	i = 0;
-	while (f_set_input_line_type(main, lines[i]) != MAP)
+	while (lines[i] && f_set_input_line_type(main, lines[i]) != MAP)
 		i++;
-	while (f_set_input_line_type(main, lines[i]) == MAP)
+	if (lines[i] == NULL)
+		f_graceful_exit(main, 1, __func__, "No map line found.");
+	while (lines[i] && f_set_input_line_type(main, lines[i]) == MAP)
 		i++;
 	while (lines[i] && f_set_input_line_type(main, lines[i]) == EMPTY)
 		i++;

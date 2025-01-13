@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 13:05:33 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/12 13:11:54 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/13 13:28:26 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,6 @@ void	f_check_single_starting_pos(t_main *main)
 		j = 0;
 		i++;
 	}
+	if (!startpos_found)
+		f_graceful_exit(main, 1, __func__, "No start pos found.");
 }
