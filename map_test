@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# File to store the test results
+RESULT_FILE="test-result"
+
+# Path to the maps directory
+MAPS_DIR="maps"
+
+# Clear the result file if it already exists
+> "$RESULT_FILE"
+
+# Iterate through all config files in the maps directory and its subdirectories
+find "$MAPS_DIR" -type f | while read -r config_file; do
+  echo "Testing with config: $config_file" >> "$RESULT_FILE"
+  # Run the program and capture stdout, stderr, and exit status
+  {
+    output=$("./cub3D" "$config_file" 2>&1)
+    exit_status=$?
+    echo "Exit Status: $exit_status" >> "$RESULT_FILE"
+    echo "Output:" >> "$RESULT_FILE"
+    echo "$output" >> "$RESULT_FILE"
+    echo "----------------------------------------" >> "$RESULT_FILE"
+  }
+done
+
+echo "All tests completed. Results saved to $RESULT_FILE."

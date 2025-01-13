@@ -8,14 +8,20 @@ CC				:= clang
 # Compiler flags
 CFLAGS			:= -Wall -Werror -Wextra -pedantic -O3
 
+# Path to the Minilibx directory
+MLX_DIR        := minilibx-linux/
+
+# Minilibx library file
+MLX_LIB        := $(MLX_DIR)/libmlx.a
+
 # Libraries to be linked (if any)
-LIBS			:=
+LIBS			:= -lXext -lX11 -L$(MLX_DIR) -lmlx
 
 # Include directories
-INCLUDES		:= -Iinc/
+INCLUDES		:= -Iinc/ -I$(MLX_DIR)
 
 # Target executable
-TARGET			:=
+TARGET			:= cub3D
 
 # Source files directory
 SRC_DIR			:= src/
@@ -27,6 +33,7 @@ SRC_FILES       += core/f_gc_clean.c
 SRC_FILES       += core/f_graceful_exit.c
 SRC_FILES       += core/f_gc_malloc.c
 SRC_FILES       += core/f_print_error.c
+SRC_FILES       += core/f_init.c
 
 SRC_FILES       += parsing/f_check_args.c
 SRC_FILES       += parsing/f_is_config_complete.c
@@ -53,12 +60,13 @@ SRC_FILES       += utils/f_char_count.c
 SRC_FILES       += utils/f_readfile.c
 SRC_FILES       += utils/f_strcmp.c
 SRC_FILES       += utils/f_strscmp.c
-SRC_FILES       += utils/f_free_split.c
 SRC_FILES       += utils/f_split.c
 SRC_FILES       += utils/f_strdup.c
 SRC_FILES       += utils/f_is_dig.c
 SRC_FILES       += utils/f_splitlines.c
 SRC_FILES       += utils/f_strjoin.c
+
+SRC_FILES       += debug/f_print_map.c
 
 # Object files directory
 OBJ_DIR			:= obj/
@@ -82,10 +90,6 @@ RM				:= /bin/rm -f
 MKDIR			:= /bin/mkdir -p
 TOUCH			:= /bin/touch
 
-
-#############################
-###### LOCAL LIBRARIES ######
-#############################
 
 
 ############################
@@ -112,7 +116,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(CFLAGS) -MMD -MF $(patsubst %.o, %.d, $@) $(INCLUDES) -c $< -o $@
 
 # Rule for linking the target executable
-$(TARGET): $(OBJ_FILES)
+$(TARGET): $(MLX_LIB) $(OBJ_FILES)
 	@echo -n "[link] "
 	$(CC) $(CFLAGS) -o $(TARGET) $(OBJ_FILES) $(INCLUDES) $(LIBS)
 	-@echo -n "🚀 $(MAGENTA)" && ls -lah $(TARGET) && echo -n "$(RESET)"
@@ -121,6 +125,10 @@ $(TARGET): $(OBJ_FILES)
 ####################################
 ###### LOCAL LIBS COMPILATION ######
 ####################################
+
+$(MLX_LIB):
+	@echo -n "[build] Minilibx library\n"
+	@$(MAKE) -C $(MLX_DIR)
 
 
 ##############################
@@ -178,4 +186,4 @@ BG_MAGENTA	:= \033[45m
 BG_CYAN		:= \033[46m
 BG_WHITE	:= \033[47m
 
-# This was taken from: https://github.com/tesla33io/awesome_makefile
+# This was adapted from: https://github.com/tesla33io/awesome_makefile

@@ -6,20 +6,20 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 12:04:13 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/11 18:11:45 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/12 18:12:16 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	*f_strdup(const char *s)
+char	*f_strdup(t_main *main, const char *s)
 {
 	char	*str;
 	int		i;
 
 	if (!s)
 		return (NULL);
-	str = f_gc_malloc(main, (ft_strlen(s) + 1) * sizeof(char));
+	str = f_gc_malloc(main, (f_strlen(s) + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 12:44:49 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/12 12:45:21 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/12 18:11:31 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,15 @@ static void	sf_fill_line(t_main *main, int offset, int i);
 void	f_fill_map_array(t_main *main)
 {
 	int		i;
-	int		j;
 	int		offset;
 	char	**lines;
 
 	lines = main->cubfile_line_by_line;
 	offset = 0;
-	while (f_set_input_line_type(lines[offset]) != MAP)
+	while (f_set_input_line_type(main, lines[offset]) != MAP)
 		offset++;
 	i = 0;
-	while (f_set_input_line_type(lines[offset + i]) == MAP)
+	while (f_set_input_line_type(main, lines[offset + i]) == MAP)
 	{
 		sf_fill_line(main, offset, i);
 		i++;
@@ -46,7 +45,7 @@ static void	sf_fill_line(t_main *main, int offset, int i)
 		main->map[i][j] = lines[offset + i][j];
 		j++;
 	}
-	while (j < main->main->map_line_width)
+	while (j < main->map_line_width)
 	{
 		main->map[i][j] = ' ';
 		j++;

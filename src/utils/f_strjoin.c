@@ -6,13 +6,13 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 14:43:22 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/11 18:11:45 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/12 18:13:55 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	*f_strjoin(char const *s1, char const *s2)
+char	*f_strjoin(t_main *main, char const *s1, char const *s2)
 {
 	size_t	size_needed;
 	char	*s3;

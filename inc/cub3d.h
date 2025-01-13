@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/12 13:52:07 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/13 11:55:41 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # include <stdlib.h>
 // For gettimeofday()
 # include <sys/time.h>
+// For booleans
+# include <stdbool.h>
 
 // Macros
 # define ERR_ARGNBR "Wrong number of args. Argc needs to be 2"
@@ -75,27 +77,27 @@ typedef struct s_main
 // Function declarations
 // Utils
 void				f_bzero(void *s, size_t n);
-char				*f_readfile(int fd);
+char				*f_readfile(t_main *main, int fd);
 int					f_strcmp(char *str1, char *str2);
-char				*f_strjoin(char const *s1, char const *s2);
+char				*f_strjoin(t_main *main, char const *s1, char const *s2);
 size_t				f_strlen(const char *s);
 int					f_char_count(char *str, char c);
 char				*f_strchr(const char *s, int c);
 void				*f_memcpy(void *dest, const void *src, size_t n);
-char				**f_splitlines(char *text);
-char				**f_split(char const *s, char c);
-void				f_free_split(char **array);
+char				**f_splitlines(t_main *main, char *text);
+char				**f_split(t_main *main, char const *s, char c);
 char				*f_strscmp(char *str1, int n, ...);
-char				*f_strdup(const char *s);
+char				*f_strdup(t_main *main, const char *s);
+bool				f_is_dig(char c);
 
 // Parsing
 bool				f_is_map_line(char *str);
 void				f_set_color_config(t_main *main, t_line_type type,
 						char *line);
 bool				f_is_config_complete(t_main *main);
-void				f_check_args(int argc, char **argv);
-void				f_set_config_data(t_main *main, char **cublines);
-t_line_type			f_set_input_line_type(char *line);
+void				f_check_args(t_main *main, int argc, char **argv);
+void				f_set_config_data(t_main *main);
+t_line_type			f_set_input_line_type(t_main *main, char *line);
 void				f_handle_cub_file(t_main *main, char **argv);
 void				f_set_map(t_main *main);
 void				f_check_for_invalid_map_lines(t_main *main);
@@ -105,11 +107,18 @@ void				f_fill_map_array(t_main *main);
 void				f_check_open_walls(t_main *main);
 void				f_check_single_starting_pos(t_main *main);
 void				f_import_cub_file(t_main *main, char **argv);
+void				f_set_texture_path(t_main *main, t_line_type type,
+						char *line);
 
 // Core
-void				f_print_error(char *func, char *message);
+void				f_print_error(const char *func, char *message);
 void				*f_gc_malloc(t_main *main, size_t size);
 void				f_gc_clean(t_main *main);
-void				f_graceful_exit(t_main *main, int exit_code, char *func,
-						char *message);
+void				f_graceful_exit(t_main *main, int exit_code,
+						const char *func, char *message);
+void				f_init(t_main *main);
+
+// Debug
+void				f_print_map(t_main *main);
+
 #endif // CUB3D_H

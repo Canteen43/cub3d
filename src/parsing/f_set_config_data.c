@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 13:35:13 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/12 13:14:56 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/13 10:53:29 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	f_set_config_data(t_main *main)
 	i = 0;
 	while (lines[i])
 	{
-		type = f_set_input_line_type(lines[i]);
+		type = f_set_input_line_type(main, lines[i]);
 		if (type == FLOOR || type == CEILING)
 			f_set_color_config(main, type, lines[i]);
 		else if (type == NORTH || type == EAST || type == SOUTH || type == WEST)
@@ -33,5 +33,6 @@ void	f_set_config_data(t_main *main)
 			f_graceful_exit(main, 1, __func__, "Map line before config over."); 
 		else if (type == MAP && f_is_config_complete(main))
 			break ;
+		i++;
 	}
 }

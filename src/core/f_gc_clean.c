@@ -6,11 +6,11 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:00:37 by glevin            #+#    #+#             */
-/*   Updated: 2024/11/26 13:40:49 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/12 16:57:01 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "cub3d.h"
 
 // Function to clean all allocated memory in the garbage collector
 void	f_gc_clean(t_main *main)

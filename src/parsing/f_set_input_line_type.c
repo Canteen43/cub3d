@@ -6,36 +6,35 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 18:44:09 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/08 19:14:34 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/13 11:54:56 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_line_typ	f_set_input_line_type(char *line)
+t_line_type	f_set_input_line_type(t_main *main, char *line)
 {
 	char		**words;
-	t_line_typ	type;
+	t_line_type	type;
 
 	if (*line == '\0')
 		return (EMPTY);
-	words = f_split(line, ' ');
-	if (f_strcmp(words[i], "NO"))
+	words = f_split(main, line, ' ');
+	if (f_strcmp(words[0], "NO") == 0)
 		type = NORTH;
-	else if (f_strcmp(words[i], "EA"))
+	else if (f_strcmp(words[0], "EA") == 0)
 		type = EAST;
-	else if (f_strcmp(words[i], "SO"))
+	else if (f_strcmp(words[0], "SO") == 0)
 		type = SOUTH;
-	else if (f_strcmp(words[i], "WE"))
+	else if (f_strcmp(words[0], "WE") == 0)
 		type = WEST;
-	else if (f_strcmp(words[i], "F"))
+	else if (f_strcmp(words[0], "F") == 0)
 		type = FLOOR;
-	else if (f_strcmp(words[i], "C"))
+	else if (f_strcmp(words[0], "C") == 0)
 		type = CEILING;
 	else if (f_is_map_line(line))
 		type = MAP;
 	else
 		type = WRONG;
-	f_free_split(words);
 	return (type);
 }

@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 12:11:03 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/05 12:14:04 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/12 18:08:40 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	f_char_count(char *str, char c)
 {
 	int	count;
 
+	count = 0;
 	if (!str)
 		return (-1);
 	while (*str)
