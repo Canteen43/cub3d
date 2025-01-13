@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/13 13:24:45 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/13 14:20:37 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ typedef struct s_main
 	int				map_line_count;
 	int				map_line_width;
 	char			**map;
+	float			player_x;
+	float			player_y;
 }					t_main;
 
 // Function declarations
@@ -109,6 +111,7 @@ void				f_check_single_starting_pos(t_main *main);
 void				f_import_cub_file(t_main *main, char **argv);
 void				f_set_texture_path(t_main *main, t_line_type type,
 						char *line);
+void				f_extract_player_pos(t_main *main);
 
 // Core
 void				f_print_error(const char *func, char *message);

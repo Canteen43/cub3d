@@ -1,24 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_set_map.c                                        :+:      :+:    :+:   */
+/*   f_extract_player_pos.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/12 10:17:39 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/13 14:20:19 by kweihman         ###   ########.fr       */
+/*   Created: 2025/01/13 14:13:56 by kweihman          #+#    #+#             */
+/*   Updated: 2025/01/13 14:19:41 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	f_set_map(t_main *main)
+void	f_extract_player_pos(t_main *main)
 {
-	f_check_for_invalid_map_lines(main);
-	f_set_map_dimensions(main);
-	f_create_map_array(main);
-	f_fill_map_array(main);
-	f_check_open_walls(main);
-	f_check_single_starting_pos(main);
-	f_extract_player_pos(main);
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (main->map[i])
+	{
+		while (main->map[i][j])
+		{
+			if (f_strchr("NESW", main->map[i][j]))
+			{
+				main->map[i][j] = '0';
+				main->player_x = i + 0.5f;
+				main->player_y = i + 0.5f;
+				return ;
+			}
+			j++;
+		}
+		j = 0;
+		i++;
+	}
 }
