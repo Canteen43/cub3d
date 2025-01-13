@@ -382,22 +382,10 @@ Error
 f_check_open_walls: Open wall found.
 ----------------------------------------
 Testing with config: maps/bad/textures_dir.cub
-Exit Status: 0
+Exit Status: 1
 Output:
-Main->map:
-11111
-10001
-10S01
-10001
-10001
-10001
-11001
-10001
-10001
-10001
-10001
-10001
-11111
+Error
+f_set_texture_path: Texture not ending with .xpm.
 ----------------------------------------
 Testing with config: maps/bad/textures_duplicates.cub
 Exit Status: 1
@@ -405,41 +393,11 @@ Output:
 Error
 f_set_texture_path: Redefintion of texture path.
 ----------------------------------------
-Testing with config: maps/bad/textures_forbidden.cub
-Exit Status: 0
-Output:
-Main->map:
-11111
-10001
-10S01
-10001
-10001
-10001
-11001
-10001
-10001
-10001
-10001
-10001
-11111
-----------------------------------------
 Testing with config: maps/bad/textures_invalid.cub
-Exit Status: 0
+Exit Status: 1
 Output:
-Main->map:
-11111
-10001
-10S01
-10001
-10001
-10001
-11001
-10001
-10001
-10001
-10001
-10001
-11111
+Error
+f_set_texture_path: Texture not ending with .xpm.
 ----------------------------------------
 Testing with config: maps/bad/textures_missing.cub
 Exit Status: 1
@@ -454,22 +412,10 @@ Error
 f_set_config_data: Map line before config over.
 ----------------------------------------
 Testing with config: maps/bad/textures_not_xpm.cub
-Exit Status: 0
+Exit Status: 1
 Output:
-Main->map:
-11111
-10001
-10S01
-10001
-10001
-10001
-11001
-10001
-10001
-10001
-10001
-10001
-11111
+Error
+f_set_texture_path: Texture not ending with .xpm.
 ----------------------------------------
 Testing with config: maps/bad/wall_hole_east.cub
 Exit Status: 1
