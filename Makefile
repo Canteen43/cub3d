@@ -15,7 +15,7 @@ MLX_DIR        := minilibx-linux/
 MLX_LIB        := $(MLX_DIR)/libmlx.a
 
 # Libraries to be linked (if any)
-LIBS			:= -lXext -lX11 -L$(MLX_DIR) -lmlx
+LIBS			:= -lXext -lX11 -L$(MLX_DIR) -lmlx -lm
 
 # Include directories
 INCLUDES		:= -Iinc/ -I$(MLX_DIR)
