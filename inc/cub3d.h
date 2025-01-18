@@ -6,7 +6,7 @@
 /*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/15 17:28:52 by glevin           ###   ########.fr       */
+/*   Updated: 2025/01/18 12:26:57 by glevin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,5 +178,26 @@ void					f_init(t_main *main);
 
 // Debug
 void					f_print_map(t_main *main);
+
+// Rendering
+void					f_init_player(t_player *player);
+void					f_init_game(t_game *game, t_main *main);
+void					f_draw_square(int x, int y, int size, int color,
+							t_game *game);
+int						f_key_press(int keycode, t_player *player);
+int						f_key_release(int keycode, t_player *player);
+void					f_move_player(t_player *player);
+void					f_clear_image(t_game *game);
+void					f_draw_map(t_game *game);
+bool					f_touch(float px, float py, t_game *game);
+float					f_distance(float x, float y);
+float					f_fixed_dist(float x1, float y1, float x2, float y2,
+							t_game *game);
+void					f_draw_walls(float ray_x, float ray_y, t_player *player,
+							t_game *game, int i);
+void					f_draw_line(t_player *player, t_game *game,
+							float start_x, int i);
+int						f_draw_loop(t_game *game);
+void					f_put_pixel(int x, int y, int color, t_game *game);
 
 #endif // CUB3D_H
