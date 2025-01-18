@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_move_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 12:17:04 by glevin            #+#    #+#             */
-/*   Updated: 2025/01/18 12:17:25 by glevin           ###   ########.fr       */
+/*   Updated: 2025/01/18 16:45:21 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	f_move_player(t_player *player)
 	cos_angle = cos(player->angle);
 	sin_angle = sin(player->angle);
 	if (player->left_rotate)
-		player->angle += ANGLE_SPEED;
-	if (player->right_rotate)
 		player->angle -= ANGLE_SPEED;
+	if (player->right_rotate)
+		player->angle += ANGLE_SPEED;
 	if (player->angle > 2 * PI)
 		player->angle -= 2 * PI;
 	if (player->angle < 0)

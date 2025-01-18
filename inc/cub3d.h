@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/18 12:58:38 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/18 18:17:50 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,12 @@
 # include "mlx.h"
 // For sin and cos
 # include <math.h>
+// For keycodes
+# include <X11/keysym.h>
+// For color macros
+# include "colors.h"
 
 // Macros
-# define ERR_ARGNBR "Wrong number of args. Argc needs to be 2"
-# define ERR_ARGNAME "Wrong name of arg. Arg needs to have .cub extension"
 # define BUFFER_SIZE 256
 
 # define MINIMAP 0
@@ -44,20 +46,12 @@
 # define WIDTH 1280
 # define HEIGHT 720
 
-# define W 119
-# define A 97
-# define S 115
-# define D 100
-
-# define RIGHT 65361
-# define LEFT 65363
-
 # define PI 3.14159265359
 # define SPEED 0.1
 # define ANGLE_SPEED 0.005
 # define BLOCK 32
 
-// Token Type enum
+// Line type enum
 typedef enum e_line_type
 {
 	EMPTY,
@@ -78,6 +72,27 @@ typedef struct s_gnode
 	struct s_gnode		*next;
 }						t_gnode;
 
+// Main struct
+typedef struct s_main
+{
+	t_gnode				*gc_head;
+	char				*no_txtr_path;
+	char				*ea_txtr_path;
+	char				*so_txtr_path;
+	char				*we_txtr_path;
+	int					floor_color;
+	int					ceiling_color;
+	char				*entire_cubfile;
+	char				**cubfile_line_by_line;
+	int					cubfile_fd;
+	int					map_line_count;
+	int					map_line_width;
+	float				player_x;
+	float				player_y;
+	char				direction;
+	char				**map;
+}						t_main;
+
 // MLX struct
 typedef struct s_player
 {
@@ -92,6 +107,7 @@ typedef struct s_player
 
 	bool				left_rotate;
 	bool				right_rotate;
+	t_main				*main;
 }						t_player;
 
 typedef struct s_main	t_main;
@@ -111,25 +127,6 @@ typedef struct s_game
 	t_main				*main;
 
 }						t_game;
-
-// Main struct
-typedef struct s_main
-{
-	t_gnode				*gc_head;
-	// t_game			*game;
-	char				*no_txtr_path;
-	char				*ea_txtr_path;
-	char				*so_txtr_path;
-	char				*we_txtr_path;
-	int					floor_color;
-	int					ceiling_color;
-	char				*entire_cubfile;
-	char				**cubfile_line_by_line;
-	int					cubfile_fd;
-	int					map_line_count;
-	int					map_line_width;
-	char				**map;
-}						t_main;
 
 // Function declarations
 // Utils
@@ -167,6 +164,7 @@ void					f_check_single_starting_pos(t_main *main);
 void					f_import_cub_file(t_main *main, char **argv);
 void					f_set_texture_path(t_main *main, t_line_type type,
 							char *line);
+void					f_extract_player_pos(t_main *main);
 
 // Core
 void					f_print_error(const char *func, char *message);
@@ -180,7 +178,7 @@ void					f_init(t_main *main);
 void					f_print_map(t_main *main);
 
 // Rendering
-void					f_init_player(t_player *player);
+void					f_init_player(t_game *game, t_player *player);
 void					f_init_game(t_game *game, t_main *main);
 void					f_draw_square(int x, int y, int size, int color,
 							t_game *game);
@@ -188,7 +186,7 @@ int						f_key_press(int keycode, t_player *player);
 int						f_key_release(int keycode, t_player *player);
 void					f_move_player(t_player *player);
 void					f_clear_image(t_game *game);
-void					f_draw_map(t_game *game);
+void					f_draw_minimap(t_game *game);
 bool					f_touch(float px, float py, t_game *game);
 float					f_distance(float x, float y);
 float					f_fixed_dist(float x1, float y1, float x2, float y2,
@@ -199,5 +197,8 @@ void					f_draw_line(t_player *player, t_game *game,
 							float start_x, int i);
 int						f_draw_loop(t_game *game);
 void					f_put_pixel(int x, int y, int color, t_game *game);
+int						f_handle_close_button(void *param);
+void					f_draw_full_square(int x, int y, int size, int color,
+							t_game *game);
 
 #endif // CUB3D_H

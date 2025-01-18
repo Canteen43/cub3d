@@ -2,5 +2,3 @@ obj/
 minilibx-linux/
 cub3D
 .vscode/
-*.o
-*.d

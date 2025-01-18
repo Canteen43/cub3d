@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_draw_loop.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 12:22:18 by glevin            #+#    #+#             */
-/*   Updated: 2025/01/18 13:54:21 by glevin           ###   ########.fr       */
+/*   Updated: 2025/01/18 18:14:09 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	f_draw_loop(t_game *game)
 {
-	t_player *player;
-	float fraction;
-	float start_x;
-	int i;
+	t_player	*player;
+	float		fraction;
+	float		start_x;
+	int			i;
 
 	player = &game->player;
 	f_move_player(player);
@@ -31,8 +31,8 @@ int	f_draw_loop(t_game *game)
 		start_x += fraction;
 		i++;
 	}
-	f_draw_map(game);
-	f_draw_square(player->x, player->y, 8, 0x00FF00, game);
+	f_draw_minimap(game);
+	f_draw_full_square(player->x / 4, player->y / 4, BLOCK / 8, RED, game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 	// usleep(10000); // To lower the fps and reduce expense to the CPU
 	return (0);
