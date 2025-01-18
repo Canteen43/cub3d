@@ -6,7 +6,7 @@
 /*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 12:20:24 by glevin            #+#    #+#             */
-/*   Updated: 2025/01/18 12:20:30 by glevin           ###   ########.fr       */
+/*   Updated: 2025/01/18 12:39:03 by glevin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	f_draw_walls(float ray_x, float ray_y, t_player *player, t_game *game,
 	end = start_y + height;
 	while (start_y < end)
 	{
-		f_put_pixel(i, start_y, 255, game);
+		f_put_pixel(i, start_y, 0x00FFFF, game);
 		start_y++;
 	}
 }
