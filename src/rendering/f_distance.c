@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   f_distance.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/04 13:45:06 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/18 12:22:55 by glevin           ###   ########.fr       */
+/*   Created: 2025/01/18 12:19:51 by glevin            #+#    #+#             */
+/*   Updated: 2025/01/18 12:27:06 by glevin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+float	f_distance(float x, float y)
 {
-	t_main	main;
-	t_game	game;
+	return (sqrt(x * x + y * y));
+}
 
-	f_init(&main);
-	f_check_args(&main, argc, argv);
-	f_handle_cub_file(&main, argv);
-	f_print_map(&main);
-	f_init_game(&game, &main);
-	mlx_hook(game.win, 2, 1L << 0, f_key_press, &game.player);
-	mlx_hook(game.win, 3, 1L << 1, f_key_release, &game.player);
-	mlx_loop_hook(game.mlx, f_draw_loop, &game);
-	mlx_loop(game.mlx);
+float	f_fixed_dist(float x1, float y1, float x2, float y2, t_game *game)
+{
+	float	delta_x;
+	float	delta_y;
+	float	angle;
+	float	fix_dist;
+
+	delta_x = x2 - x1;
+	delta_y = y2 - y1;
+	angle = atan2(delta_y, delta_x) - game->player.angle;
+	fix_dist = f_distance(delta_x, delta_y) * cos(angle);
+	return (fix_dist);
 }
