@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_draw_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kweihman <kweihman@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 17:31:38 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/18 18:13:04 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/19 20:25:26 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,9 @@ void	f_draw_minimap(t_game *game)
 {
 	int	y;
 	int	x;
-	int	mini_block;
 
-	mini_block = BLOCK / 4;
 	y = -1;
-	f_draw_full_square(0, 0, game->main->map_line_count * mini_block, YELLOW, game);
+	f_draw_full_square(0, 0, game->main->map_line_count *MINIBLOCK, YELLOW, game);
 	while (game->main->map[++y])
 	{
 		x = -1;
@@ -28,9 +26,11 @@ void	f_draw_minimap(t_game *game)
 		{
 			if (game->main->map[x][y] == '1')
 			{
-				f_draw_square(x * mini_block, y * mini_block, mini_block, BLUE,
+				f_draw_square(x * MINIBLOCK, y * MINIBLOCK, MINIBLOCK, BLUE,
 					game);
 			}
 		}
 	}
+	f_draw_circle_full(game, (t_circle){RED, MINIBLOCK / 3, (t_coords){game->player.x * MINIBLOCK, game->player.y * MINIBLOCK}});
+	f_draw_circle_full(game, (t_circle){PINK, MINIBLOCK / 5, (t_coords){(game->player.x + 0.3 * cos(game->player.angle)) * MINIBLOCK, (game->player.y - 0.3 * sin(game->player.angle)) * MINIBLOCK}});
 }

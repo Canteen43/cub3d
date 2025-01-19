@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kweihman <kweihman@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/18 18:17:50 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/19 20:57:04 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,26 @@
 
 # define PI 3.14159265359
 # define SPEED 0.1
-# define ANGLE_SPEED 0.005
+# define ANGLE_SPEED 0.02
+# define MINIBLOCK 32
 # define BLOCK 32
+# define FRAMES_PER_SECOND 80
+
+// Coordinate struct
+typedef struct s_coordinates
+{
+	float	x;
+	float	y;
+}						t_coords;
+
+
+// Circle struct
+typedef struct s_circle
+{
+	int			color;
+	float		radius;
+	t_coords	center;
+}						t_circle;
 
 // Line type enum
 typedef enum e_line_type
@@ -200,5 +218,10 @@ void					f_put_pixel(int x, int y, int color, t_game *game);
 int						f_handle_close_button(void *param);
 void					f_draw_full_square(int x, int y, int size, int color,
 							t_game *game);
+void	f_draw_circle_full(t_game *game, t_circle circle);
+float f_distance2(t_coords p1, t_coords p2);
+void f_attempt_move(t_player *player, char dimension, float distance);
+
+
 
 #endif // CUB3D_H

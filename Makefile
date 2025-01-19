@@ -85,6 +85,9 @@ SRC_FILES       += rendering/f_put_pixel.c
 SRC_FILES       += rendering/f_touch.c
 SRC_FILES       += rendering/f_handle_close_button.c
 SRC_FILES       += rendering/f_draw_full_square.c
+SRC_FILES       += rendering/f_distance2.c
+SRC_FILES       += rendering/f_draw_circle_full.c
+SRC_FILES       += rendering/f_attempt_move.c
 
 # Object files directory
 OBJ_DIR			:= obj/

@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_draw_line.c                                      :+:      :+:    :+:   */
+/*   f_draw_circle_full.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 12:21:24 by glevin            #+#    #+#             */
-/*   Updated: 2025/01/19 18:01:25 by kweihman         ###   ########.fr       */
+/*   Created: 2025/01/19 19:38:04 by kweihman          #+#    #+#             */
+/*   Updated: 2025/01/19 20:19:46 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	f_draw_line(t_player *player, t_game *game, float start_x, int i)
+void	f_draw_circle_full(t_game *game, t_circle circle)
 {
-	float	ray_x;
-	float	ray_y;
-	float	cos_angle;
-	float	sin_angle;
-	// bool	touch;
+	int	i;
+	int	j;
 
-	ray_x = player->x;
-	ray_y = player->y;
-	cos_angle = cos(start_x);
-	sin_angle = sin(start_x);
-	// touch = false;
-	while (!f_touch(ray_x, ray_y, game))
+	i = circle.center.x - circle.radius;
+	if (i < 0)
+		i = 0;
+	j = circle.center.y - circle.radius;
+	if (i < 0)
+		i = 0;
+	while (i < circle.center.x + circle.radius)
 	{
-		f_put_pixel(ray_x, ray_y, PINK, game);
-		ray_x += cos_angle;
-		ray_y += sin_angle;
+		j = 0;
+		while (j < circle.center.y + circle.radius)
+		{
+			if (f_distance2(circle.center, (t_coords){i, j}) <= circle.radius)
+				f_put_pixel(i, j, circle.color, game);
+			j++;
+		}
+		i++;
 	}
-	f_draw_walls(ray_x, ray_y, player, game, i);
 }
