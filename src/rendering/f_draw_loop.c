@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_draw_loop.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kweihman <kweihman@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 12:22:18 by glevin            #+#    #+#             */
-/*   Updated: 2025/01/19 19:23:55 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/20 20:28:57 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ int	f_draw_loop(t_game *game)
 	f_move_player(player);
 	f_clear_image(game);
 	f_draw_minimap(game);
+	player->intersection.x = player->x;
+	player->intersection.y = player->y;
+	while (!f_is_wall(game, player->intersection))
+		player->intersection = f_nearest_intersection(player->intersection, player->angle);
 	// fraction = PI / 3 / WIDTH;
 	// start_x = player->angle - PI / 6 + PI;
 	// i = 0;

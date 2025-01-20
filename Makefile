@@ -68,6 +68,7 @@ SRC_FILES       += utils/f_splitlines.c
 SRC_FILES       += utils/f_strjoin.c
 
 SRC_FILES       += debug/f_print_map.c
+SRC_FILES       += debug/f_debug_info.c
 
 SRC_FILES       += rendering/f_draw_minimap.c
 SRC_FILES       += rendering/f_clear_image.c
@@ -88,6 +89,10 @@ SRC_FILES       += rendering/f_draw_full_square.c
 SRC_FILES       += rendering/f_distance2.c
 SRC_FILES       += rendering/f_draw_circle_full.c
 SRC_FILES       += rendering/f_attempt_move.c
+SRC_FILES       += rendering/f_nearest_intersection.c
+SRC_FILES       += rendering/f_find_targets.c
+SRC_FILES       += rendering/f_is_round.c
+SRC_FILES       += rendering/f_is_wall.c
 
 # Object files directory
 OBJ_DIR			:= obj/

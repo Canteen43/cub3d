@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kweihman <kweihman@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/19 20:57:04 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/20 20:26:54 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,16 @@
 // Coordinate struct
 typedef struct s_coordinates
 {
-	float	x;
-	float	y;
+	float				x;
+	float				y;
 }						t_coords;
-
 
 // Circle struct
 typedef struct s_circle
 {
-	int			color;
-	float		radius;
-	t_coords	center;
+	int					color;
+	float				radius;
+	t_coords			center;
 }						t_circle;
 
 // Line type enum
@@ -125,6 +124,7 @@ typedef struct s_player
 
 	bool				left_rotate;
 	bool				right_rotate;
+	t_coords			intersection;
 	t_main				*main;
 }						t_player;
 
@@ -194,6 +194,7 @@ void					f_init(t_main *main);
 
 // Debug
 void					f_print_map(t_main *main);
+void					f_debug_info(t_player *player);
 
 // Rendering
 void					f_init_player(t_game *game, t_player *player);
@@ -218,10 +219,12 @@ void					f_put_pixel(int x, int y, int color, t_game *game);
 int						f_handle_close_button(void *param);
 void					f_draw_full_square(int x, int y, int size, int color,
 							t_game *game);
-void	f_draw_circle_full(t_game *game, t_circle circle);
-float f_distance2(t_coords p1, t_coords p2);
-void f_attempt_move(t_player *player, char dimension, float distance);
-
-
-
+void					f_draw_circle_full(t_game *game, t_circle circle);
+float					f_distance2(t_coords p1, t_coords p2);
+void					f_attempt_move(t_player *player, char dimension,
+							float distance);
+float					f_find_target(float current, float vector);
+t_coords				f_nearest_intersection(t_coords current, float angle);
+bool					f_is_round(float nbr);
+bool					f_is_wall(t_game *game, t_coords pos);
 #endif // CUB3D_H

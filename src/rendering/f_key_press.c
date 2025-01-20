@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 12:15:12 by glevin            #+#    #+#             */
-/*   Updated: 2025/01/18 16:03:38 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/20 20:07:26 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ int	f_key_press(int keycode, t_player *player)
 		player->left_rotate = true;
 	if (keycode == XK_Right)
 		player->right_rotate = true;
+	if (keycode == XK_space)
+		f_debug_info(player);
 	return (0);
 }
