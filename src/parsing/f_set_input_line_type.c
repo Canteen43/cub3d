@@ -6,20 +6,20 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 18:44:09 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/13 13:26:34 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:07:43 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_line_type	f_set_input_line_type(t_main *main, char *line)
+t_line_type	f_set_input_line_type(t_game *game, char *line)
 {
 	char		**words;
 	t_line_type	type;
 
 	if (*line == '\0')
 		return (EMPTY);
-	words = f_split(main, line, ' ');
+	words = f_split(game, line, ' ');
 	if (f_strcmp(words[0], "NO") == 0)
 		type = NORTH;
 	else if (f_strcmp(words[0], "EA") == 0)

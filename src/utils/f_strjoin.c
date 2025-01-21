@@ -6,19 +6,19 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 14:43:22 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/12 18:13:55 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:07:43 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	*f_strjoin(t_main *main, char const *s1, char const *s2)
+char	*f_strjoin(t_game *game, char const *s1, char const *s2)
 {
 	size_t	size_needed;
 	char	*s3;
 
 	size_needed = f_strlen(s1) + f_strlen(s2) + 1;
-	s3 = f_gc_malloc(main, size_needed * sizeof(char));
+	s3 = f_gc_malloc(game, size_needed * sizeof(char));
 	if (!s3)
 		return (NULL);
 	while (*s1)

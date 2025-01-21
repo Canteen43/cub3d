@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 13:31:10 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/13 12:32:51 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:07:43 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,32 @@ static void	sf_skip_spaces(char *line, int *i);
 static int	sf_get_value(int *target, char *line, int *i, char color);
 static int	sf_check_comma(char *line, int *i);
 
-void	f_set_color_config(t_main *main, t_line_type type, char *line)
+void	f_set_color_config(t_game *game, t_line_type type, char *line)
 {
 	int	*target;
 	int	i;
 
 	if (type == FLOOR)
-		target = &main->floor_color;
+		target = &game->floor_color;
 	if (type == CEILING)
-		target = &main->ceiling_color;
+		target = &game->ceiling_color;
 	if (*target != -1)
-		f_graceful_exit(main, 1, __func__, "Redefintion of color config.");
+		f_graceful_exit(game, 1, __func__, "Redefintion of color config.");
 	i = 0;
 	sf_skip_spaces(line, &i);
 	i++;
 	if (sf_get_value(target, line, &i, 'r'))
-		f_graceful_exit(main, 1, __func__, "Wrong value for red config.");
+		f_graceful_exit(game, 1, __func__, "Wrong value for red config.");
 	if (sf_check_comma(line, &i))
-		f_graceful_exit(main, 1, __func__, "Comma missing after color config.");
+		f_graceful_exit(game, 1, __func__, "Comma missing after color config.");
 	if (sf_get_value(target, line, &i, 'g'))
-		f_graceful_exit(main, 1, __func__, "Wrong value for green config.");
+		f_graceful_exit(game, 1, __func__, "Wrong value for green config.");
 	if (sf_check_comma(line, &i))
-		f_graceful_exit(main, 1, __func__, "Comma missing after color config.");
+		f_graceful_exit(game, 1, __func__, "Comma missing after color config.");
 	if (sf_get_value(target, line, &i, 'b'))
-		f_graceful_exit(main, 1, __func__, "Wrong value for blue config.");
+		f_graceful_exit(game, 1, __func__, "Wrong value for blue config.");
 	if (line[i] != '\0')
-		f_graceful_exit(main, 1, __func__, "Extra argument for color config.");
+		f_graceful_exit(game, 1, __func__, "Extra argument for color config.");
 }
 
 static void	sf_skip_spaces(char *line, int *i)

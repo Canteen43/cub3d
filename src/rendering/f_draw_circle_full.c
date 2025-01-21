@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_draw_circle_full.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kweihman <kweihman@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 19:38:04 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/19 20:19:46 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:40:09 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	f_draw_circle_full(t_game *game, t_circle circle)
 		j = 0;
 		while (j < circle.center.y + circle.radius)
 		{
-			if (f_distance2(circle.center, (t_coords){i, j}) <= circle.radius)
+			if (f_distance(circle.center, (t_coords){i, j}) <= circle.radius)
 				f_put_pixel(i, j, circle.color, game);
 			j++;
 		}

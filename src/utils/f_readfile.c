@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 14:40:33 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/13 10:43:04 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:07:43 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 /*Gets a fd from a file that needs to be ready to be read from. Returns a
 pointer to the string read.*/
-char	*f_readfile(t_main *main, int fd)
+char	*f_readfile(t_game *game, int fd)
 {
 	char	*str;
 	char	buf[BUFFER_SIZE];
 	int		read_rt;
 
-	str = f_gc_malloc(main, sizeof(char));
+	str = f_gc_malloc(game, sizeof(char));
 	if (str == NULL)
 		return (NULL);
 	*str = '\0';
@@ -32,7 +32,7 @@ char	*f_readfile(t_main *main, int fd)
 			return (NULL);
 		if (read_rt == 0)
 			break ;
-		str = f_strjoin(main, str, buf);
+		str = f_strjoin(game, str, buf);
 		if (str == NULL)
 			return (NULL);
 	}

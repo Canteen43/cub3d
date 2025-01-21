@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:11:19 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/13 11:55:21 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:07:43 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	substr_cpy(char const *str, char dlm, int i, char *sub)
 	*sub = '\0';
 }
 
-char	**f_split(t_main *main, char const *s, char c)
+char	**f_split(t_game *game, char const *s, char c)
 {
 	int		sub_cnt;
 	char	**ptr;
@@ -73,13 +73,13 @@ char	**f_split(t_main *main, char const *s, char c)
 	sub_cnt = 0;
 	while (index_substr(s, sub_cnt, c))
 		sub_cnt++;
-	ptr = f_gc_malloc(main, (sub_cnt + 1) * sizeof(void *));
+	ptr = f_gc_malloc(game, (sub_cnt + 1) * sizeof(void *));
 	if (ptr == NULL)
 		return (NULL);
 	i = 0;
 	while (i < sub_cnt)
 	{
-		ptr[i] = f_gc_malloc(main, (substr_len(s, c, i) + 1) * sizeof(char));
+		ptr[i] = f_gc_malloc(game, (substr_len(s, c, i) + 1) * sizeof(char));
 		if (ptr[i] == NULL)
 			return (NULL);
 		substr_cpy(s, c, i, ptr[i]);

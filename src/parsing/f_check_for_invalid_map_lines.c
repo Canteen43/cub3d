@@ -6,27 +6,27 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 10:34:32 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/13 13:26:23 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:07:43 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	f_check_for_invalid_map_lines(t_main *main)
+void	f_check_for_invalid_map_lines(t_game *game)
 {
 	int			i;
 	char		**lines;
 
-	lines = main->cubfile_line_by_line;
+	lines = game->cubfile_line_by_line;
 	i = 0;
-	while (lines[i] && f_set_input_line_type(main, lines[i]) != MAP)
+	while (lines[i] && f_set_input_line_type(game, lines[i]) != MAP)
 		i++;
 	if (lines[i] == NULL)
-		f_graceful_exit(main, 1, __func__, "No map line found.");
-	while (lines[i] && f_set_input_line_type(main, lines[i]) == MAP)
+		f_graceful_exit(game, 1, __func__, "No map line found.");
+	while (lines[i] && f_set_input_line_type(game, lines[i]) == MAP)
 		i++;
-	while (lines[i] && f_set_input_line_type(main, lines[i]) == EMPTY)
+	while (lines[i] && f_set_input_line_type(game, lines[i]) == EMPTY)
 		i++;
 	if (lines[i] != NULL)
-		f_graceful_exit(main, 1, __func__, "Non-empty line found after map.");
+		f_graceful_exit(game, 1, __func__, "Non-empty line found after map.");
 }

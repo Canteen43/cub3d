@@ -3,30 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   f_distance.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 12:19:51 by glevin            #+#    #+#             */
-/*   Updated: 2025/01/18 12:27:06 by glevin           ###   ########.fr       */
+/*   Created: 2025/01/19 19:36:07 by kweihman          #+#    #+#             */
+/*   Updated: 2025/01/21 14:27:18 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-float	f_distance(float x, float y)
+float	f_distance(t_coords p1, t_coords p2)
 {
-	return (sqrt(x * x + y * y));
-}
-
-float	f_fixed_dist(float x1, float y1, float x2, float y2, t_game *game)
-{
-	float	delta_x;
-	float	delta_y;
-	float	angle;
-	float	fix_dist;
-
-	delta_x = x2 - x1;
-	delta_y = y2 - y1;
-	angle = atan2(delta_y, delta_x) - game->player.angle;
-	fix_dist = f_distance(delta_x, delta_y) * cos(angle);
-	return (fix_dist);
+	return (sqrtf(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2)));
 }
