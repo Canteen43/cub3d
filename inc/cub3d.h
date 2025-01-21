@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/21 15:32:46 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/21 16:19:08 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,13 @@
 // Macros
 # define BUFFER_SIZE 256
 
-# define MINIMAP 0
-
 # define WIDTH 1280
 # define HEIGHT 720
 
 # define PI 3.14159265359
 # define SPEED 0.1
 # define ANGLE_SPEED 0.02
-# define MINIBLOCK 32
-# define BLOCK 32
+# define MINIBLOCK 16
 # define FRAMES_PER_SECOND 80
 
 // Coordinate struct
@@ -67,6 +64,14 @@ typedef struct s_circle
 	float			radius;
 	t_coords		center;
 }					t_circle;
+
+// Square struct
+typedef struct s_square
+{
+	int				color;
+	float			size;
+	t_coords		top_left;
+}					t_square;
 
 // Line type enum
 typedef enum e_line_type
@@ -179,23 +184,19 @@ void				f_debug_info(t_game *game);
 // Rendering
 void				f_start_mlx(t_game *game);
 void				f_start_mlx(t_game *game);
-void				f_draw_square(int x, int y, int size, int color,
-						t_game *game);
+void				f_draw_square(t_game *game, t_square sq);
 int					f_key_press(int keycode, t_game *game);
 int					f_key_release(int keycode, t_game *game);
 void				f_move_player(t_game *game);
 void				f_clear_image(t_game *game);
 void				f_draw_minimap(t_game *game);
 bool				f_touch(float px, float py, t_game *game);
-float				f_fixed_dist(float x1, float y1, float x2, float y2,
-						t_game *game);
 void				f_draw_walls(float ray_x, float ray_y, t_game *game, int i);
 void				f_draw_line(t_game *game, float start_x, int i);
 int					f_game_loop(t_game *game);
 void				f_put_pixel(int x, int y, int color, t_game *game);
 int					f_handle_close_button(void *param);
-void				f_draw_full_square(int x, int y, int size, int color,
-						t_game *game);
+void				f_draw_full_square(t_game *game, t_square sq);
 void				f_draw_circle_full(t_game *game, t_circle circle);
 float				f_distance(t_coords p1, t_coords p2);
 void				f_attempt_move(t_game *game, char dimension,

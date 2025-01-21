@@ -6,25 +6,25 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 12:14:25 by glevin            #+#    #+#             */
-/*   Updated: 2025/01/18 18:06:28 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/21 16:10:32 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	f_draw_full_square(int x, int y, int size, int color, t_game *game)
+void	f_draw_full_square(t_game *game, t_square sq)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (i < size)
+	while (i < sq.size)
 	{
 		j = 0;
-		while (j < size)
+		while (j < sq.size)
 		{
-			f_put_pixel(x + i, y + j, color, game);
+			f_put_pixel(sq.top_left.x + i, sq.top_left.y + j, sq.color, game);
 			j++;
 		}
 		i++;
