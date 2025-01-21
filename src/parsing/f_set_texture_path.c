@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 11:52:45 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/21 14:07:43 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:11:16 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void	f_set_texture_path(t_game *game, t_line_type type, char *line)
 	char	**words;
 
 	if (type == NORTH)
-		target = &game->no_txtr_path;
+		target = &game->north.path;
 	if (type == EAST)
-		target = &game->ea_txtr_path;
+		target = &game->east.path;
 	if (type == SOUTH)
-		target = &game->so_txtr_path;
+		target = &game->south.path;
 	if (type == WEST)
-		target = &game->we_txtr_path;
+		target = &game->west.path;
 	if (*target != NULL)
 		f_graceful_exit(game, 1, __func__, "Redefintion of texture path.");
 	words = f_split(game, line, ' ');

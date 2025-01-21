@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/21 16:19:08 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:25:04 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,15 @@ typedef struct s_square
 	t_coords		top_left;
 }					t_square;
 
+// Texture struct
+typedef struct s_texture
+{
+	char			*path;
+	void			*img_ptr;
+	int				width;
+	int				height;
+}					t_tex;
+
 // Line type enum
 typedef enum e_line_type
 {
@@ -98,10 +107,10 @@ typedef struct s_gnode
 typedef struct s_game
 {
 	t_gnode			*gc_head;
-	char			*no_txtr_path;
-	char			*ea_txtr_path;
-	char			*so_txtr_path;
-	char			*we_txtr_path;
+	t_tex			north;
+	t_tex			east;
+	t_tex			south;
+	t_tex			west;
 	int				floor_color;
 	int				ceiling_color;
 	char			*entire_cubfile;
@@ -123,11 +132,11 @@ typedef struct s_game
 	bool			key_right;
 	bool			key_left;
 	bool			key_down;
-
 	bool			left_rotate;
 	bool			right_rotate;
-	t_coords		player_pos;
+
 	float			player_angle;
+	t_coords		player_pos;
 	t_coords		grid_hit;
 	t_coords		wall_hit;
 }					t_game;
@@ -205,4 +214,5 @@ float				f_find_target(float current, float vector);
 t_coords			f_next_grid_hit(t_coords current, float angle);
 bool				f_is_round(float nbr);
 bool				f_is_wall(t_game *game, t_coords pos);
+void				f_load_textures(t_game *game);
 #endif // CUB3D_H
