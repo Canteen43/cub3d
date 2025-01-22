@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_game_loop.c                                      :+:      :+:    :+:   */
+/*   f_next_wall_hit.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 12:22:18 by glevin            #+#    #+#             */
-/*   Updated: 2025/01/22 17:40:43 by kweihman         ###   ########.fr       */
+/*   Created: 2025/01/22 15:17:35 by kweihman          #+#    #+#             */
+/*   Updated: 2025/01/22 16:35:46 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	f_game_loop(t_game *game)
+t_coords	f_next_wall_hit(t_game *game, t_coords current, float angle)
 {
-	f_move_player(game);
-	f_clear_image(game);
-	f_draw_walls(game);
-	f_draw_minimap(game);
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-	usleep(1000000 / FRAMES_PER_SECOND);
-	return (0);
+	t_coords	wall_hit;
+
+	wall_hit = f_next_grid_hit(current, angle);
+	while (!f_is_wall(game, wall_hit))
+		wall_hit = f_next_grid_hit(wall_hit, angle);
+	return (wall_hit);
 }

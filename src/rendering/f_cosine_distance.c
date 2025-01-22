@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_game_loop.c                                      :+:      :+:    :+:   */
+/*   f_cosine_distance.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 12:22:18 by glevin            #+#    #+#             */
-/*   Updated: 2025/01/22 17:40:43 by kweihman         ###   ########.fr       */
+/*   Created: 2025/01/22 15:30:42 by kweihman          #+#    #+#             */
+/*   Updated: 2025/01/22 15:33:52 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	f_game_loop(t_game *game)
+float	f_cosine_distance(t_coords a, t_coords b, float angle1, float angle2)
 {
-	f_move_player(game);
-	f_clear_image(game);
-	f_draw_walls(game);
-	f_draw_minimap(game);
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-	usleep(1000000 / FRAMES_PER_SECOND);
-	return (0);
+	return (f_distance(a, b) * cos(angle1 - angle2));
 }

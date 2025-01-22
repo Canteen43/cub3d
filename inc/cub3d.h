@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/22 14:30:00 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/22 17:41:01 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,27 @@
 
 # define WIDTH 1280
 # define HEIGHT 720
-
 # define PI 3.14159265359
-# define SPEED 0.1
-# define ANGLE_SPEED 0.02
+
+// Field of view
+// Sets how much of the game the player can see horizontally. Units is radians.
+// 1.047197551 is PI / 3, so 60 degrees.
+# define FOV 1.047197551
+
+// Sets how far the player moves with one button press.
+// 0.025 means that one step is one 40-th of a cube wide.
+# define SPEED 0.025
+
+// Sets how much the player turns with one button press. Unit is radians.
+// 0.017453293 is PI / 180, so one degree.
+# define ANGLE_SPEED 0.017453293
+
+// Sets the length and width in pixels of one cube on the minimap.
 # define MINIBLOCK 16
+
+// Sets the sleep time between rendering frames and updating player position.
+// Real frames per second will be lower since this pretends that rendering is
+// instant.
 # define FRAMES_PER_SECOND 80
 
 // Coordinate struct
@@ -74,8 +90,8 @@ typedef struct s_square
 }					t_square;
 
 // Texture struct
-/* Use game->[texture_name]->data to the color at a given pixel position.
-Same way we use game->data to write a color to a pixel position. */
+/* Usage: Use game->[texture_name]->data to read the color at a given pixel
+position. Same way we use game->data to write a color to a pixel position. */
 typedef struct s_texture
 {
 	char			*path;
@@ -88,7 +104,7 @@ typedef struct s_texture
 	int				endian;
 }					t_tex;
 
-// Line type enum
+// Enum used for classifying lines during parsing
 typedef enum e_line_type
 {
 	EMPTY,
@@ -110,6 +126,7 @@ typedef struct s_gnode
 }					t_gnode;
 
 // Main struct
+/*Overarching struct that holds all variables that might need to be accessed.*/
 typedef struct s_game
 {
 	t_gnode			*gc_head;
@@ -143,8 +160,6 @@ typedef struct s_game
 
 	float			player_angle;
 	t_coords		player_pos;
-	t_coords		grid_hit;
-	t_coords		wall_hit;
 }					t_game;
 
 // Function declarations
@@ -206,7 +221,7 @@ void				f_move_player(t_game *game);
 void				f_clear_image(t_game *game);
 void				f_draw_minimap(t_game *game);
 bool				f_touch(float px, float py, t_game *game);
-void				f_draw_walls(float ray_x, float ray_y, t_game *game, int i);
+void				f_draw_walls(t_game *game);
 void				f_draw_line(t_game *game, float start_x, int i);
 int					f_game_loop(t_game *game);
 void				f_put_pixel(int x, int y, int color, t_game *game);
@@ -221,4 +236,9 @@ t_coords			f_next_grid_hit(t_coords current, float angle);
 bool				f_is_round(float nbr);
 bool				f_is_wall(t_game *game, t_coords pos);
 void				f_load_textures(t_game *game);
+t_coords			f_next_wall_hit(t_game *game, t_coords current,
+						float angle);
+float				f_cosine_distance(t_coords a, t_coords b, float angle1,
+						float angle2);
+
 #endif // CUB3D_H
