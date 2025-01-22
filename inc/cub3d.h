@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/21 18:25:04 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/22 14:30:00 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,18 @@ typedef struct s_square
 }					t_square;
 
 // Texture struct
+/* Use game->[texture_name]->data to the color at a given pixel position.
+Same way we use game->data to write a color to a pixel position. */
 typedef struct s_texture
 {
 	char			*path;
 	void			*img_ptr;
 	int				width;
 	int				height;
+	void			*data;
+	int				bpp;
+	int				size_line;
+	int				endian;
 }					t_tex;
 
 // Line type enum

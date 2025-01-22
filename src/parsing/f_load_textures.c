@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 18:04:09 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/21 18:26:03 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/22 14:27:45 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,6 @@ static void	sf_load_one_texture(t_game *game, t_tex *tex)
 			&tex->height);
 	if (tex->img_ptr == NULL)
 		f_graceful_exit(game, 1, __func__, "Error loading texture.");
+	tex->data = mlx_get_data_addr(tex->img_ptr, &tex->bpp, &tex->size_line,
+			&tex->endian);
 }
