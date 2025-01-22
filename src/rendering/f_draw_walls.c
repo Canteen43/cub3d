@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 12:20:24 by glevin            #+#    #+#             */
-/*   Updated: 2025/01/22 17:35:26 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/22 18:00:22 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,18 @@ static void	sf_print_column(t_game *game, int ray, int wall_height)
 			f_put_pixel(ray, y, game->floor_color, game);
 		else
 			f_put_pixel(ray, y, SALMON, game);
+			// TODO: Change this line to draw textures.
 		y++;
 	}
 }
+// TODO: To draw the textures, I think you need to first find out which
+// direction the wall is facing. You can do so by checking if coordinates are
+// round numbers, which should tell you EAST/WEST vs NORTH/SOUTH. And then you
+// can use player position to figure out if your above or below / left or right
+// to the wall. Wouter said not to worry about corners (both x and y round
+// numbers).
+// And for the textures, I think we need a "reverse" function to our put_pixel,
+// that takes coordinates and returns the color for a given image.
+// And then it should be a little math, to see which pixel of the texture image
+// to print where on the wall column.
+// Boom there you go.
