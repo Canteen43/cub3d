@@ -6,15 +6,15 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:46:20 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/13 10:49:22 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:07:43 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	f_init(t_main *main)
+void	f_init(t_game *game)
 {
-	f_bzero(main, sizeof(t_main));
-	main->ceiling_color = -1;
-	main->floor_color = -1;
+	f_bzero(game, sizeof(t_game));
+	game->ceiling_color = -1;
+	game->floor_color = -1;
 }

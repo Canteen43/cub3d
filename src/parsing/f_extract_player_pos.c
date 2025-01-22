@@ -1,42 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_check_single_starting_pos.c                      :+:      :+:    :+:   */
+/*   f_extract_game_pos.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/12 13:05:33 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/21 14:07:43 by kweihman         ###   ########.fr       */
+/*   Created: 2025/01/13 14:13:56 by kweihman          #+#    #+#             */
+/*   Updated: 2025/01/21 14:13:38 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	f_check_single_starting_pos(t_game *game)
+// Static functions
+static void	sf_set_angle(t_game *game, char c);
+
+void	f_extract_game_pos(t_game *game)
 {
-	int		i;
-	int		j;
-	bool	startpos_found;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
-	startpos_found = false;
 	while (game->map[i])
 	{
 		while (game->map[i][j])
 		{
 			if (f_strchr("NESW", game->map[i][j]))
 			{
-				if (!startpos_found)
-					startpos_found = true;
-				else if (startpos_found)
-					f_graceful_exit(game, 1, __func__, "Multiple start pos.");
+				sf_set_angle(game, game->map[i][j]);
+				game->map[i][j] = '0';
+				game->player_pos.x = j + 0.5f;
+				game->player_pos.y = i + 0.5f;
+				return ;
 			}
 			j++;
 		}
 		j = 0;
 		i++;
 	}
-	if (!startpos_found)
-		f_graceful_exit(game, 1, __func__, "No start pos found.");
+}
+
+static void	sf_set_angle(t_game *game, char c)
+{
+	if (c == 'E')
+		game->player_angle = PI * 0;
+	if (c == 'N')
+		game->player_angle = PI * 0.5;
+	if (c == 'W')
+		game->player_angle = PI * 1.0;
+	if (c == 'S')
+		game->player_angle = PI * 1.5;
 }

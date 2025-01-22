@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_create_map_array.c                               :+:      :+:    :+:   */
+/*   f_draw_circle_full.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/12 12:17:49 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/21 14:07:43 by kweihman         ###   ########.fr       */
+/*   Created: 2025/01/19 19:38:04 by kweihman          #+#    #+#             */
+/*   Updated: 2025/01/21 14:40:09 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	f_create_map_array(t_game *game)
+void	f_draw_circle_full(t_game *game, t_circle circle)
 {
 	int	i;
+	int	j;
 
-	game->map = f_gc_malloc(game, (game->map_line_count + 1) * sizeof(void *));
-	i = 0;
-	while (i < game->map_line_count)
+	i = circle.center.x - circle.radius;
+	if (i < 0)
+		i = 0;
+	j = circle.center.y - circle.radius;
+	if (i < 0)
+		i = 0;
+	while (i < circle.center.x + circle.radius)
 	{
-		game->map[i] = f_gc_malloc(game, (game->map_line_width + 1)
-				* sizeof(char));
+		j = 0;
+		while (j < circle.center.y + circle.radius)
+		{
+			if (f_distance(circle.center, (t_coords){i, j}) <= circle.radius)
+				f_put_pixel(i, j, circle.color, game);
+			j++;
+		}
 		i++;
 	}
-	game->map[i] = NULL;
 }

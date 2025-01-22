@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   f_draw_square.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 12:14:25 by glevin            #+#    #+#             */
-/*   Updated: 2025/01/18 12:14:39 by glevin           ###   ########.fr       */
+/*   Updated: 2025/01/21 16:08:22 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	f_draw_square(int x, int y, int size, int color, t_game *game)
+void	f_draw_square(t_game *game, t_square sq)
 {
 	int	i;
 
 	i = -1;
-	while (size > ++i)
-		f_put_pixel(x + i, y, color, game);
+	while (sq.size > ++i)
+		f_put_pixel(sq.top_left.x + i, sq.top_left.y, sq.color, game);
 	i = -1;
-	while (size > ++i)
-		f_put_pixel(x, y + i, color, game);
+	while (sq.size > ++i)
+		f_put_pixel(sq.top_left.x, sq.top_left.y + i, sq.color, game);
 	i = -1;
-	while (size > ++i)
-		f_put_pixel(x + size, y + i, color, game);
+	while (sq.size > ++i)
+		f_put_pixel(sq.top_left.x + sq.size, sq.top_left.y + i, sq.color, game);
 	i = -1;
-	while (size > ++i)
-		f_put_pixel(x + i, y + size, color, game);
+	while (sq.size > ++i)
+		f_put_pixel(sq.top_left.x + i, sq.top_left.y + sq.size, sq.color, game);
 }

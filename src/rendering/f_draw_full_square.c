@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_set_map.c                                        :+:      :+:    :+:   */
+/*   f_draw_full_square.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/12 10:17:39 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/21 14:16:14 by kweihman         ###   ########.fr       */
+/*   Created: 2025/01/18 12:14:25 by glevin            #+#    #+#             */
+/*   Updated: 2025/01/21 16:10:32 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	f_set_map(t_game *game)
+void	f_draw_full_square(t_game *game, t_square sq)
 {
-	f_check_for_invalid_map_lines(game);
-	f_set_map_dimensions(game);
-	f_create_map_array(game);
-	f_fill_map_array(game);
-	f_check_open_walls(game);
-	f_check_single_starting_pos(game);
-	f_extract_game_pos(game);
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < sq.size)
+	{
+		j = 0;
+		while (j < sq.size)
+		{
+			f_put_pixel(sq.top_left.x + i, sq.top_left.y + j, sq.color, game);
+			j++;
+		}
+		i++;
+	}
 }

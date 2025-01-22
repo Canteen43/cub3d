@@ -2,6 +2,11 @@
 	"files.associations": {
 		"cub3d.h": "c",
 		"typeinfo": "c",
-		"stdbool.h": "c"
+		"stdbool.h": "c",
+		"array": "c",
+		"string_view": "c",
+		"initializer_list": "c",
+		"utility": "c",
+		"cmath": "c"
 	}
 }

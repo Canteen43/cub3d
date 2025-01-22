@@ -51,6 +51,8 @@ SRC_FILES       += parsing/f_handle_cub_file.c
 SRC_FILES       += parsing/f_set_map_dimensions.c
 SRC_FILES       += parsing/f_import_cub_file.c
 SRC_FILES       += parsing/f_set_texture_path.c
+SRC_FILES       += parsing/f_extract_player_pos.c
+SRC_FILES       += parsing/f_load_textures.c
 
 SRC_FILES       += utils/f_bzero.c
 SRC_FILES       += utils/f_memcpy.c
@@ -67,21 +69,30 @@ SRC_FILES       += utils/f_splitlines.c
 SRC_FILES       += utils/f_strjoin.c
 
 SRC_FILES       += debug/f_print_map.c
+SRC_FILES       += debug/f_debug_info.c
 
+SRC_FILES       += rendering/f_draw_minimap.c
 SRC_FILES       += rendering/f_clear_image.c
 SRC_FILES       += rendering/f_distance.c
-SRC_FILES       += rendering/f_draw_line.c
-SRC_FILES       += rendering/f_draw_loop.c
-SRC_FILES       += rendering/f_draw_map.c
+SRC_FILES       += rendering/f_game_loop.c
 SRC_FILES       += rendering/f_draw_square.c
-SRC_FILES       += rendering/f_draw_walls.c
-SRC_FILES       += rendering/f_init_game.c
-SRC_FILES       += rendering/f_init_player.c
+SRC_FILES       += rendering/f_start_mlx.c
 SRC_FILES       += rendering/f_key_press.c
 SRC_FILES       += rendering/f_key_release.c
 SRC_FILES       += rendering/f_move_player.c
 SRC_FILES       += rendering/f_put_pixel.c
-SRC_FILES       += rendering/f_touch.c
+SRC_FILES       += rendering/f_handle_close_button.c
+SRC_FILES       += rendering/f_draw_full_square.c
+SRC_FILES       += rendering/f_draw_circle_full.c
+SRC_FILES       += rendering/f_attempt_move.c
+SRC_FILES       += rendering/f_next_grid_hit.c
+SRC_FILES       += rendering/f_find_targets.c
+SRC_FILES       += rendering/f_is_round.c
+SRC_FILES       += rendering/f_is_wall.c
+SRC_FILES       += rendering/f_draw_walls.c
+SRC_FILES       += rendering/f_cosine_distance.c
+SRC_FILES       += rendering/f_next_wall_hit.c
+
 
 # Object files directory
 OBJ_DIR			:= obj/

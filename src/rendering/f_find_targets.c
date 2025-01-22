@@ -1,24 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_set_map.c                                        :+:      :+:    :+:   */
+/*   f_find_targets.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/12 10:17:39 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/21 14:16:14 by kweihman         ###   ########.fr       */
+/*   Created: 2025/01/20 19:11:46 by kweihman          #+#    #+#             */
+/*   Updated: 2025/01/20 19:59:32 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	f_set_map(t_game *game)
+float	f_find_target(float current, float vector)
 {
-	f_check_for_invalid_map_lines(game);
-	f_set_map_dimensions(game);
-	f_create_map_array(game);
-	f_fill_map_array(game);
-	f_check_open_walls(game);
-	f_check_single_starting_pos(game);
-	f_extract_game_pos(game);
+	float	target;
+
+	if (f_is_round(current))
+	{
+		if (vector >= 0)
+			target = current + 1;
+		else
+			target = current - 1;
+	}
+	else
+	{
+		if (vector >= 0)
+			target = ceilf(current);
+		else
+			target = floorf(current);
+	}
+	return (target);
 }

@@ -6,14 +6,14 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:16:46 by glevin            #+#    #+#             */
-/*   Updated: 2025/01/12 17:11:19 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:07:43 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 // Function to add a node to the garbage collector list
-t_gnode	*f_gc_add_node(t_main *main, void *ptr)
+t_gnode	*f_gc_add_node(t_game *game, void *ptr)
 {
 	t_gnode	*new_node;
 
@@ -21,20 +21,20 @@ t_gnode	*f_gc_add_node(t_main *main, void *ptr)
 	if (!new_node)
 		return (NULL);
 	new_node->ptr = ptr;
-	new_node->next = main->gc_head;
-	main->gc_head = new_node;
+	new_node->next = game->gc_head;
+	game->gc_head = new_node;
 	return (new_node);
 }
 
 // Wrapper for malloc that integrates with garbage collector
-void	*f_gc_malloc(t_main *main, size_t size)
+void	*f_gc_malloc(t_game *game, size_t size)
 {
 	void	*ptr;
 
 	ptr = malloc(size);
 	if (ptr == NULL)
 		return (NULL);
-	if (f_gc_add_node(main, ptr) == NULL)
+	if (f_gc_add_node(game, ptr) == NULL)
 	{
 		free(ptr);
 		return (NULL);

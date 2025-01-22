@@ -3,28 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   f_key_press.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 12:15:12 by glevin            #+#    #+#             */
-/*   Updated: 2025/01/18 12:15:30 by glevin           ###   ########.fr       */
+/*   Updated: 2025/01/21 14:14:52 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	f_key_press(int keycode, t_player *player)
+int	f_key_press(int keycode, t_game *game)
 {
-	if (keycode == W)
-		player->key_up = true;
-	if (keycode == S)
-		player->key_down = true;
-	if (keycode == A)
-		player->key_left = true;
-	if (keycode == D)
-		player->key_right = true;
-	if (keycode == LEFT)
-		player->left_rotate = true;
-	if (keycode == RIGHT)
-		player->right_rotate = true;
+	if (keycode == XK_Escape)
+		f_graceful_exit(game, 0, NULL, NULL);
+	if (keycode == XK_w)
+		game->key_up = true;
+	if (keycode == XK_s)
+		game->key_down = true;
+	if (keycode == XK_a)
+		game->key_left = true;
+	if (keycode == XK_d)
+		game->key_right = true;
+	if (keycode == XK_Left)
+		game->left_rotate = true;
+	if (keycode == XK_Right)
+		game->right_rotate = true;
+	if (keycode == XK_space)
+		f_debug_info(game);
 	return (0);
 }

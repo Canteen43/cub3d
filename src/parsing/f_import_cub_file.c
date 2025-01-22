@@ -6,21 +6,21 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 13:48:52 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/13 12:49:13 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:07:43 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	f_import_cub_file(t_main *main, char **argv)
+void	f_import_cub_file(t_game *game, char **argv)
 {
-	main->cubfile_fd = open(argv[1], O_RDONLY, NULL);
-	if (main->cubfile_fd == -1)
-		f_graceful_exit(main, 1, __func__, "Open() failed.");
-	main->entire_cubfile = f_readfile(main, main->cubfile_fd);
-	if (!main->entire_cubfile)
-		f_graceful_exit(main, 1, __func__, "Reading .cub-file failed.");
-	if (*main->entire_cubfile == '\0')
-		f_graceful_exit(main, 1, __func__, "Empty .cub-file.");
-	main->cubfile_line_by_line = f_splitlines(main, main->entire_cubfile);
+	game->cubfile_fd = open(argv[1], O_RDONLY, NULL);
+	if (game->cubfile_fd == -1)
+		f_graceful_exit(game, 1, __func__, "Open() failed.");
+	game->entire_cubfile = f_readfile(game, game->cubfile_fd);
+	if (!game->entire_cubfile)
+		f_graceful_exit(game, 1, __func__, "Reading .cub-file failed.");
+	if (*game->entire_cubfile == '\0')
+		f_graceful_exit(game, 1, __func__, "Empty .cub-file.");
+	game->cubfile_line_by_line = f_splitlines(game, game->entire_cubfile);
 }
