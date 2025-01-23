@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/22 17:41:01 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/23 14:26:14 by glevin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@
 
 // Sets how much the player turns with one button press. Unit is radians.
 // 0.017453293 is PI / 180, so one degree.
-# define ANGLE_SPEED 0.017453293
+// # define ANGLE_SPEED 0.017453293
+# define ANGLE_SPEED 0.05
 
 // Sets the length and width in pixels of one cube on the minimap.
 # define MINIBLOCK 16
@@ -65,6 +66,9 @@
 // Real frames per second will be lower since this pretends that rendering is
 // instant.
 # define FRAMES_PER_SECOND 80
+
+// Sets the distanc between the player and the wall that should not be traversable
+# define WALL_BUFFER 0.2
 
 // Coordinate struct
 typedef struct s_coordinates
