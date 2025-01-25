@@ -6,7 +6,7 @@
 /*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/23 14:26:14 by glevin           ###   ########.fr       */
+/*   Updated: 2025/01/25 13:26:43 by glevin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@
 
 // Sets how far the player moves with one button press.
 // 0.025 means that one step is one 40-th of a cube wide.
-# define SPEED 0.025
+# define SPEED 0.1
 
 // Sets how much the player turns with one button press. Unit is radians.
 // 0.017453293 is PI / 180, so one degree.
@@ -244,5 +244,7 @@ t_coords			f_next_wall_hit(t_game *game, t_coords current,
 						float angle);
 float				f_cosine_distance(t_coords a, t_coords b, float angle1,
 						float angle2);
+int					f_get_texture(int y, t_game *game, int wall_height,
+						t_coords wall_hit);
 
 #endif // CUB3D_H
