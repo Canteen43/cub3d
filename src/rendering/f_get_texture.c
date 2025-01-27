@@ -6,7 +6,7 @@
 /*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 13:23:28 by glevin            #+#    #+#             */
-/*   Updated: 2025/01/25 13:29:08 by glevin           ###   ########.fr       */
+/*   Updated: 2025/01/26 17:46:40 by glevin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ int	f_get_texture(int y, t_game *game, int wall_height, t_coords wall_hit)
 	wall_height_ratio = (y - ceiling_height) / (float)wall_height;
 	texture = sf_get_texture_map(game, wall_hit);
 	y_i = (int)(wall_height_ratio * (float)texture->height);
-	x_i = sf_get_fractional(wall_hit) * texture->width;
+	if (texture->direction == 3 || texture->direction == 4)
+		x_i = (1 - sf_get_fractional(wall_hit)) * texture->width;
+	else
+		x_i = sf_get_fractional(wall_hit) * texture->width;
 	offset = y_i * texture->size_line + (x_i * (texture->bpp / 8));
 	color = *(int *)((char *)texture->data + offset);
 	return (color);

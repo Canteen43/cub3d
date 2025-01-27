@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/27 10:37:05 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/27 12:23:34 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ typedef struct s_square
 position. Same way we use game->data to write a color to a pixel position. */
 typedef struct s_texture
 {
+	int				direction;
 	char			*path;
 	void			*img_ptr;
 	int				width;
