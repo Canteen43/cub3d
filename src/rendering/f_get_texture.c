@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 13:23:28 by glevin            #+#    #+#             */
-/*   Updated: 2025/01/27 14:18:42 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:28:34 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	f_get_texture(t_game *game, t_coords wall_hit, float wall_height_ratio)
 	t_tex	*texture;
 
 	texture = sf_get_texture_map(game, wall_hit);
-	y_i = (int)(wall_height_ratio * (float)texture->height);
+	y_i = (int)(wall_height_ratio * texture->height);
 	if (texture->direction == 3 || texture->direction == 4)
 		x_i = (1 - sf_get_fractional(wall_hit)) * texture->width;
 	else
@@ -49,7 +49,7 @@ static t_tex	*sf_get_texture_map(t_game *game, t_coords wall_hit)
 		else
 			return (&game->east);
 	}
-	if (y_fractional == 0)
+	else
 	{
 		if (game->player_pos.y > wall_hit.y)
 			return (&game->north);
