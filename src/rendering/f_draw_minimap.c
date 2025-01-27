@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 17:31:38 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/27 10:58:13 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/27 12:33:15 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	f_draw_minimap(t_game *game)
 	int	radius;
 
 	sf_draw_map(game);
-	radius = WALL_BUFFER * (MINI_HEIGHT / (DISTANCE_SEEN * 2));
+	radius = WALL_BUFFER * game->pix_per_unit;
 	f_draw_circle_full(game, (t_circle){RED, radius, (t_coords){MINI_HEIGHT / 2,
 		MINI_HEIGHT / 2}});
 	sf_draw_rays(game);

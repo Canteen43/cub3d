@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/27 12:23:34 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/27 12:50:05 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@
 // instant.
 # define FRAMES_PER_SECOND 80
 
-// Sets the distanc between the player and the wall that should not be traversable
+// Sets the distanc between the player and the wall that should not be passed
 # define WALL_BUFFER 0.2
 
 // Coordinate struct
@@ -257,7 +257,7 @@ t_coords			f_next_wall_hit(t_game *game, t_coords current,
 						float angle);
 float				f_cosine_distance(t_coords a, t_coords b, float angle1,
 						float angle2);
-int					f_get_texture(int y, t_game *game, int wall_height,
-						t_coords wall_hit);
+int					f_get_texture(t_game *game, t_coords wall_hit,
+						float wall_height_ratio);
 
 #endif // CUB3D_H

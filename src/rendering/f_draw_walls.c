@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_draw_walls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 12:20:24 by glevin            #+#    #+#             */
-/*   Updated: 2025/01/25 13:28:02 by glevin           ###   ########.fr       */
+/*   Updated: 2025/01/27 14:21:26 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ static void	sf_print_column(t_game *game, int x, int wall_height,
 			f_put_pixel(x, y, game->floor_color, game);
 		else
 		{
-			color = f_get_texture(y, game, wall_height, wall_hit);
+			color = f_get_texture(game, wall_hit, ((float)y - ceiling_threshold
+						- 1) / wall_height);
 			f_put_pixel(x, y, color, game);
 		}
 		y++;

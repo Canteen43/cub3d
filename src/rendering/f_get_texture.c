@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_get_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 13:23:28 by glevin            #+#    #+#             */
-/*   Updated: 2025/01/26 17:46:40 by glevin           ###   ########.fr       */
+/*   Updated: 2025/01/27 14:18:42 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,14 @@
 static float	sf_get_fractional(t_coords wall_hit);
 static t_tex	*sf_get_texture_map(t_game *game, t_coords wall_hit);
 
-int	f_get_texture(int y, t_game *game, int wall_height, t_coords wall_hit)
+int	f_get_texture(t_game *game, t_coords wall_hit, float wall_height_ratio)
 {
 	int		x_i;
 	int		y_i;
 	int		offset;
 	int		color;
-	float	wall_height_ratio;
-	int		ceiling_height;
 	t_tex	*texture;
 
-	ceiling_height = HEIGHT / 2 - wall_height / 2 + 1;
-	wall_height_ratio = (y - ceiling_height) / (float)wall_height;
 	texture = sf_get_texture_map(game, wall_hit);
 	y_i = (int)(wall_height_ratio * (float)texture->height);
 	if (texture->direction == 3 || texture->direction == 4)
