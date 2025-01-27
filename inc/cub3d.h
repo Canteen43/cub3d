@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/27 15:43:50 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:00:00 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@
 
 // Macros
 # define BUFFER_SIZE 256
+
+# define MOUSE_SENSITIVITY 1
 
 # define WIDTH 1280
 # define HEIGHT 720
@@ -260,5 +262,6 @@ float				f_cosine_distance(t_coords a, t_coords b, float angle1,
 						float angle2);
 int					f_get_texture(t_game *game, t_coords wall_hit,
 						float wall_height_ratio);
+int					f_handle_mouse(int x, int y, void *param);
 
 #endif // CUB3D_H
