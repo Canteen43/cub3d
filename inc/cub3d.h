@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/27 12:50:05 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:43:50 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 # define HEIGHT 720
 # define PI 3.14159265359
 
-# define MINI_HEIGHT 360
+# define MINI_HEIGHT 240
 # define DISTANCE_SEEN 8.0
 
 // Field of view
@@ -167,6 +167,7 @@ typedef struct s_game
 	int				size_line;
 	int				endian;
 	int				pix_per_unit;
+	float			focal_length;
 
 	bool			key_up;
 	bool			key_right;

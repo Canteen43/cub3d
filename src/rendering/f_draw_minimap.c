@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 17:31:38 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/27 12:33:15 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:05:23 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,14 @@ static void	sf_draw_rays(t_game *game);
 
 void	f_draw_minimap(t_game *game)
 {
-	int	radius;
+	int			radius;
+	t_coords	center;
 
 	sf_draw_map(game);
 	radius = WALL_BUFFER * game->pix_per_unit;
-	f_draw_circle_full(game, (t_circle){RED, radius, (t_coords){MINI_HEIGHT / 2,
-		MINI_HEIGHT / 2}});
+	center.x = MINI_HEIGHT / 2;
+	center.y = MINI_HEIGHT / 2;
+	f_draw_circle_full(game, (t_circle){RED, radius, center});
 	sf_draw_rays(game);
 }
 
@@ -101,9 +103,13 @@ static void	sf_draw_rays(t_game *game)
 		wall_hit = f_next_wall_hit(game, game->player_pos, ray_angle);
 		end.x = center.x + (wall_hit.x - game->player_pos.x)
 			* game->pix_per_unit;
+		if (end.x > MINI_HEIGHT)
+			end.x = MINI_HEIGHT;
 		end.y = center.y + (wall_hit.y - game->player_pos.y)
 			* game->pix_per_unit;
+		if (end.y > MINI_HEIGHT)
+			end.y = MINI_HEIGHT;
 		f_draw_line(game, (t_line){ORANGE, center, end});
-		ray += 5;
+		ray += 1;
 	}
 }

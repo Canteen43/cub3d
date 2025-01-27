@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 12:20:24 by glevin            #+#    #+#             */
-/*   Updated: 2025/01/27 14:21:26 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:38:03 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	f_draw_walls(t_game *game)
 		wall_hit = f_next_wall_hit(game, game->player_pos, ray_angle);
 		distance = f_cosine_distance(game->player_pos, wall_hit,
 				game->player_angle, ray_angle);
-		wall_height = WIDTH / (distance * 2.0 * tan(FOV / 2.0));
+		wall_height = WIDTH / (distance * game->focal_length);
 		sf_print_column(game, ray, wall_height, wall_hit);
 		ray++;
 	}
