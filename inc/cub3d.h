@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/25 13:26:43 by glevin           ###   ########.fr       */
+/*   Updated: 2025/01/27 10:37:05 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@
 # define HEIGHT 720
 # define PI 3.14159265359
 
+# define MINI_HEIGHT 360
+# define DISTANCE_SEEN 8.0
+
 // Field of view
 // Sets how much of the game the player can see horizontally. Units is radians.
 // 1.047197551 is PI / 3, so 60 degrees.
@@ -76,6 +79,14 @@ typedef struct s_coordinates
 	float			x;
 	float			y;
 }					t_coords;
+
+// Line struct
+typedef struct s_line
+{
+	int				color;
+	t_coords		start;
+	t_coords		end;
+}					t_line;
 
 // Circle struct
 typedef struct s_circle
@@ -154,6 +165,7 @@ typedef struct s_game
 	int				bpp;
 	int				size_line;
 	int				endian;
+	int				pix_per_unit;
 
 	bool			key_up;
 	bool			key_right;
@@ -226,7 +238,7 @@ void				f_clear_image(t_game *game);
 void				f_draw_minimap(t_game *game);
 bool				f_touch(float px, float py, t_game *game);
 void				f_draw_walls(t_game *game);
-void				f_draw_line(t_game *game, float start_x, int i);
+void				f_draw_line(t_game *game, t_line line);
 int					f_game_loop(t_game *game);
 void				f_put_pixel(int x, int y, int color, t_game *game);
 int					f_handle_close_button(void *param);
