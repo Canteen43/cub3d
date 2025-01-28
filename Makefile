@@ -34,6 +34,7 @@ SRC_FILES       += core/f_graceful_exit.c
 SRC_FILES       += core/f_gc_malloc.c
 SRC_FILES       += core/f_print_error.c
 SRC_FILES       += core/f_init.c
+SRC_FILES       += core/f_set_hooks.c
 
 SRC_FILES       += parsing/f_check_args.c
 SRC_FILES       += parsing/f_is_config_complete.c

@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/27 18:00:00 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/28 13:08:39 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,7 @@ void				f_gc_clean(t_game *game);
 void				f_graceful_exit(t_game *game, int exit_code,
 						const char *func, char *message);
 void				f_init(t_game *game);
+void				f_set_hooks(t_game *game);
 
 // Debug
 void				f_print_map(t_game *game);
