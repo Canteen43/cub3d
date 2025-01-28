@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_get_texture.c                                    :+:      :+:    :+:   */
+/*   f_get_color_from_tex.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 13:23:28 by glevin            #+#    #+#             */
-/*   Updated: 2025/01/27 14:28:34 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/28 18:09:24 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,21 @@
 
 // Static functions:
 static float	sf_get_fractional(t_coords wall_hit);
-static t_tex	*sf_get_texture_map(t_game *game, t_coords wall_hit);
+static t_tex	*sf_get_direction(t_game *game, t_coords wall_hit);
 
-int	f_get_texture(t_game *game, t_coords wall_hit, float wall_height_ratio)
+int	f_get_color_from_tex(t_game *game, t_coords wall_hit, float wall_height_ratio)
 {
 	int		x_i;
 	int		y_i;
 	int		offset;
 	int		color;
 	t_tex	*texture;
+	t_dir	direction;
 
-	texture = sf_get_texture_map(game, wall_hit);
+	direction = sf_get_direction(game, wall_hit);
+	texture = sf_get_direction(game, wall_hit);
+	if (wall_height_ratio < 0)
+		wall_height_ratio = 0;
 	y_i = (int)(wall_height_ratio * texture->height);
 	if (texture->direction == 3 || texture->direction == 4)
 		x_i = (1 - sf_get_fractional(wall_hit)) * texture->width;
@@ -35,28 +39,22 @@ int	f_get_texture(t_game *game, t_coords wall_hit, float wall_height_ratio)
 	return (color);
 }
 
-static t_tex	*sf_get_texture_map(t_game *game, t_coords wall_hit)
+static t_dir	*sf_get_direction(t_game *game, t_coords wall_hit)
 {
-	float	x_fractional;
-	float	y_fractional;
-
-	x_fractional = wall_hit.x - (int)wall_hit.x;
-	y_fractional = wall_hit.y - (int)wall_hit.y;
-	if (x_fractional == 0)
+	if (modff(wall_hit.x, NULL) == 0)
 	{
 		if (game->player_pos.x > wall_hit.x)
-			return (&game->west);
+			return (west);
 		else
-			return (&game->east);
+			return (east);
 	}
 	else
 	{
 		if (game->player_pos.y > wall_hit.y)
-			return (&game->north);
+			return (north);
 		else
-			return (&game->south);
+			return (south);
 	}
-	return (NULL);
 }
 
 static float	sf_get_fractional(t_coords wall_hit)

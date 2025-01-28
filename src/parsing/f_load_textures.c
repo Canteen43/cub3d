@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_load_textures.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 18:04:09 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/26 17:46:23 by glevin           ###   ########.fr       */
+/*   Updated: 2025/01/28 16:23:33 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ void	f_load_textures(t_game *game)
 	sf_load_one_texture(game, &game->east, 2);
 	sf_load_one_texture(game, &game->south, 3);
 	sf_load_one_texture(game, &game->west, 4);
+	if (game->bonus)
+	{
+		sf_load_one_texture(game, &game->cuttable, 4);
+	}
 }
 
 static void	sf_load_one_texture(t_game *game, t_tex *tex, int direction)

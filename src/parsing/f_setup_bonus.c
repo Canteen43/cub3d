@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_handle_cub_file.c                                :+:      :+:    :+:   */
+/*   f_setup_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/04 16:27:30 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/28 16:16:00 by kweihman         ###   ########.fr       */
+/*   Created: 2025/01/28 16:14:34 by kweihman          #+#    #+#             */
+/*   Updated: 2025/01/28 16:22:50 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	f_handle_cub_file(t_game *game, char **argv)
+void	f_setup_bonus(t_game *game)
 {
-	f_import_cub_file(game, argv);
-	if (!game->bonus)
-	{
-		f_set_config_data(game);
-		f_set_map(game);
-	}
-	f_setup_bonus(game);
+	game->north.path = "textures/tree.xpm";
+	game->east.path = "textures/tree.xpm";
+	game->south.path = "textures/tree.xpm";
+	game->west.path = "textures/tree.xpm";
+	game->ceiling_color = CORAL;
+	game->floor_color = LIME;
+	game->cuttable.path = "textures/cuttable.xpm"
 }

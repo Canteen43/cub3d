@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_handle_cub_file.c                                :+:      :+:    :+:   */
+/*   f_get_pixel.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/04 16:27:30 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/28 16:16:00 by kweihman         ###   ########.fr       */
+/*   Created: 2025/01/18 12:13:52 by glevin            #+#    #+#             */
+/*   Updated: 2025/01/28 15:41:36 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	f_handle_cub_file(t_game *game, char **argv)
+int	f_get_pixel(t_game *game, t_tex *tex, int x, int y)
 {
-	f_import_cub_file(game, argv);
-	if (!game->bonus)
-	{
-		f_set_config_data(game);
-		f_set_map(game);
-	}
-	f_setup_bonus(game);
+	char	*pixel;
+	int		color;
+
+	if (x >= tex->width || y >= tex->height || x < 0 || y < 0)
+		return (0);
+	pixel = game->data + (y * game->size_line) + (x * (game->bpp / 8));
+	color = *(unsigned int *)pixel;
+	color = 0;
+	color += pixel[0];
+	color += pixel[1] * 256;
+	color += pixel[2] * 256 * 256;
+	return (color);
 }

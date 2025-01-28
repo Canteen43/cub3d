@@ -93,9 +93,10 @@ SRC_FILES       += rendering/f_is_wall.c
 SRC_FILES       += rendering/f_draw_walls.c
 SRC_FILES       += rendering/f_cosine_distance.c
 SRC_FILES       += rendering/f_next_wall_hit.c
-SRC_FILES       += rendering/f_get_texture.c
+SRC_FILES       += rendering/f_get_color_from_tex.c
 SRC_FILES       += rendering/f_draw_line.c
 SRC_FILES       += rendering/f_handle_mouse.c
+SRC_FILES       += rendering/f_get_pixel.c
 
 
 # Object files directory

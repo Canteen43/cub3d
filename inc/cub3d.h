@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/28 13:08:39 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/28 18:10:20 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,15 @@
 
 // Sets the distanc between the player and the wall that should not be passed
 # define WALL_BUFFER 0.2
+
+// Direction enum
+typedef enum e_direction
+{
+	north,
+	east,
+	south,
+	west,
+}					t_dir;
 
 // Coordinate struct
 typedef struct s_coordinates
@@ -152,6 +161,7 @@ typedef struct s_game
 	t_tex			east;
 	t_tex			south;
 	t_tex			west;
+	t_tex			cuttable;
 	int				floor_color;
 	int				ceiling_color;
 	char			*entire_cubfile;
@@ -177,6 +187,7 @@ typedef struct s_game
 	bool			key_down;
 	bool			left_rotate;
 	bool			right_rotate;
+	bool			bonus;
 
 	float			player_angle;
 	t_coords		player_pos;
@@ -261,8 +272,9 @@ t_coords			f_next_wall_hit(t_game *game, t_coords current,
 						float angle);
 float				f_cosine_distance(t_coords a, t_coords b, float angle1,
 						float angle2);
-int					f_get_texture(t_game *game, t_coords wall_hit,
+int					f_get_color_from_tex(t_game *game, t_coords wall_hit,
 						float wall_height_ratio);
 int					f_handle_mouse(int x, int y, void *param);
+int					f_get_pixel(t_game *game, t_tex *tex, int x, int y);
 
 #endif // CUB3D_H
