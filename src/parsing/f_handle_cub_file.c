@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:27:30 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/28 16:16:00 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:35:22 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	f_handle_cub_file(t_game *game, char **argv)
 	{
 		f_set_config_data(game);
 		f_set_map(game);
+		return ;
 	}
 	f_setup_bonus(game);
 }

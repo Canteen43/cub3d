@@ -54,6 +54,7 @@ SRC_FILES       += parsing/f_import_cub_file.c
 SRC_FILES       += parsing/f_set_texture_path.c
 SRC_FILES       += parsing/f_extract_player_pos.c
 SRC_FILES       += parsing/f_load_textures.c
+SRC_FILES       += parsing/f_setup_bonus.c
 
 SRC_FILES       += utils/f_bzero.c
 SRC_FILES       += utils/f_memcpy.c

@@ -6,28 +6,29 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 18:04:09 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/28 16:23:33 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:15:11 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 // Static functions:
-static void	sf_load_one_texture(t_game *game, t_tex *tex, int direction);
+static void	sf_load_one_texture(t_game *game, t_tex *tex);
 
 void	f_load_textures(t_game *game)
 {
-	sf_load_one_texture(game, &game->north, 1);
-	sf_load_one_texture(game, &game->east, 2);
-	sf_load_one_texture(game, &game->south, 3);
-	sf_load_one_texture(game, &game->west, 4);
+	sf_load_one_texture(game, &game->north);
+	sf_load_one_texture(game, &game->east);
+	sf_load_one_texture(game, &game->south);
+	sf_load_one_texture(game, &game->west);
 	if (game->bonus)
 	{
-		sf_load_one_texture(game, &game->cuttable, 4);
+		sf_load_one_texture(game, &game->bonus_cuttable);
+		sf_load_one_texture(game, &game->bonus_wall);
 	}
 }
 
-static void	sf_load_one_texture(t_game *game, t_tex *tex, int direction)
+static void	sf_load_one_texture(t_game *game, t_tex *tex)
 {
 	tex->img_ptr = mlx_xpm_file_to_image(game->mlx, tex->path, &tex->width,
 			&tex->height);
@@ -35,5 +36,4 @@ static void	sf_load_one_texture(t_game *game, t_tex *tex, int direction)
 		f_graceful_exit(game, 1, __func__, "Error loading texture.");
 	tex->data = mlx_get_data_addr(tex->img_ptr, &tex->bpp, &tex->size_line,
 			&tex->endian);
-	tex->direction = direction;
 }

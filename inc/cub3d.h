@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/28 18:10:20 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:18:45 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ typedef struct s_square
 position. Same way we use game->data to write a color to a pixel position. */
 typedef struct s_texture
 {
-	int				direction;
 	char			*path;
 	void			*img_ptr;
 	int				width;
@@ -161,7 +160,8 @@ typedef struct s_game
 	t_tex			east;
 	t_tex			south;
 	t_tex			west;
-	t_tex			cuttable;
+	t_tex			bonus_cuttable;
+	t_tex			bonus_wall;
 	int				floor_color;
 	int				ceiling_color;
 	char			*entire_cubfile;
@@ -229,6 +229,7 @@ void				f_import_cub_file(t_game *game, char **argv);
 void				f_set_texture_path(t_game *game, t_line_type type,
 						char *line);
 void				f_extract_game_pos(t_game *game);
+void				f_setup_bonus(t_game *game);
 
 // Core
 void				f_print_error(const char *func, char *message);
@@ -275,6 +276,6 @@ float				f_cosine_distance(t_coords a, t_coords b, float angle1,
 int					f_get_color_from_tex(t_game *game, t_coords wall_hit,
 						float wall_height_ratio);
 int					f_handle_mouse(int x, int y, void *param);
-int					f_get_pixel(t_game *game, t_tex *tex, int x, int y);
+int					f_get_pixel(t_game *game, t_tex *tex, t_coords pos);
 
 #endif // CUB3D_H
