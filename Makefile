@@ -34,6 +34,7 @@ SRC_FILES       += core/f_graceful_exit.c
 SRC_FILES       += core/f_gc_malloc.c
 SRC_FILES       += core/f_print_error.c
 SRC_FILES       += core/f_init.c
+SRC_FILES       += core/f_set_hooks.c
 
 SRC_FILES       += parsing/f_check_args.c
 SRC_FILES       += parsing/f_is_config_complete.c
@@ -53,6 +54,8 @@ SRC_FILES       += parsing/f_import_cub_file.c
 SRC_FILES       += parsing/f_set_texture_path.c
 SRC_FILES       += parsing/f_extract_player_pos.c
 SRC_FILES       += parsing/f_load_textures.c
+SRC_FILES       += parsing/f_setup_bonus.c
+SRC_FILES       += parsing/f_setup_bonus_map.c
 
 SRC_FILES       += utils/f_bzero.c
 SRC_FILES       += utils/f_memcpy.c
@@ -92,8 +95,11 @@ SRC_FILES       += rendering/f_is_wall.c
 SRC_FILES       += rendering/f_draw_walls.c
 SRC_FILES       += rendering/f_cosine_distance.c
 SRC_FILES       += rendering/f_next_wall_hit.c
-SRC_FILES       += rendering/f_get_texture.c
+SRC_FILES       += rendering/f_get_tex_color.c
 SRC_FILES       += rendering/f_draw_line.c
+SRC_FILES       += rendering/f_handle_mouse.c
+SRC_FILES       += rendering/f_get_pixel.c
+SRC_FILES       += rendering/f_determine_tile_type.c
 
 
 # Object files directory

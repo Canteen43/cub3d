@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_init.c                                           :+:      :+:    :+:   */
+/*   f_handle_mouse.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 10:46:20 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/27 14:40:32 by kweihman         ###   ########.fr       */
+/*   Created: 2025/01/27 17:27:28 by kweihman          #+#    #+#             */
+/*   Updated: 2025/01/28 13:01:35 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	f_init(t_game *game)
+int	f_handle_mouse(int x, int y, void *param)
 {
-	f_bzero(game, sizeof(t_game));
-	game->ceiling_color = -1;
-	game->floor_color = -1;
-	game->pix_per_unit = MINI_HEIGHT / (DISTANCE_SEEN * 2);
-	game->focal_length = 2.0 * tan(FOV / 2.0);
+	t_game	*game;
+	float	dx;
+	float	angle;
+
+	game = (t_game *)param;
+	(void)y;
+	dx = (x - WIDTH / 2);
+	angle = (dx / WIDTH) * FOV;
+	game->player_angle -= angle;
+	mlx_mouse_move(game->mlx, game->win, WIDTH / 2, HEIGHT / 2);
+	return (0);
 }

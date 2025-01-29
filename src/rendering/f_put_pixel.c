@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_put_pixel.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 12:13:52 by glevin            #+#    #+#             */
-/*   Updated: 2025/01/18 12:14:07 by glevin           ###   ########.fr       */
+/*   Updated: 2025/01/28 13:24:32 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	f_put_pixel(int x, int y, int color, t_game *game)
 {
 	int	index;
 
+	if (color == 0)
+		return ;
 	if (x >= WIDTH || y >= HEIGHT || x < 0 || y < 0)
 		return ;
 	index = y * game->size_line + x * game->bpp / 8;

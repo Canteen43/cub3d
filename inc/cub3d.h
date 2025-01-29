@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/27 12:23:34 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/29 18:39:38 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,13 @@
 // Macros
 # define BUFFER_SIZE 256
 
+# define MOUSE_SENSITIVITY 1
+
 # define WIDTH 1280
 # define HEIGHT 720
 # define PI 3.14159265359
 
-# define MINI_HEIGHT 360
+# define MINI_HEIGHT 240
 # define DISTANCE_SEEN 8.0
 
 // Field of view
@@ -70,8 +72,17 @@
 // instant.
 # define FRAMES_PER_SECOND 80
 
-// Sets the distanc between the player and the wall that should not be traversable
+// Sets the distanc between the player and the wall that should not be passed
 # define WALL_BUFFER 0.2
+
+// Direction enum
+typedef enum e_direction
+{
+	north,
+	east,
+	south,
+	west,
+}					t_dir;
 
 // Coordinate struct
 typedef struct s_coordinates
@@ -109,7 +120,6 @@ typedef struct s_square
 position. Same way we use game->data to write a color to a pixel position. */
 typedef struct s_texture
 {
-	int				direction;
 	char			*path;
 	void			*img_ptr;
 	int				width;
@@ -150,6 +160,8 @@ typedef struct s_game
 	t_tex			east;
 	t_tex			south;
 	t_tex			west;
+	t_tex			bonus_cuttable;
+	t_tex			bonus_wall;
 	int				floor_color;
 	int				ceiling_color;
 	char			*entire_cubfile;
@@ -167,6 +179,7 @@ typedef struct s_game
 	int				size_line;
 	int				endian;
 	int				pix_per_unit;
+	float			focal_length;
 
 	bool			key_up;
 	bool			key_right;
@@ -174,6 +187,7 @@ typedef struct s_game
 	bool			key_down;
 	bool			left_rotate;
 	bool			right_rotate;
+	bool			bonus;
 
 	float			player_angle;
 	t_coords		player_pos;
@@ -215,6 +229,8 @@ void				f_import_cub_file(t_game *game, char **argv);
 void				f_set_texture_path(t_game *game, t_line_type type,
 						char *line);
 void				f_extract_game_pos(t_game *game);
+void				f_setup_bonus(t_game *game);
+void				f_setup_bonus_map(t_game *game);
 
 // Core
 void				f_print_error(const char *func, char *message);
@@ -223,6 +239,7 @@ void				f_gc_clean(t_game *game);
 void				f_graceful_exit(t_game *game, int exit_code,
 						const char *func, char *message);
 void				f_init(t_game *game);
+void				f_set_hooks(t_game *game);
 
 // Debug
 void				f_print_map(t_game *game);
@@ -257,7 +274,11 @@ t_coords			f_next_wall_hit(t_game *game, t_coords current,
 						float angle);
 float				f_cosine_distance(t_coords a, t_coords b, float angle1,
 						float angle2);
-int					f_get_texture(int y, t_game *game, int wall_height,
-						t_coords wall_hit);
+int					f_get_tex_color(t_game *game, t_coords wall_hit,
+						float wall_height_ratio);
+int					f_handle_mouse(int x, int y, void *param);
+int					f_get_pixel(t_game *game, t_tex *tex, t_coords pos);
+char				f_determine_tile_type(t_game *game, t_coords wall_hit,
+						t_dir dir);
 
 #endif // CUB3D_H

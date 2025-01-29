@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_init.c                                           :+:      :+:    :+:   */
+/*   f_get_pixel.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 10:46:20 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/27 14:40:32 by kweihman         ###   ########.fr       */
+/*   Created: 2025/01/18 12:13:52 by glevin            #+#    #+#             */
+/*   Updated: 2025/01/29 16:19:32 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	f_init(t_game *game)
+int	f_get_pixel(t_game *game, t_tex *tex, t_coords pos)
 {
-	f_bzero(game, sizeof(t_game));
-	game->ceiling_color = -1;
-	game->floor_color = -1;
-	game->pix_per_unit = MINI_HEIGHT / (DISTANCE_SEEN * 2);
-	game->focal_length = 2.0 * tan(FOV / 2.0);
+	int	offset;
+	int	color;
+
+	(void)game;
+	offset = (int)pos.y * tex->size_line + ((int)pos.x * (tex->bpp / 8));
+	color = *(int *)((char *)tex->data + offset);
+	return (color);
 }
