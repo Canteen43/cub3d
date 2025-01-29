@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:20:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/21 16:20:48 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/29 18:58:00 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,7 @@
 # define BEIGE      0xF5F5DC
 # define CORAL      0xFF7F50
 # define AQUA       0x00FFFF
+# define SKYBLUE	0x99CCFF
+# define POKEGRASS	0x50E890
 
 #endif // COLORS_H

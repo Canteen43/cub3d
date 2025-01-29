@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/29 16:18:45 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/29 18:39:38 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,6 +230,7 @@ void				f_set_texture_path(t_game *game, t_line_type type,
 						char *line);
 void				f_extract_game_pos(t_game *game);
 void				f_setup_bonus(t_game *game);
+void				f_setup_bonus_map(t_game *game);
 
 // Core
 void				f_print_error(const char *func, char *message);
@@ -273,9 +274,11 @@ t_coords			f_next_wall_hit(t_game *game, t_coords current,
 						float angle);
 float				f_cosine_distance(t_coords a, t_coords b, float angle1,
 						float angle2);
-int					f_get_color_from_tex(t_game *game, t_coords wall_hit,
+int					f_get_tex_color(t_game *game, t_coords wall_hit,
 						float wall_height_ratio);
 int					f_handle_mouse(int x, int y, void *param);
 int					f_get_pixel(t_game *game, t_tex *tex, t_coords pos);
+char				f_determine_tile_type(t_game *game, t_coords wall_hit,
+						t_dir dir);
 
 #endif // CUB3D_H

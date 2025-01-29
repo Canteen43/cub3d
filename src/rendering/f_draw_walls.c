@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 12:20:24 by glevin            #+#    #+#             */
-/*   Updated: 2025/01/29 15:16:16 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/29 18:52:32 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	sf_print_column(t_game *game, int x, int wall_height,
 			f_put_pixel(x, y, game->floor_color, game);
 		else
 		{
-			color = f_get_color_from_tex(game, wall_hit, ((float)y
+			color = f_get_tex_color(game, wall_hit, ((float)y
 						- ceiling_threshold - 1) / wall_height);
 			f_put_pixel(x, y, color, game);
 		}

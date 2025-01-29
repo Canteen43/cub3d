@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_get_color_from_tex.c                             :+:      :+:    :+:   */
+/*   f_get_tex_color.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,12 +14,12 @@
 
 // Static functions:
 static t_dir	sf_determine_direction(t_game *game, t_coords wall_hit);
-static t_tex	*sf_determine_texture(t_game *game, t_dir dir);
+static t_tex	*sf_determine_texture(t_game *game, t_dir dir,
+					t_coords wall_hit);
 static float	sf_get_tex_x(t_coords wall_hit, t_tex *tex, t_dir dir);
 static float	sf_get_tex_y(t_tex *tex, float ratio);
 
-int	f_get_color_from_tex(t_game *game, t_coords wall_hit,
-		float wall_height_ratio)
+int	f_get_tex_color(t_game *game, t_coords wall_hit, float wall_height_ratio)
 {
 	t_dir		direction;
 	t_tex		*texture;
@@ -27,7 +27,7 @@ int	f_get_color_from_tex(t_game *game, t_coords wall_hit,
 	int			color;
 
 	direction = sf_determine_direction(game, wall_hit);
-	texture = sf_determine_texture(game, direction);
+	texture = sf_determine_texture(game, direction, wall_hit);
 	tex_coords.y = sf_get_tex_y(texture, wall_height_ratio);
 	tex_coords.x = sf_get_tex_x(wall_hit, texture, direction);
 	color = f_get_pixel(game, texture, tex_coords);
@@ -54,8 +54,11 @@ static t_dir	sf_determine_direction(t_game *game, t_coords wall_hit)
 	}
 }
 
-static t_tex	*sf_determine_texture(t_game *game, t_dir dir)
+static t_tex	*sf_determine_texture(t_game *game, t_dir dir,
+		t_coords wall_hit)
 {
+	char	tile_type;
+
 	if (!game->bonus)
 	{
 		if (dir == north)
@@ -67,7 +70,11 @@ static t_tex	*sf_determine_texture(t_game *game, t_dir dir)
 		else
 			return (&game->west);
 	}
-	return (NULL);
+	tile_type = f_determine_tile_type(game, wall_hit, dir);
+	if (tile_type == '1')
+		return (&game->bonus_wall);
+	else
+		return (&game->bonus_cuttable);
 }
 
 static float	sf_get_tex_y(t_tex *tex, float ratio)

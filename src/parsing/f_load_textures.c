@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 18:04:09 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/29 15:15:11 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/01/29 18:26:25 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,14 @@ static void	sf_load_one_texture(t_game *game, t_tex *tex);
 
 void	f_load_textures(t_game *game)
 {
-	sf_load_one_texture(game, &game->north);
-	sf_load_one_texture(game, &game->east);
-	sf_load_one_texture(game, &game->south);
-	sf_load_one_texture(game, &game->west);
-	if (game->bonus)
+	if (!game->bonus)
+	{
+		sf_load_one_texture(game, &game->north);
+		sf_load_one_texture(game, &game->east);
+		sf_load_one_texture(game, &game->south);
+		sf_load_one_texture(game, &game->west);
+	}
+	else
 	{
 		sf_load_one_texture(game, &game->bonus_cuttable);
 		sf_load_one_texture(game, &game->bonus_wall);
