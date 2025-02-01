@@ -100,6 +100,13 @@ SRC_FILES       += rendering/f_draw_line.c
 SRC_FILES       += rendering/f_handle_mouse.c
 SRC_FILES       += rendering/f_get_pixel.c
 SRC_FILES       += rendering/f_determine_tile_type.c
+SRC_FILES       += rendering/f_determine_direction.c
+SRC_FILES       += rendering/f_determine_adjacent_tile.c
+SRC_FILES       += rendering/f_remove_obstacle.c
+SRC_FILES       += rendering/f_determine_tile_coords.c
+SRC_FILES       += rendering/f_add_obstacle_to_respawn_list.c
+SRC_FILES       += rendering/f_remove_from_respawn_list.c
+SRC_FILES       += rendering/f_handle_respawns.c
 
 
 # Object files directory

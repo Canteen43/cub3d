@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_game_loop.c                                      :+:      :+:    :+:   */
+/*   f_remove_obstacle.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 12:22:18 by glevin            #+#    #+#             */
-/*   Updated: 2025/02/01 20:29:05 by kweihman         ###   ########.fr       */
+/*   Created: 2025/02/01 18:47:45 by kweihman          #+#    #+#             */
+/*   Updated: 2025/02/01 20:10:29 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	f_game_loop(t_game *game)
+void	f_remove_obstacle(t_game *game)
 {
-	f_move_player(game);
-	f_handle_respawns(game);
-	f_clear_image(game);
-	f_draw_walls(game);
-	f_draw_minimap(game);
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-	usleep(1000000 / FRAMES_PER_SECOND);
-	return (0);
+	t_int_xy	tile;
+	char		type;
+
+	tile = f_determine_adjacent_tile(game);
+	type = game->map[tile.y][tile.x];
+	if (type == '1' || type == '0')
+	{
+		printf("You are not in range.\n");
+		return ;
+	}
+	game->map[tile.y][tile.x] = '0';
+	f_add_obstacle_to_respawn_list(game, tile, type);
 }

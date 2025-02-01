@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_game_loop.c                                      :+:      :+:    :+:   */
+/*   f_add_obstacle_to_respawn_list.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 12:22:18 by glevin            #+#    #+#             */
-/*   Updated: 2025/02/01 20:29:05 by kweihman         ###   ########.fr       */
+/*   Created: 2025/02/01 19:58:02 by kweihman          #+#    #+#             */
+/*   Updated: 2025/02/01 20:07:12 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	f_game_loop(t_game *game)
+void	f_add_obstacle_to_respawn_list(t_game *game, t_int_xy coords, char type)
 {
-	f_move_player(game);
-	f_handle_respawns(game);
-	f_clear_image(game);
-	f_draw_walls(game);
-	f_draw_minimap(game);
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-	usleep(1000000 / FRAMES_PER_SECOND);
-	return (0);
+	t_obstacle_respawn	*obs;
+	t_obstacle_respawn	*last;
+
+	obs = f_gc_malloc(game, sizeof(t_obstacle_respawn));
+	obs->coords = coords;
+	obs->type = type;
+	obs->next = NULL;
+	if (!game->or_head)
+	{
+		game->or_head = obs;
+		obs->prev = NULL;
+		return ;
+	}
+	last = game->or_head;
+	while (last->next)
+		last = last->next;
+	last->next = obs;
+	obs->prev = last;
 }

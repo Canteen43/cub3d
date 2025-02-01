@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_game_loop.c                                      :+:      :+:    :+:   */
+/*   f_handle_respawns.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 12:22:18 by glevin            #+#    #+#             */
-/*   Updated: 2025/02/01 20:29:05 by kweihman         ###   ########.fr       */
+/*   Created: 2025/02/01 20:11:16 by kweihman          #+#    #+#             */
+/*   Updated: 2025/02/01 20:30:33 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	f_game_loop(t_game *game)
+void	f_handle_respawns(t_game *game)
 {
-	f_move_player(game);
-	f_handle_respawns(game);
-	f_clear_image(game);
-	f_draw_walls(game);
-	f_draw_minimap(game);
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-	usleep(1000000 / FRAMES_PER_SECOND);
-	return (0);
+	t_obstacle_respawn	*obs;
+	int					y;
+	int					x;
+
+	obs = game->or_head;
+	while (obs)
+	{
+		y = obs->coords.y;
+		x = obs->coords.x;
+		if (f_distance(game->player_pos, (t_coords){x + 0.5, y + 0.5}) > 5)
+		{
+			game->map[y][x] = obs->type;
+			f_remove_from_respawn_list(game, obs);
+		}
+		obs = obs->next;
+	}
 }

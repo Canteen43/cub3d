@@ -13,7 +13,6 @@
 #include "cub3d.h"
 
 // Static functions:
-static t_dir	sf_determine_direction(t_game *game, t_coords wall_hit);
 static t_tex	*sf_determine_texture(t_game *game, t_dir dir,
 					t_coords wall_hit);
 static float	sf_get_tex_x(t_coords wall_hit, t_tex *tex, t_dir dir);
@@ -26,32 +25,12 @@ int	f_get_tex_color(t_game *game, t_coords wall_hit, float wall_height_ratio)
 	t_coords	tex_coords;
 	int			color;
 
-	direction = sf_determine_direction(game, wall_hit);
+	direction = f_determine_direction(game, wall_hit);
 	texture = sf_determine_texture(game, direction, wall_hit);
 	tex_coords.y = sf_get_tex_y(texture, wall_height_ratio);
 	tex_coords.x = sf_get_tex_x(wall_hit, texture, direction);
 	color = f_get_pixel(game, texture, tex_coords);
 	return (color);
-}
-
-static t_dir	sf_determine_direction(t_game *game, t_coords wall_hit)
-{
-	float	dummy;
-
-	if (modff(wall_hit.x, &dummy) == 0)
-	{
-		if (game->player_pos.x > wall_hit.x)
-			return (west);
-		else
-			return (east);
-	}
-	else
-	{
-		if (game->player_pos.y > wall_hit.y)
-			return (north);
-		else
-			return (south);
-	}
 }
 
 static t_tex	*sf_determine_texture(t_game *game, t_dir dir,

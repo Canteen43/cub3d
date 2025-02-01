@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_game_loop.c                                      :+:      :+:    :+:   */
+/*   f_determine_adjacent_tile.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 12:22:18 by glevin            #+#    #+#             */
-/*   Updated: 2025/02/01 20:29:05 by kweihman         ###   ########.fr       */
+/*   Created: 2025/02/01 18:54:38 by kweihman          #+#    #+#             */
+/*   Updated: 2025/02/01 19:34:27 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	f_game_loop(t_game *game)
+t_int_xy	f_determine_adjacent_tile(t_game *game)
 {
-	f_move_player(game);
-	f_handle_respawns(game);
-	f_clear_image(game);
-	f_draw_walls(game);
-	f_draw_minimap(game);
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-	usleep(1000000 / FRAMES_PER_SECOND);
-	return (0);
+	t_coords	grid_hit;
+	t_dir		dir;
+	t_int_xy	tile_coords;
+
+	grid_hit = f_next_grid_hit(game->player_pos, game->player_angle);
+	dir = f_determine_direction(game, grid_hit);
+	tile_coords = f_determine_tile_coords(game, grid_hit, dir);
+	return (tile_coords);
 }

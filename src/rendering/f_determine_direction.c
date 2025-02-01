@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_game_loop.c                                      :+:      :+:    :+:   */
+/*   f_determine_direction.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 12:22:18 by glevin            #+#    #+#             */
-/*   Updated: 2025/02/01 20:29:05 by kweihman         ###   ########.fr       */
+/*   Created: 2025/02/01 18:53:13 by kweihman          #+#    #+#             */
+/*   Updated: 2025/02/01 18:58:40 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	f_game_loop(t_game *game)
+t_dir	f_determine_direction(t_game *game, t_coords wall_hit)
 {
-	f_move_player(game);
-	f_handle_respawns(game);
-	f_clear_image(game);
-	f_draw_walls(game);
-	f_draw_minimap(game);
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-	usleep(1000000 / FRAMES_PER_SECOND);
-	return (0);
+	float	dummy;
+
+	if (modff(wall_hit.x, &dummy) == 0)
+	{
+		if (game->player_pos.x > wall_hit.x)
+			return (west);
+		else
+			return (east);
+	}
+	else
+	{
+		if (game->player_pos.y > wall_hit.y)
+			return (north);
+		else
+			return (south);
+	}
 }

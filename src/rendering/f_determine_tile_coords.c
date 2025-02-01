@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_game_loop.c                                      :+:      :+:    :+:   */
+/*   f_determine_tile_coords.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 12:22:18 by glevin            #+#    #+#             */
-/*   Updated: 2025/02/01 20:29:05 by kweihman         ###   ########.fr       */
+/*   Created: 2025/02/01 19:24:16 by kweihman          #+#    #+#             */
+/*   Updated: 2025/02/01 19:35:21 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	f_game_loop(t_game *game)
+t_int_xy	f_determine_tile_coords(t_game *game, t_coords grid_hit, t_dir dir)
 {
-	f_move_player(game);
-	f_handle_respawns(game);
-	f_clear_image(game);
-	f_draw_walls(game);
-	f_draw_minimap(game);
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-	usleep(1000000 / FRAMES_PER_SECOND);
-	return (0);
+	t_int_xy	coords;
+
+	(void)game;
+	if (dir == north || dir == south)
+	{
+		coords.y = roundf(grid_hit.y);
+		coords.x = truncf(grid_hit.x);
+	}
+	if (dir == west || dir == east)
+	{
+		coords.y = truncf(grid_hit.y);
+		coords.x = roundf(grid_hit.x);
+	}
+	if (dir == north)
+		coords.y--;
+	else if (dir == west)
+		coords.x--;
+	return (coords);
 }
