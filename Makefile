@@ -107,6 +107,9 @@ SRC_FILES       += rendering/f_determine_tile_coords.c
 SRC_FILES       += rendering/f_add_obstacle_to_respawn_list.c
 SRC_FILES       += rendering/f_remove_from_respawn_list.c
 SRC_FILES       += rendering/f_handle_respawns.c
+SRC_FILES       += rendering/f_draw_image.c
+SRC_FILES       += rendering/f_draw_charmander.c
+SRC_FILES       += rendering/f_draw_from_tex_to_area.c
 
 
 # Object files directory

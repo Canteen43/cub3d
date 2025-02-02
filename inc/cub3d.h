@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/01 20:30:16 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/02 14:31:12 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@
 
 // Field of view
 // Sets how much of the game the player can see horizontally. Units is radians.
-// 1.047197551 is PI / 3, so 60 degrees.
-# define FOV 1.047197551
+// 1 is 57 degrees.
+# define FOV 1.0
 
 // Sets how far the player moves with one button press.
 // 0.025 means that one step is one 40-th of a cube wide.
@@ -123,6 +123,15 @@ typedef struct s_square
 	t_coords					top_left;
 }								t_square;
 
+// Rectangle struct
+typedef struct s_rectangle
+{
+	int							color;
+	t_int_xy					top_left;
+	int							width;
+	int							height;
+}								t_rect;
+
 // Texture struct
 /* Usage: Use game->[texture_name]->data to read the color at a given pixel
 position. Same way we use game->data to write a color to a pixel position. */
@@ -179,6 +188,7 @@ typedef struct s_game
 	t_tex						west;
 	t_tex						bonus_cuttable;
 	t_tex						bonus_wall;
+	t_tex						bonus_charmander;
 	int							floor_color;
 	int							ceiling_color;
 	char						*entire_cubfile;
@@ -315,5 +325,10 @@ void							f_add_obstacle_to_respawn_list(t_game *game,
 void							f_remove_from_respawn_list(t_game *game,
 									t_obstacle_respawn *obs);
 void							f_handle_respawns(t_game *game);
+void							f_draw_image(t_game *game, t_tex *tex,
+									t_int_xy top_left);
+void							f_draw_charmander(t_game *game);
+void							f_draw_from_tex_to_area(t_game *game,
+									t_tex *tex, t_rect area);
 
 #endif // CUB3D_H

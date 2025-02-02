@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 20:50:06 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/27 12:29:20 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/02 14:32:47 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,16 @@ void	f_attempt_move(t_game *game, char dimension, float distance)
 static bool	sf_wall_touch_with_buffer(t_game *game, t_coords new)
 {
 	if (game->map[(int)(new.y + WALL_BUFFER)][(int)(new.x
-			+ WALL_BUFFER)] == '1')
+			+ WALL_BUFFER)] != '0')
 		return (true);
 	if (game->map[(int)(new.y - WALL_BUFFER)][(int)(new.x
-			- WALL_BUFFER)] == '1')
+			- WALL_BUFFER)] != '0')
 		return (true);
 	if (game->map[(int)(new.y + WALL_BUFFER)][(int)(new.x
-			- WALL_BUFFER)] == '1')
+			- WALL_BUFFER)] != '0')
 		return (true);
 	if (game->map[(int)(new.y - WALL_BUFFER)][(int)(new.x
-			+ WALL_BUFFER)] == '1')
+			+ WALL_BUFFER)] != '0')
 		return (true);
 	return (false);
 }

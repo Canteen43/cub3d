@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   f_draw_charmander.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/04 13:45:06 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/02 15:01:23 by kweihman         ###   ########.fr       */
+/*   Created: 2025/02/02 11:51:47 by kweihman          #+#    #+#             */
+/*   Updated: 2025/02/02 12:59:00 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+void	f_draw_charmander(t_game *game)
 {
-	t_game	game;
+	t_rect	area;
 
-	f_init(&game);
-	f_check_args(&game, argc, argv);
-	f_handle_cub_file(&game, argv);
-	f_start_mlx(&game);
-	f_set_hooks(&game);
-	mlx_loop(game.mlx);
+	area.width = WIDTH * 0.33;
+	area.top_left.x = area.width;
+	area.height = HEIGHT * 0.33;
+	area.top_left.y = HEIGHT - area.height;
+	f_draw_from_tex_to_area(game, &game->bonus_charmander, area);
 }

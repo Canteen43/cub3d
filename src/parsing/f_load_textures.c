@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 18:04:09 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/29 18:26:25 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/02 11:53:54 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	f_load_textures(t_game *game)
 	{
 		sf_load_one_texture(game, &game->bonus_cuttable);
 		sf_load_one_texture(game, &game->bonus_wall);
+		sf_load_one_texture(game, &game->bonus_charmander);
 	}
 }
 
