@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   f_start_mlx.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kweihman <kweihman@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 12:12:45 by glevin            #+#    #+#             */
-/*   Updated: 2025/01/22 09:29:40 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/03 14:41:51 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "main.h"
 
 void	f_start_mlx(t_game *game)
 {

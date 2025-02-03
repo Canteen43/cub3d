@@ -6,11 +6,11 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 14:43:22 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/21 14:07:43 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/03 14:41:51 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "main.h"
 
 char	*f_strjoin(t_game *game, char const *s1, char const *s2)
 {

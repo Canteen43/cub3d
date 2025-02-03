@@ -6,11 +6,11 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 20:11:16 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/01 20:30:33 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/03 14:41:51 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "main.h"
 
 void	f_handle_respawns(t_game *game)
 {

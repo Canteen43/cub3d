@@ -5,12 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/21 16:20:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/29 18:58:00 by kweihman         ###   ########.fr       */
+/*   Created: 2025/02/03 14:31:19 by kweihman          #+#    #+#             */
+/*   Updated: 2025/02/03 14:36:03 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// extended_colors.h
 #ifndef COLORS_H
 # define COLORS_H
 

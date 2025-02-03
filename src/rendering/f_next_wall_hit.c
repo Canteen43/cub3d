@@ -6,11 +6,11 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 15:17:35 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/22 16:35:46 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/03 14:41:51 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "main.h"
 
 t_coords	f_next_wall_hit(t_game *game, t_coords current, float angle)
 {

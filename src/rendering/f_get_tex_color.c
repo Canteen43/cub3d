@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "main.h"
 
 // Static functions:
 static float	sf_get_rel_x(t_coords wall_hit, t_dir dir);

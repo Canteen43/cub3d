@@ -6,11 +6,11 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 20:04:06 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/27 17:50:31 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/03 14:41:51 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "main.h"
 
 void	f_debug_info(t_game *game)
 {

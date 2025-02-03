@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "main.h"
 
 t_coords	f_next_grid_hit(t_coords current, float angle)
 {

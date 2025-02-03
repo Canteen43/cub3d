@@ -6,11 +6,11 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:11:19 by kweihman          #+#    #+#             */
-/*   Updated: 2025/01/21 14:07:43 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/03 14:41:51 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "main.h"
 
 /* Returns pointer to substring with index. Returns NULL if there is no
 substring with index. Can also be used to count number of substrings.*/

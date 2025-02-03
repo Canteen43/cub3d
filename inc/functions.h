@@ -1,227 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 17:54:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/02 14:31:12 by kweihman         ###   ########.fr       */
+/*   Created: 2025/02/03 14:31:19 by kweihman          #+#    #+#             */
+/*   Updated: 2025/02/03 14:38:44 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef FUNCTIONS_H
+# define FUNCTIONS_H
 
-// For open(), close()
-# include <fcntl.h>
-// For read(), write()
-# include <unistd.h>
-// For printf()
-# include <stdio.h>
-// For f_gc_malloc(game, ), free()
-# include <stdlib.h>
-// For perror(), strerror()
-# include <string.h>
-// For exit()
-# include <stdlib.h>
-// For gettimeofday()
-# include <sys/time.h>
-// For booleans
-# include <stdbool.h>
-// For MLX
-# include "mlx.h"
-// For sin and cos
-# include <math.h>
-// For keycodes
-# include <X11/keysym.h>
-// For color macros
-# include "colors.h"
-
-// Macros
-# define BUFFER_SIZE 256
-
-# define MOUSE_SENSITIVITY 1
-
-# define WIDTH 1280
-# define HEIGHT 720
-# define PI 3.14159265359
-
-# define MINI_HEIGHT 240
-# define DISTANCE_SEEN 8.0
-
-// Field of view
-// Sets how much of the game the player can see horizontally. Units is radians.
-// 1 is 57 degrees.
-# define FOV 1.0
-
-// Sets how far the player moves with one button press.
-// 0.025 means that one step is one 40-th of a cube wide.
-# define SPEED 0.1
-
-// Sets how much the player turns with one button press. Unit is radians.
-// 0.017453293 is PI / 180, so one degree.
-// # define ANGLE_SPEED 0.017453293
-# define ANGLE_SPEED 0.05
-
-// Sets the length and width in pixels of one cube on the minimap.
-# define MINIBLOCK 16
-
-// Sets the sleep time between rendering frames and updating player position.
-// Real frames per second will be lower since this pretends that rendering is
-// instant.
-# define FRAMES_PER_SECOND 80
-
-// Sets the distanc between the player and the wall that should not be passed
-# define WALL_BUFFER 0.2
-
-// Direction enum
-// Not the direction the side is facing but the direction relative to player
-typedef enum e_direction
-{
-	north,
-	east,
-	south,
-	west,
-}								t_dir;
-
-// Coordinate struct
-typedef struct s_coordinates
-{
-	float						x;
-	float						y;
-}								t_coords;
-
-// Int coordinate struct
-typedef struct s_integer_coordinates
-{
-	int							x;
-	int							y;
-}								t_int_xy;
-
-// Line struct
-typedef struct s_line
-{
-	int							color;
-	t_coords					start;
-	t_coords					end;
-}								t_line;
-
-// Circle struct
-typedef struct s_circle
-{
-	int							color;
-	float						radius;
-	t_coords					center;
-}								t_circle;
-
-// Square struct
-typedef struct s_square
-{
-	int							color;
-	float						size;
-	t_coords					top_left;
-}								t_square;
-
-// Rectangle struct
-typedef struct s_rectangle
-{
-	int							color;
-	t_int_xy					top_left;
-	int							width;
-	int							height;
-}								t_rect;
-
-// Texture struct
-/* Usage: Use game->[texture_name]->data to read the color at a given pixel
-position. Same way we use game->data to write a color to a pixel position. */
-typedef struct s_texture
-{
-	char						*path;
-	void						*img_ptr;
-	int							width;
-	int							height;
-	void						*data;
-	int							bpp;
-	int							size_line;
-	int							endian;
-}								t_tex;
-
-// Respawn queue
-typedef struct s_obstacle_respawn
-{
-	char						type;
-	t_int_xy					coords;
-	struct s_obstacle_respawn	*prev;
-	struct s_obstacle_respawn	*next;
-}								t_obstacle_respawn;
-
-// Enum used for classifying lines during parsing
-typedef enum e_line_type
-{
-	EMPTY,
-	NORTH,
-	EAST,
-	SOUTH,
-	WEST,
-	FLOOR,
-	CEILING,
-	MAP,
-	WRONG,
-}								t_line_type;
-
-// Garbage collection struct
-typedef struct s_gnode
-{
-	void						*ptr;
-	struct s_gnode				*next;
-}								t_gnode;
-
-// Main struct
-/*Overarching struct that holds all variables that might need to be accessed.*/
-typedef struct s_game
-{
-	t_gnode						*gc_head;
-	t_tex						north;
-	t_tex						east;
-	t_tex						south;
-	t_tex						west;
-	t_tex						bonus_cuttable;
-	t_tex						bonus_wall;
-	t_tex						bonus_charmander;
-	int							floor_color;
-	int							ceiling_color;
-	char						*entire_cubfile;
-	char						**cubfile_line_by_line;
-	int							cubfile_fd;
-	int							map_line_count;
-	int							map_line_width;
-	char						**map;
-	void						*mlx;
-	void						*win;
-	void						*img;
-
-	char						*data;
-	int							bpp;
-	int							size_line;
-	int							endian;
-	int							pix_per_unit;
-	float						focal_length;
-
-	bool						key_up;
-	bool						key_right;
-	bool						key_left;
-	bool						key_down;
-	bool						left_rotate;
-	bool						right_rotate;
-	bool						bonus;
-
-	float						player_angle;
-	t_coords					player_pos;
-	t_obstacle_respawn			*or_head;
-}								t_game;
-
-// Function declarations
 // Utils
 void							f_bzero(void *s, size_t n);
 char							*f_readfile(t_game *game, int fd);
@@ -331,4 +122,4 @@ void							f_draw_charmander(t_game *game);
 void							f_draw_from_tex_to_area(t_game *game,
 									t_tex *tex, t_rect area);
 
-#endif // CUB3D_H
+#endif // FUNCTIONS_H
