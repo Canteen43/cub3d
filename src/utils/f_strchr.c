@@ -6,11 +6,11 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 12:26:31 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/03 14:41:51 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:48:16 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "headers.h"
 
 /*Analogous to memchr, s and c will be interpreted as unsigned char. 'A' + 256 
 will be interpreted as 'A'.*/

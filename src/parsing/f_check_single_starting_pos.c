@@ -6,11 +6,11 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 13:05:33 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/03 14:41:51 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:48:16 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "headers.h"
 
 void	f_check_single_starting_pos(t_game *game)
 {

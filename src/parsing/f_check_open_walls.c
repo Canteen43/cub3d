@@ -6,11 +6,11 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 12:47:20 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/03 14:41:51 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:48:16 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "headers.h"
 
 // Static functions:
 bool	sf_space_adjacent_to_non_wall(t_game *game, int i, int j);

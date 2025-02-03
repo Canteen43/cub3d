@@ -6,11 +6,11 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 12:17:49 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/03 14:41:51 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:48:16 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "headers.h"
 
 void	f_create_map_array(t_game *game)
 {

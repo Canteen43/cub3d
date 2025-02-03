@@ -6,14 +6,15 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:31:19 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/03 14:38:44 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:52:22 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FUNCTIONS_H
 # define FUNCTIONS_H
 
-// Utils
+/* utils */
+
 void							f_bzero(void *s, size_t n);
 char							*f_readfile(t_game *game, int fd);
 int								f_strcmp(char *str1, char *str2);
@@ -30,7 +31,8 @@ char							*f_strscmp(char *str1, int n, ...);
 char							*f_strdup(t_game *game, const char *s);
 bool							f_is_dig(char c);
 
-// Parsing
+/* parsing */
+
 bool							f_is_map_line(char *str);
 void							f_set_color_config(t_game *game,
 									t_line_type type, char *line);
@@ -54,7 +56,8 @@ void							f_extract_game_pos(t_game *game);
 void							f_setup_bonus(t_game *game);
 void							f_setup_bonus_map(t_game *game);
 
-// Core
+/* core */
+
 void							f_print_error(const char *func, char *message);
 void							*f_gc_malloc(t_game *game, size_t size);
 void							f_gc_clean(t_game *game);
@@ -63,11 +66,13 @@ void							f_graceful_exit(t_game *game, int exit_code,
 void							f_init(t_game *game);
 void							f_set_hooks(t_game *game);
 
-// Debug
+/* debug */
+
 void							f_print_map(t_game *game);
 void							f_debug_info(t_game *game);
 
-// Rendering
+/* rendering */
+
 void							f_start_mlx(t_game *game);
 void							f_start_mlx(t_game *game);
 void							f_draw_square(t_game *game, t_square sq);

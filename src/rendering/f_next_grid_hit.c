@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "headers.h"
 
 t_coords	f_next_grid_hit(t_coords current, float angle)
 {
