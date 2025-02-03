@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 12:15:12 by glevin            #+#    #+#             */
-/*   Updated: 2025/02/01 19:08:27 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:27:54 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	f_key_press(int keycode, t_game *game)
 		game->right_rotate = true;
 	if (keycode == XK_Return)
 		f_debug_info(game);
-	if (keycode == XK_space)
+	if (keycode == XK_space && game->bonus)
 		f_remove_obstacle(game);
 	return (0);
 }
