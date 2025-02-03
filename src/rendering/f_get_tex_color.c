@@ -13,57 +13,30 @@
 #include "cub3d.h"
 
 // Static functions:
-static t_tex	*sf_determine_texture(t_game *game, t_dir dir,
-					t_coords wall_hit);
-static float	sf_get_tex_x(t_coords wall_hit, t_tex *tex, t_dir dir);
-static float	sf_get_tex_y(t_tex *tex, float ratio);
+static float	sf_get_rel_x(t_coords wall_hit, t_dir dir);
+static t_tex	*sf_determine_texture(t_game *game, t_dir dir);
+static t_tex	*sf_determine_bonus_texture(t_game *game, t_dir dir,
+					t_coords wall_hit, t_coords relative);
 
-int	f_get_tex_color(t_game *game, t_coords wall_hit, float wall_height_ratio)
+int	f_get_tex_color(t_game *game, t_coords wall_hit, float relative_y)
 {
-	t_dir		direction;
+	t_dir		dir;
 	t_tex		*texture;
-	t_coords	tex_coords;
+	t_coords	relative;
 	int			color;
 
-	direction = f_determine_direction(game, wall_hit);
-	texture = sf_determine_texture(game, direction, wall_hit);
-	tex_coords.y = sf_get_tex_y(texture, wall_height_ratio);
-	tex_coords.x = sf_get_tex_x(wall_hit, texture, direction);
-	color = f_get_pixel(game, texture, tex_coords);
+	dir = f_determine_direction(game, wall_hit);
+	relative.x = sf_get_rel_x(wall_hit, dir);
+	relative.y = relative_y;
+	if (!game->bonus)
+		texture = sf_determine_texture(game, dir);
+	else
+		texture = sf_determine_bonus_texture(game, dir, wall_hit, relative);
+	color = f_get_pixel(game, texture, relative);
 	return (color);
 }
 
-static t_tex	*sf_determine_texture(t_game *game, t_dir dir,
-		t_coords wall_hit)
-{
-	char	tile_type;
-
-	if (!game->bonus)
-	{
-		if (dir == north)
-			return (&game->north);
-		else if (dir == east)
-			return (&game->east);
-		else if (dir == south)
-			return (&game->south);
-		else
-			return (&game->west);
-	}
-	tile_type = f_determine_tile_type(game, wall_hit, dir);
-	if (tile_type == '1')
-		return (&game->bonus_wall);
-	else
-		return (&game->bonus_cuttable);
-}
-
-static float	sf_get_tex_y(t_tex *tex, float ratio)
-{
-	if (ratio < 0)
-		ratio = 0;
-	return (ratio * tex->height);
-}
-
-static float	sf_get_tex_x(t_coords wall_hit, t_tex *tex, t_dir dir)
+static float	sf_get_rel_x(t_coords wall_hit, t_dir dir)
 {
 	float	dummy;
 	float	fraction;
@@ -76,5 +49,30 @@ static float	sf_get_tex_x(t_coords wall_hit, t_tex *tex, t_dir dir)
 		fraction = 1 - modff(wall_hit.x, &dummy);
 	else
 		fraction = 1 - modff(wall_hit.y, &dummy);
-	return (fraction * tex->width);
+	return (fraction);
+}
+
+static t_tex	*sf_determine_texture(t_game *game, t_dir dir)
+{
+	if (dir == north)
+		return (&game->north);
+	else if (dir == east)
+		return (&game->east);
+	else if (dir == south)
+		return (&game->south);
+	else
+		return (&game->west);
+}
+
+static t_tex	*sf_determine_bonus_texture(t_game *game, t_dir dir,
+		t_coords wall_hit, t_coords relative)
+{
+	t_int_xy	tile;
+
+	tile = f_determine_tile_coords(game, wall_hit, dir);
+	if (game->map[tile.y][tile.x] == '1')
+		return (&game->bonus_wall);
+	else
+		return (&game->bonus_cuttable);
+	(void)relative;
 }

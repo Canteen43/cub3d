@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 12:20:24 by glevin            #+#    #+#             */
-/*   Updated: 2025/01/29 18:52:32 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:41:37 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ void	f_draw_walls(t_game *game)
 static void	sf_print_column(t_game *game, int x, int wall_height,
 		t_coords wall_hit)
 {
-	int	y;
-	int	color;
-	int	ceiling_threshold;
-	int	floor_threshold;
+	int		y;
+	int		color;
+	int		ceiling_threshold;
+	int		floor_threshold;
+	float	relative_y;
 
 	ceiling_threshold = HEIGHT / 2 - wall_height / 2;
 	floor_threshold = HEIGHT / 2 + wall_height / 2;
@@ -56,8 +57,8 @@ static void	sf_print_column(t_game *game, int x, int wall_height,
 			f_put_pixel(x, y, game->floor_color, game);
 		else
 		{
-			color = f_get_tex_color(game, wall_hit, ((float)y
-						- ceiling_threshold - 1) / wall_height);
+			relative_y = (float)(y - ceiling_threshold) / wall_height;
+			color = f_get_tex_color(game, wall_hit, relative_y);
 			f_put_pixel(x, y, color, game);
 		}
 		y++;
