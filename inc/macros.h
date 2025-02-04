@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:20:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/04 10:57:12 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:12:04 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@
 
 // Sets how much can be seen on minimap (unit = cubes)
 # define DISTANCE_SEEN 8.0
+
+// Sets how far player has to be from obstacle to trigger respawn (unit = cubes)
+# define RESPAWN_DISTANCE 5.0
+
+// Sets how far player has to be from obstacle to trigger attack (unit = cubes)
+# define ATTACK_DISTANCE 3.5
 
 // Horizontal field of view in radians.
 // 1 equals 57 degrees.

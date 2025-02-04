@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_time_diff_ms.c                                   :+:      :+:    :+:   */
+/*   f_remove_anim.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/04 11:52:28 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/04 17:41:01 by kweihman         ###   ########.fr       */
+/*   Created: 2025/02/04 17:05:57 by kweihman          #+#    #+#             */
+/*   Updated: 2025/02/04 17:42:31 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
 
-int	f_time_diff_ms(struct timeval *later, struct timeval *earlier)
+void f_remove_anim(t_game *game, t_anim_queue *anim)
 {
-	int	result;
-
-	result = (later->tv_sec - earlier->tv_sec) * 1000 + (later->tv_usec
-			- earlier->tv_usec) / 1000;
-	return (result);
+	if (anim == game->anim_head)
+		game->anim_head = anim->next;
+	if (anim->prev)
+		anim->prev->next = anim->next;
+	if (anim->next)
+		anim->next->prev = anim->prev;
 }

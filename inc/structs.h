@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:31:19 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/04 12:55:09 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:02:19 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,12 +122,13 @@ typedef struct s_anim
 }						t_anim;
 
 // Struct: Node in list of ongoing animations
-typedef struct t_anim_queue
+typedef struct s_anim_queue
 {
-	t_anim				anim;
+	t_anim				*anim;
 	t_int_xy			coords;
 	struct timeval		start;
-	struct s_aq			*next;
+	struct s_anim_queue	*prev;
+	struct s_anim_queue	*next;
 }						t_anim_queue;
 
 // Garbage collection struct
@@ -183,6 +184,7 @@ typedef struct s_game
 	t_coords			player_pos;
 	t_obs_resp			*or_head;
 	t_img				*img_head;
+	t_anim_queue		*anim_head;
 }						t_game;
 
 #endif // STRUCTS_H

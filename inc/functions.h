@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:31:19 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/04 12:51:35 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:55:01 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,9 @@ void		f_destroy_images(t_game *game);
 int			f_time_diff_ms(struct timeval *later, struct timeval *earlier);
 void		f_load_texture(t_game *game, t_tex *tex);
 void		f_load_bonus_textures(t_game *game);
+void		f_load_anim(t_game *game, t_anim *anim, t_anim params, char *path);
+void		f_remove_anim(t_game *game, t_anim_queue *anim);
+void		f_superpose_anim(t_game *game, t_int_xy tile, t_coords relative,
+				int *color);
+void		f_add_to_anim_queue(t_game *game, t_int_xy coords, t_anim *anim);
 #endif // FUNCTIONS_H

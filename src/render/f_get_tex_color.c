@@ -15,8 +15,7 @@
 // Static functions:
 static float	sf_get_rel_x(t_coords wall_hit, t_dir dir);
 static t_tex	*sf_determine_texture(t_game *game, t_dir dir);
-static t_tex	*sf_determine_bonus_texture(t_game *game, t_dir dir,
-					t_coords wall_hit, t_coords relative);
+static t_tex	*sf_determine_bonus_texture(t_game *game, t_int_xy tile);
 
 int	f_get_tex_color(t_game *game, t_coords wall_hit, float relative_y)
 {
@@ -24,15 +23,21 @@ int	f_get_tex_color(t_game *game, t_coords wall_hit, float relative_y)
 	t_tex		*texture;
 	t_coords	relative;
 	int			color;
+	t_int_xy	tile;
 
 	dir = f_determine_direction(game, wall_hit);
 	relative.x = sf_get_rel_x(wall_hit, dir);
 	relative.y = relative_y;
 	if (!game->bonus)
+	{
 		texture = sf_determine_texture(game, dir);
-	else
-		texture = sf_determine_bonus_texture(game, dir, wall_hit, relative);
+		color = f_get_pixel(game, texture, relative);
+		return (color);
+	}
+	tile = f_determine_tile_coords(game, wall_hit, dir);
+	texture = sf_determine_bonus_texture(game, tile);
 	color = f_get_pixel(game, texture, relative);
+	f_superpose_anim(game, tile, relative, &color);
 	return (color);
 }
 
@@ -64,15 +69,14 @@ static t_tex	*sf_determine_texture(t_game *game, t_dir dir)
 		return (&game->west);
 }
 
-static t_tex	*sf_determine_bonus_texture(t_game *game, t_dir dir,
-		t_coords wall_hit, t_coords relative)
+static t_tex	*sf_determine_bonus_texture(t_game *game, t_int_xy tile)
 {
-	t_int_xy	tile;
+	char type;
 
-	tile = f_determine_tile_coords(game, wall_hit, dir);
-	if (game->map[tile.y][tile.x] == '1')
+	type = game->map[tile.y][tile.x];
+	if (type == '1')
 		return (&game->bonus_wall);
 	else
 		return (&game->bonus_cuttable);
-	(void)relative;
+	
 }

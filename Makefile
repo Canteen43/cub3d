@@ -37,6 +37,7 @@ SRC_FILES       += cleanup/f_destroy_images.c
 SRC_FILES       += debug/f_print_map.c
 SRC_FILES       += debug/f_debug_info.c
 
+SRC_FILES       += game/f_add_to_anim_queue.c
 SRC_FILES       += game/f_add_obstacle_to_respawn_list.c
 SRC_FILES       += game/f_attempt_move.c
 SRC_FILES       += game/f_determine_adjacent_tile.c
@@ -51,6 +52,7 @@ SRC_FILES       += game/f_is_wall.c
 SRC_FILES       += game/f_key_press.c
 SRC_FILES       += game/f_key_release.c
 SRC_FILES       += game/f_move_player.c
+SRC_FILES       += game/f_remove_anim.c
 SRC_FILES       += game/f_remove_from_respawn_list.c
 SRC_FILES       += game/f_remove_obstacle.c
 
@@ -60,6 +62,7 @@ SRC_FILES       += math/f_find_targets.c
 SRC_FILES       += math/f_next_grid_hit.c
 SRC_FILES       += math/f_next_wall_hit.c
 SRC_FILES       += math/f_is_round.c
+SRC_FILES       += math/f_time_diff_ms.c
 
 SRC_FILES       += parse/f_check_args.c
 SRC_FILES       += parse/f_check_for_invalid_map_lines.c
@@ -94,6 +97,7 @@ SRC_FILES       += render/f_draw_walls.c
 SRC_FILES       += render/f_get_pixel.c
 SRC_FILES       += render/f_get_tex_color.c
 SRC_FILES       += render/f_put_pixel.c
+SRC_FILES       += render/f_superpose_anim.c
 
 SRC_FILES       += setup/f_add_img_to_list.c
 SRC_FILES       += setup/f_init_main.c

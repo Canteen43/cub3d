@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 18:34:47 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/03 16:48:16 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:02:27 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,5 @@ void	f_setup_bonus_map(t_game *game)
 	while (game->map[0][game->map_line_width])
 		game->map_line_width++;
 	game->player_angle = PI / 2;
-	game->player_pos = (t_coords){50.5, 15.5};
+	game->player_pos = (t_coords){22.5, 15.5};
 }

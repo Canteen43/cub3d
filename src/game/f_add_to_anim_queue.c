@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_time_diff_ms.c                                   :+:      :+:    :+:   */
+/*   f_add_to_anim_queue.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/04 11:52:28 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/04 17:41:01 by kweihman         ###   ########.fr       */
+/*   Created: 2025/02/04 15:52:55 by kweihman          #+#    #+#             */
+/*   Updated: 2025/02/04 18:04:07 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
 
-int	f_time_diff_ms(struct timeval *later, struct timeval *earlier)
+void f_add_to_anim_queue(t_game *game, t_int_xy coords, t_anim *anim)
 {
-	int	result;
+	t_anim_queue *new;
 
-	result = (later->tv_sec - earlier->tv_sec) * 1000 + (later->tv_usec
-			- earlier->tv_usec) / 1000;
-	return (result);
+	new = f_gc_malloc(game, sizeof(t_anim_queue));
+	if (gettimeofday(&new->start, NULL))
+		f_graceful_exit(game, 1, __func__, "Gettimeofday() failed");
+	new->anim = anim;
+	new->coords = coords;
+	new->prev = NULL;
+	new->next = game->anim_head;
+	game->anim_head = new;
 }
