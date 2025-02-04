@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 20:11:16 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/03 16:48:16 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/04 11:45:15 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	f_handle_respawns(t_game *game)
 {
-	t_obstacle_respawn	*obs;
-	int					y;
-	int					x;
+	t_obs_resp	*obs;
+	int			y;
+	int			x;
 
 	obs = game->or_head;
 	while (obs)

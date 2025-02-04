@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:31:19 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/04 10:25:59 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/04 12:55:09 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,76 +21,76 @@ typedef enum e_direction
 	east,
 	south,
 	west,
-}								t_dir;
+}						t_dir;
 
 // Coordinate struct
 typedef struct s_coordinates
 {
-	float						x;
-	float						y;
-}								t_coords;
+	float				x;
+	float				y;
+}						t_coords;
 
 // Int coordinate struct
 typedef struct s_integer_coordinates
 {
-	int							x;
-	int							y;
-}								t_int_xy;
+	int					x;
+	int					y;
+}						t_int_xy;
 
 // Line struct
 typedef struct s_line
 {
-	int							color;
-	t_coords					start;
-	t_coords					end;
-}								t_line;
+	int					color;
+	t_coords			start;
+	t_coords			end;
+}						t_line;
 
 // Circle struct
 typedef struct s_circle
 {
-	int							color;
-	float						radius;
-	t_coords					center;
-}								t_circle;
+	int					color;
+	float				radius;
+	t_coords			center;
+}						t_circle;
 
 // Square struct
 typedef struct s_square
 {
-	int							color;
-	float						size;
-	t_coords					top_left;
-}								t_square;
+	int					color;
+	float				size;
+	t_coords			top_left;
+}						t_square;
 
 // Rectangle struct
 typedef struct s_rectangle
 {
-	int							color;
-	t_int_xy					top_left;
-	int							width;
-	int							height;
-}								t_rect;
+	int					color;
+	t_int_xy			top_left;
+	int					width;
+	int					height;
+}						t_rect;
 
 // Texture struct
 typedef struct s_texture
 {
-	char						*path;
-	void						*img_ptr;
-	int							width;
-	int							height;
-	void						*data;
-	int							bpp;
-	int							size_line;
-	int							endian;
-}								t_tex;
+	char				*path;
+	void				*img_ptr;
+	int					width;
+	int					height;
+	void				*data;
+	int					bpp;
+	int					size_line;
+	int					endian;
+}						t_tex;
 
-// Respawn queue
-typedef struct s_obstacle_respawn
+// Struct: Node in list of obstacles waiting for respawn
+typedef struct s_obs_resp
 {
-	char						type;
-	t_int_xy					coords;
-	struct s_obstacle_respawn	*prev;
-	struct s_obstacle_respawn	*next;
-}								t_obstacle_respawn;
+	char				type;
+	t_int_xy			coords;
+	struct s_obs_resp	*prev;
+	struct s_obs_resp	*next;
+}						t_obs_resp;
 
 // Enum used for classifying lines during parse
 typedef enum e_line_type
@@ -104,64 +104,85 @@ typedef enum e_line_type
 	CEILING,
 	MAP,
 	WRONG,
-}								t_line_type;
+}						t_line_type;
 
-// Image destruction struct
-typedef struct s_image_to_destroy
+// Struct: Node in list of images to be destroyed at exit
+typedef struct s_img
 {
-	void						*img_prt;
-	struct s_image_to_destroy	*next;
-}								t_image;
+	void				*ptr;
+	struct s_img		*next;
+}						t_img;
+
+// Struct: Animation
+typedef struct s_anim
+{
+	t_tex				*frames;
+	int					nbr_frames;
+	int					duration_ms;
+}						t_anim;
+
+// Struct: Node in list of ongoing animations
+typedef struct t_anim_queue
+{
+	t_anim				anim;
+	t_int_xy			coords;
+	struct timeval		start;
+	struct s_aq			*next;
+}						t_anim_queue;
 
 // Garbage collection struct
 typedef struct s_gnode
 {
-	void						*ptr;
-	struct s_gnode				*next;
-}								t_gnode;
+	void				*ptr;
+	struct s_gnode		*next;
+}						t_gnode;
 
 // Main struct
 // Overarching struct that holds all variables that might need to be accessed.
 typedef struct s_game
 {
-	t_gnode						*gc_head;
-	t_tex						north;
-	t_tex						east;
-	t_tex						south;
-	t_tex						west;
-	t_tex						bonus_cuttable;
-	t_tex						bonus_wall;
-	t_tex						bonus_charmander;
-	int							floor_color;
-	int							ceiling_color;
-	char						*entire_cubfile;
-	char						**cubfile_line_by_line;
-	int							cubfile_fd;
-	int							map_line_count;
-	int							map_line_width;
-	char						**map;
-	void						*mlx;
-	void						*win;
-	void						*img;
+	t_tex				north;
+	t_tex				east;
+	t_tex				south;
+	t_tex				west;
+	t_tex				bonus_cuttable;
+	t_tex				bonus_wall;
+	t_tex				bonus_charmander;
 
-	char						*data;
-	int							bpp;
-	int							size_line;
-	int							endian;
-	int							pix_per_unit;
-	float						focal_length;
+	t_anim				cut;
 
-	bool						key_up;
-	bool						key_right;
-	bool						key_left;
-	bool						key_down;
-	bool						left_rotate;
-	bool						right_rotate;
-	bool						bonus;
+	t_gnode				*gc_head;
+	int					floor_color;
+	int					ceiling_color;
+	char				*entire_cubfile;
+	char				**cubfile_line_by_line;
+	int					cubfile_fd;
+	int					map_line_count;
+	int					map_line_width;
+	char				**map;
+	void				*mlx;
+	void				*win;
+	void				*img;
 
-	float						player_angle;
-	t_coords					player_pos;
-	t_obstacle_respawn			*or_head;
-}								t_game;
+	char				*data;
+	int					bpp;
+	int					size_line;
+	int					endian;
+	int					pix_per_unit;
+	float				focal_length;
+
+	bool				key_up;
+	bool				key_right;
+	bool				key_left;
+	bool				key_down;
+	bool				left_rotate;
+	bool				right_rotate;
+	bool				bonus;
+
+	float				player_angle;
+	t_coords			player_pos;
+	t_obs_resp			*or_head;
+	t_img				*img_head;
+}						t_game;
 
 #endif // STRUCTS_H

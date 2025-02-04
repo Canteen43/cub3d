@@ -32,6 +32,7 @@ SRC_FILES       += main.c
 SRC_FILES       += cleanup/f_gc_clean.c
 SRC_FILES       += cleanup/f_graceful_exit.c
 SRC_FILES       += cleanup/f_print_error.c
+SRC_FILES       += cleanup/f_destroy_images.c
 
 SRC_FILES       += debug/f_print_map.c
 SRC_FILES       += debug/f_debug_info.c
@@ -94,9 +95,13 @@ SRC_FILES       += render/f_get_pixel.c
 SRC_FILES       += render/f_get_tex_color.c
 SRC_FILES       += render/f_put_pixel.c
 
+SRC_FILES       += setup/f_add_img_to_list.c
 SRC_FILES       += setup/f_init_main.c
 SRC_FILES       += setup/f_init_mlx.c
-SRC_FILES       += setup/f_load_textures.c
+SRC_FILES       += setup/f_load_anim.c
+SRC_FILES       += setup/f_load_bonus_textures.c
+SRC_FILES       += setup/f_load_dir_textures.c
+SRC_FILES       += setup/f_load_texture.c
 SRC_FILES       += setup/f_set_hooks.c
 
 SRC_FILES       += utils/f_bzero.c

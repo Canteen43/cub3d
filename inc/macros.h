@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:20:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/04 10:26:09 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/04 10:57:12 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@
 # define SPEED 0.1
 
 // Sets how much the player turns with one button press. Unit is radians.
-// 0.017453293 is PI / 180, so one degree.
-// # define ANGLE_SPEED 0.017453293
+// 0.05 equals 2.9 degrees.
 # define ANGLE_SPEED 0.05
 
 // Sets sleep between frame render.
@@ -49,6 +48,7 @@
 # define FRAMES_PER_SECOND 80
 
 // Sets a distance between player and wall that shall not be passed
+// 0.2 equals 20% of cube length.
 # define WALL_BUFFER 0.2
 
 #endif // MACROS_H
