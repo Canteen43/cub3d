@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:31:19 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/03 14:56:05 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/04 10:25:59 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ typedef struct s_obstacle_respawn
 	struct s_obstacle_respawn	*next;
 }								t_obstacle_respawn;
 
-// Enum used for classifying lines during parsing
+// Enum used for classifying lines during parse
 typedef enum e_line_type
 {
 	EMPTY,
@@ -105,6 +105,13 @@ typedef enum e_line_type
 	MAP,
 	WRONG,
 }								t_line_type;
+
+// Image destruction struct
+typedef struct s_image_to_destroy
+{
+	void						*img_prt;
+	struct s_image_to_destroy	*next;
+}								t_image;
 
 // Garbage collection struct
 typedef struct s_gnode

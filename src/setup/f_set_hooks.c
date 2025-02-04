@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_init.c                                           :+:      :+:    :+:   */
+/*   f_set_hooks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 10:46:20 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/03 16:48:16 by kweihman         ###   ########.fr       */
+/*   Created: 2025/01/28 13:05:50 by kweihman          #+#    #+#             */
+/*   Updated: 2025/02/04 10:24:04 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
 
-void	f_init(t_game *game)
+void	f_set_hooks(t_game *game)
 {
-	f_bzero(game, sizeof(t_game));
-	game->ceiling_color = -1;
-	game->floor_color = -1;
-	game->pix_per_unit = MINI_HEIGHT / (DISTANCE_SEEN * 2);
-	game->focal_length = 2.0 * tan(FOV / 2.0);
+	mlx_hook(game->win, 2, 1L << 0, f_key_press, game);
+	mlx_hook(game->win, 3, 1L << 1, f_key_release, game);
+	mlx_hook(game->win, 17, 0, f_handle_close_button, game);
+	mlx_hook(game->win, 6, 1L << 6, f_handle_mouse, game);
 }

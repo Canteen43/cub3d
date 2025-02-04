@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:20:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/03 14:54:25 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/04 10:26:09 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@
 // # define ANGLE_SPEED 0.017453293
 # define ANGLE_SPEED 0.05
 
-// Sets sleep between frame rendering.
-// Cave: Real value is lower since this assumes instant rendering.
+// Sets sleep between frame render.
+// Cave: Real value is lower since this assumes instant render.
 # define FRAMES_PER_SECOND 80
 
 // Sets a distance between player and wall that shall not be passed

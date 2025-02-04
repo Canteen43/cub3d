@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:31:19 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/03 16:52:22 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/04 10:26:09 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char							*f_strscmp(char *str1, int n, ...);
 char							*f_strdup(t_game *game, const char *s);
 bool							f_is_dig(char c);
 
-/* parsing */
+/* parse */
 
 bool							f_is_map_line(char *str);
 void							f_set_color_config(t_game *game,
@@ -41,7 +41,7 @@ void							f_check_args(t_game *game, int argc,
 									char **argv);
 void							f_set_config_data(t_game *game);
 t_line_type						f_set_input_line_type(t_game *game, char *line);
-void							f_handle_cub_file(t_game *game, char **argv);
+void							f_parse_input_file(t_game *game, char **argv);
 void							f_set_map(t_game *game);
 void							f_check_for_invalid_map_lines(t_game *game);
 void							f_set_map_dimensions(t_game *game);
@@ -63,7 +63,7 @@ void							*f_gc_malloc(t_game *game, size_t size);
 void							f_gc_clean(t_game *game);
 void							f_graceful_exit(t_game *game, int exit_code,
 									const char *func, char *message);
-void							f_init(t_game *game);
+void							f_init_main(t_game *game);
 void							f_set_hooks(t_game *game);
 
 /* debug */
@@ -71,10 +71,10 @@ void							f_set_hooks(t_game *game);
 void							f_print_map(t_game *game);
 void							f_debug_info(t_game *game);
 
-/* rendering */
+/* render */
 
-void							f_start_mlx(t_game *game);
-void							f_start_mlx(t_game *game);
+void							f_init_mlx(t_game *game);
+void							f_init_mlx(t_game *game);
 void							f_draw_square(t_game *game, t_square sq);
 int								f_key_press(int keycode, t_game *game);
 int								f_key_release(int keycode, t_game *game);
