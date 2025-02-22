@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kweihman <kweihman@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:31:19 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/04 17:55:01 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/22 18:19:30 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,5 @@ void		f_remove_anim(t_game *game, t_anim_queue *anim);
 void		f_superpose_anim(t_game *game, t_int_xy tile, t_coords relative,
 				int *color);
 void		f_add_to_anim_queue(t_game *game, t_int_xy coords, t_anim *anim);
+void	f_draw_line_mapsafe(t_game *game, t_line line);
 #endif // FUNCTIONS_H

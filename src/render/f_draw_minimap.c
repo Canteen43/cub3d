@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_draw_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kweihman <kweihman@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 17:31:38 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/03 16:48:16 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/22 18:21:18 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,9 @@ static void	sf_draw_rays(t_game *game)
 		wall_hit = f_next_wall_hit(game, game->player_pos, ray_angle);
 		end.x = center.x + (wall_hit.x - game->player_pos.x)
 			* game->pix_per_unit;
-		if (end.x > MINI_HEIGHT)
-			end.x = MINI_HEIGHT;
 		end.y = center.y + (wall_hit.y - game->player_pos.y)
 			* game->pix_per_unit;
-		if (end.y > MINI_HEIGHT)
-			end.y = MINI_HEIGHT;
-		f_draw_line(game, (t_line){ORANGE, center, end});
+		f_draw_line_mapsafe(game, (t_line){ORANGE, center, end});
 		ray += 1;
 	}
 }

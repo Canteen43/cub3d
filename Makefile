@@ -91,6 +91,7 @@ SRC_FILES       += render/f_draw_full_square.c
 SRC_FILES       += render/f_draw_from_tex_to_area.c
 SRC_FILES       += render/f_draw_image.c
 SRC_FILES       += render/f_draw_line.c
+SRC_FILES       += render/f_draw_line_mapsafe.c
 SRC_FILES       += render/f_draw_minimap.c
 SRC_FILES       += render/f_draw_square.c
 SRC_FILES       += render/f_draw_walls.c
