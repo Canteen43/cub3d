@@ -55,6 +55,7 @@ SRC_FILES       += game/f_move_player.c
 SRC_FILES       += game/f_remove_anim.c
 SRC_FILES       += game/f_remove_from_respawn_list.c
 SRC_FILES       += game/f_remove_obstacle.c
+SRC_FILES       += game/f_is_visible.c
 
 SRC_FILES       += math/f_cosine_distance.c
 SRC_FILES       += math/f_distance.c
@@ -63,6 +64,7 @@ SRC_FILES       += math/f_next_grid_hit.c
 SRC_FILES       += math/f_next_wall_hit.c
 SRC_FILES       += math/f_is_round.c
 SRC_FILES       += math/f_time_diff_ms.c
+SRC_FILES       += math/f_angle_diff.c
 
 SRC_FILES       += parse/f_check_args.c
 SRC_FILES       += parse/f_check_for_invalid_map_lines.c
@@ -91,7 +93,6 @@ SRC_FILES       += render/f_draw_full_square.c
 SRC_FILES       += render/f_draw_from_tex_to_area.c
 SRC_FILES       += render/f_draw_image.c
 SRC_FILES       += render/f_draw_line.c
-SRC_FILES       += render/f_draw_line_mapsafe.c
 SRC_FILES       += render/f_draw_minimap.c
 SRC_FILES       += render/f_draw_square.c
 SRC_FILES       += render/f_draw_walls.c

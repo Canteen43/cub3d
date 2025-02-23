@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 16:20:35 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/04 18:05:07 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/23 18:43:02 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ static t_anim_queue	*sf_current_anim(t_game *game, t_int_xy tile)
 
 static int	sf_current_frame(t_game *game, t_anim_queue *current)
 {
-	struct timeval now;
-	int time_passed;
-	int frame;
-	int duration;
+	struct timeval	now;
+	int				time_passed;
+	int				frame;
+	int				duration;
 
 	duration = current->anim->duration_ms;
 	gettimeofday(&now, NULL);

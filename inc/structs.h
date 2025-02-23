@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:31:19 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/04 18:02:19 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/23 18:26:47 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ typedef struct s_game
 	t_tex				bonus_cuttable;
 	t_tex				bonus_wall;
 	t_tex				bonus_charmander;
+	t_tex				bonus_pokeball;
 
 	t_anim				cut;
 
@@ -179,6 +180,7 @@ typedef struct s_game
 	bool				left_rotate;
 	bool				right_rotate;
 	bool				bonus;
+	bool				debug_flag;
 
 	float				player_angle;
 	t_coords			player_pos;

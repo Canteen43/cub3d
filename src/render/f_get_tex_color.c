@@ -71,12 +71,11 @@ static t_tex	*sf_determine_texture(t_game *game, t_dir dir)
 
 static t_tex	*sf_determine_bonus_texture(t_game *game, t_int_xy tile)
 {
-	char type;
+	char	type;
 
 	type = game->map[tile.y][tile.x];
 	if (type == '1')
 		return (&game->bonus_wall);
 	else
 		return (&game->bonus_cuttable);
-	
 }

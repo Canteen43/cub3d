@@ -3,109 +3,65 @@
 /*                                                        :::      ::::::::   */
 /*   f_draw_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kweihman <kweihman@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 17:31:38 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/22 18:21:18 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/23 18:42:47 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
 
-// void	f_draw_minimap(t_game *game)
-// {
-// 	int	y;
-// 	int	x;
-
-// 	y = -1;
-// 	f_draw_full_square(game, (t_square){YELLOW, game->map_line_count
-// 		* MINIBLOCK, (t_coords){0, 0}});
-// 	while (game->map[++y])
-// 	{
-// 		x = -1;
-// 		while (game->map[y][++x])
-// 		{
-// 			if (game->map[y][x] == '1')
-// 			{
-// 				f_draw_square(game, (t_square){BLUE, MINIBLOCK, (t_coords){x
-// 					* MINIBLOCK, y * MINIBLOCK}});
-// 			}
-// 		}
-// 	}
-// 	f_draw_circle_full(game, (t_circle){RED, MINIBLOCK / 3,
-// 		(t_coords){game->player_pos.x * MINIBLOCK, game->player_pos.y
-// 		* MINIBLOCK}});
-// 	f_draw_circle_full(game, (t_circle){PINK, MINIBLOCK / 5,
-// 		(t_coords){(game->player_pos.x + 0.3 * cos(game->player_angle))
-// 		* MINIBLOCK, (game->player_pos.y - 0.3 * sin(game->player_angle))
-// 		* MINIBLOCK}});
-// }
-
-// Static functions
-static void	sf_draw_map(t_game *game);
-static void	sf_draw_rays(t_game *game);
+// Static functions:
+static t_coords	sf_get_coords(t_game *game, t_int_xy pixel);
+static void		sf_draw_pokeball(t_game *game);
 
 void	f_draw_minimap(t_game *game)
 {
-	int			radius;
-	t_coords	center;
+	t_int_xy	pixel;
+	int			color;
+	t_coords	coords;
 
-	sf_draw_map(game);
-	radius = WALL_BUFFER * game->pix_per_unit;
-	center.x = MINI_HEIGHT / 2;
-	center.y = MINI_HEIGHT / 2;
-	f_draw_circle_full(game, (t_circle){RED, radius, center});
-	sf_draw_rays(game);
-}
-
-static void	sf_draw_map(t_game *game)
-{
-	int			y;
-	int			x;
-	t_coords	pos;
-
-	y = 0;
-	while (y < MINI_HEIGHT)
+	pixel.y = 0;
+	while (pixel.y < MINI_HEIGHT)
 	{
-		x = 0;
-		while (x < MINI_HEIGHT)
+		pixel.x = 0;
+		while (pixel.x < MINI_HEIGHT)
 		{
-			pos.x = game->player_pos.x - DISTANCE_SEEN + x * (DISTANCE_SEEN * 2
-					/ MINI_HEIGHT);
-			pos.y = game->player_pos.y - DISTANCE_SEEN + y * (DISTANCE_SEEN * 2
-					/ MINI_HEIGHT);
-			if (pos.x >= game->map_line_width || pos.x < 0
-				|| pos.y >= game->map_line_count || pos.y < 0
-				|| game->map[(int)pos.y][(int)pos.x] == '0')
-				f_put_pixel(x, y, LIGHT_GRAY, game);
+			coords = sf_get_coords(game, pixel);
+			if (f_is_wall(game, coords))
+				color = DARK_GRAY;
+			else if (f_is_visible(game, coords))
+				color = ORANGE;
 			else
-				f_put_pixel(x, y, DARK_GRAY, game);
-			x++;
+				color = LIGHT_GRAY;
+			f_put_pixel(pixel.x, pixel.y, color, game);
+			pixel.x++;
 		}
-		y++;
+		pixel.y++;
 	}
+	if (game->bonus)
+		sf_draw_pokeball(game);
 }
 
-static void	sf_draw_rays(t_game *game)
+static t_coords	sf_get_coords(t_game *game, t_int_xy pixel)
 {
-	int			ray;
-	float		ray_angle;
-	t_coords	wall_hit;
-	t_coords	center;
-	t_coords	end;
+	t_coords	coords;
 
-	ray = 0;
-	center.x = MINI_HEIGHT / 2;
-	center.y = MINI_HEIGHT / 2;
-	while (ray < WIDTH)
-	{
-		ray_angle = game->player_angle + FOV / 2 - ray * FOV / WIDTH;
-		wall_hit = f_next_wall_hit(game, game->player_pos, ray_angle);
-		end.x = center.x + (wall_hit.x - game->player_pos.x)
-			* game->pix_per_unit;
-		end.y = center.y + (wall_hit.y - game->player_pos.y)
-			* game->pix_per_unit;
-		f_draw_line_mapsafe(game, (t_line){ORANGE, center, end});
-		ray += 1;
-	}
+	coords.x = game->player_pos.x - DISTANCE_SEEN + ((float)pixel.x
+			/ MINI_HEIGHT * DISTANCE_SEEN * 2);
+	coords.y = game->player_pos.y - DISTANCE_SEEN + ((float)pixel.y
+			/ MINI_HEIGHT * DISTANCE_SEEN * 2);
+	return (coords);
+}
+
+static void	sf_draw_pokeball(t_game *game)
+{
+	t_rect	area;
+
+	area.width = game->bonus_pokeball.width / 2;
+	area.top_left.x = MINI_HEIGHT / 2 - area.width / 2;
+	area.height = game->bonus_pokeball.height / 2;
+	area.top_left.y = MINI_HEIGHT / 2 - area.height / 2;
+	f_draw_from_tex_to_area(game, &game->bonus_pokeball, area);
 }

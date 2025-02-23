@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_setup_bonus.c                                    :+:      :+:    :+:   */
+/*   f_angle_diff.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 16:14:34 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/23 18:26:21 by kweihman         ###   ########.fr       */
+/*   Created: 2025/02/23 17:49:57 by kweihman          #+#    #+#             */
+/*   Updated: 2025/02/23 18:42:25 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
 
-void	f_setup_bonus(t_game *game)
+float	f_angle_diff(float alpha, float beta)
 {
-	game->ceiling_color = SKY_BLUE;
-	game->floor_color = POKEGRASS;
-	game->bonus_cuttable.path = "textures/cuttable.xpm";
-	game->bonus_wall.path = "textures/tree.xpm";
-	game->bonus_charmander.path = "textures/charmander.xpm";
-	game->bonus_pokeball.path = "textures/pokeball.xpm";
-	f_setup_bonus_map(game);
+	float	diff;
+
+	diff = alpha - beta;
+	while (diff < -PI)
+		diff += 2 * PI;
+	while (diff > PI)
+		diff -= 2 * PI;
+	if (diff < 0)
+		diff = -diff;
+	return (diff);
 }

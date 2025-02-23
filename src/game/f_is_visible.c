@@ -1,0 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   f_is_visible.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/23 16:37:20 by kweihman          #+#    #+#             */
+/*   Updated: 2025/02/23 18:42:05 by kweihman         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "headers.h"
+
+bool	f_is_visible(t_game *game, t_coords coords)
+{
+	t_coords	vector;
+	float		angle;
+	t_coords	wallhit;
+
+	vector.x = coords.x - game->player_pos.x;
+	vector.y = coords.y - game->player_pos.y;
+	angle = atan2f(-vector.y, vector.x);
+	if (f_angle_diff(angle, game->player_angle) > FOV / 2)
+		return (false);
+	wallhit = f_next_wall_hit(game, game->player_pos, angle);
+	if (f_distance(game->player_pos, coords) > f_distance(game->player_pos,
+			wallhit))
+		return (false);
+	if (game->debug_flag)
+		printf("Player Angle: %f,  Angle: %f\n", game->player_angle, angle);
+	return (true);
+}
