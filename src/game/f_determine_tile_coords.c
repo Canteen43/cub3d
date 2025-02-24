@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_determine_tile_coords.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 19:24:16 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/03 16:48:16 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/24 13:52:01 by glevin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ t_int_xy	f_determine_tile_coords(t_game *game, t_coords grid_hit, t_dir dir)
 {
 	t_int_xy	coords;
 
-	(void)game;
 	if (dir == north || dir == south)
 	{
 		coords.y = roundf(grid_hit.y);
@@ -31,5 +30,7 @@ t_int_xy	f_determine_tile_coords(t_game *game, t_coords grid_hit, t_dir dir)
 		coords.y--;
 	else if (dir == west)
 		coords.x--;
+	if (coords.y >= game->map_line_count)
+		coords.y = 20;
 	return (coords);
 }
