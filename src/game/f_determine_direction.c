@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_determine_direction.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 18:53:13 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/03 16:48:16 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:00:41 by glevin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 t_dir	f_determine_direction(t_game *game, t_coords wall_hit)
 {
-	float	dummy;
-
-	if (modff(wall_hit.x, &dummy) == 0)
+	if (f_is_round(wall_hit.x))
 	{
 		if (game->player_pos.x > wall_hit.x)
 			return (west);
