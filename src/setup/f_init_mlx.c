@@ -25,8 +25,9 @@ void	f_init_mlx(t_game *game)
 	else
 		f_load_bonus_textures(game);
 	f_set_hooks(game);
-
-
-	// mlx_mouse_hide(game->mlx, game->win);
-	// mlx_mouse_move(game->mlx, game->win, WIDTH / 2, HEIGHT / 2);
+	if (game->bonus == true)
+	{
+		mlx_mouse_hide(game->mlx, game->win);
+		mlx_mouse_move(game->mlx, game->win, WIDTH / 2, HEIGHT / 2);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 19:24:16 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/25 11:44:34 by glevin           ###   ########.fr       */
+/*   Updated: 2025/02/25 17:10:08 by glevin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ t_int_xy	f_determine_tile_coords(t_game *game, t_coords grid_hit, t_dir dir)
 	else if (dir == west)
 		coords.x--;
 	if (coords.y >= game->map_line_count)
-		coords.y = game->map_line_count-1;
+		coords.y = game->map_line_count - 1;
 	return (coords);
 }

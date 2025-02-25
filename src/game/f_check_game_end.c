@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_check_game_end.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:55:12 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/25 16:47:35 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/25 17:10:14 by glevin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	f_check_game_end(t_game *game)
 {
 	struct timeval	now;
-	t_rect area;
+	t_rect			area;
 
 	if (!game->finished)
 		return ;

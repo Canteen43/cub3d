@@ -6,7 +6,7 @@
 /*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:31:19 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/25 17:03:25 by glevin           ###   ########.fr       */
+/*   Updated: 2025/02/25 17:05:40 by glevin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ typedef struct s_game
 	t_tex				bonus_charmander;
 	t_tex				bonus_pokeball_minimap;
 	t_tex				win_logo;
-	t_tex				bonus_pokeball_ingame;
+	t_tex				bonus_pokeball_map;
 	t_tex				bonus_team_rocket;
 
 	t_anim				cut;

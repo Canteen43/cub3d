@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   f_remove_obstacle.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 18:47:45 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/25 14:36:01 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/25 17:14:13 by glevin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
+
+static void	handle_team_rocket(t_game *game, t_int_xy tile);
 
 void	f_remove_obstacle(t_game *game)
 {
@@ -31,14 +33,17 @@ void	f_remove_obstacle(t_game *game)
 		game->pokeball = true;
 	}
 	else if (type == 'R')
-	{
-		f_add_to_anim_queue(game, tile, &game->cut);
-		game->finished = true;
-		gettimeofday(&game->game_end, NULL);
-	}
+		handle_team_rocket(game, tile);
 	else if (type == 'C' && game->pokeball == true)
 	{
 		f_add_to_anim_queue(game, tile, &game->cut);
 		f_add_obstacle_to_respawn_list(game, tile, type);
 	}
+}
+
+static void	handle_team_rocket(t_game *game, t_int_xy tile)
+{
+	f_add_to_anim_queue(game, tile, &game->cut);
+	game->finished = true;
+	gettimeofday(&game->game_end, NULL);
 }
