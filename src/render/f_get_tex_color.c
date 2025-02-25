@@ -74,12 +74,17 @@ static t_tex	*sf_determine_bonus_texture(t_game *game, t_int_xy tile)
 	char	type;
 
 	type = game->map[tile.y][tile.x];
+	if(game->debug_flag == true)
+	{
+		printf("tile.x: %i, tile.y: %i", tile.x, tile.y);
+		game->debug_flag = false;
+	}
 	if (type == '1')
 		return (&game->bonus_wall);
 	else if (type == 'P')
 		return (&game->bonus_pokeball_map);
-	else if (type == 'C')
-		return (&game->bonus_cuttable);
-	else
+	else if (type == 'R')
 		return (&game->bonus_team_rocket);
+	else
+		return (&game->bonus_cuttable);
 }

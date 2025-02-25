@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_is_visible.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 16:37:20 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/23 18:42:05 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:47:43 by glevin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ bool	f_is_visible(t_game *game, t_coords coords)
 	if (f_distance(game->player_pos, coords) > f_distance(game->player_pos,
 			wallhit))
 		return (false);
-	if (game->debug_flag)
-		printf("Player Angle: %f,  Angle: %f\n", game->player_angle, angle);
+	// if (game->debug_flag)
+	// 	printf("Player Angle: %f,  Angle: %f\n", game->player_angle, angle);
 	return (true);
 }
