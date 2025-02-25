@@ -78,12 +78,8 @@ static t_tex	*sf_determine_bonus_texture(t_game *game, t_int_xy tile)
 		return (&game->bonus_wall);
 	else if (type == 'P')
 		return (&game->bonus_pokeball_map);
-	else if (type == 'R')
+	else if (type == 'C')
 		return (&game->bonus_cuttable);
-	else if (type == '0')
-	{
-		return (&game->bonus_cuttable);
-	}
 	else
 		return (&game->bonus_team_rocket);
 }

@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:14:34 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/25 16:36:49 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:45:13 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ void	f_setup_bonus(t_game *game)
 	game->bonus_pokeball_map.path = "textures/pokeball_map.xpm";
 	game->bonus_pokeball_minimap.path = "textures/pokeball_minimap.xpm";
 	game->bonus_team_rocket.path = "textures/team_rocket.xpm";
+	game->win_logo.path = "textures/win_logo.xpm";
 	f_setup_bonus_map(game);
 }

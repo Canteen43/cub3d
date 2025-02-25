@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:49:53 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/25 13:38:45 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:45:54 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	f_load_bonus_textures(t_game *game)
 	f_load_texture(game, &game->bonus_pokeball_map);
 	f_load_texture(game, &game->bonus_pokeball_minimap);
 	f_load_texture(game, &game->bonus_team_rocket);
+	f_load_texture(game, &game->win_logo);
 	f_load_anim(game, &game->cut, (t_anim){NULL, 20, 100},
 		"textures/animations/cut/cut");
 }
