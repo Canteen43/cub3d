@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 17:31:38 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/23 18:42:47 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:40:17 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ static void	sf_draw_pokeball(t_game *game)
 {
 	t_rect	area;
 
-	area.width = game->bonus_pokeball.width / 2;
+	area.width = game->bonus_pokeball_minimap.width / 2;
 	area.top_left.x = MINI_HEIGHT / 2 - area.width / 2;
-	area.height = game->bonus_pokeball.height / 2;
+	area.height = game->bonus_pokeball_minimap.height / 2;
 	area.top_left.y = MINI_HEIGHT / 2 - area.height / 2;
-	f_draw_from_tex_to_area(game, &game->bonus_pokeball, area);
+	f_draw_from_tex_to_area(game, &game->bonus_pokeball_minimap, area);
 }

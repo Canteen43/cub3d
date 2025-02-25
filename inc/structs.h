@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:31:19 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/25 12:42:25 by glevin           ###   ########.fr       */
+/*   Updated: 2025/02/25 14:36:20 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,9 @@ typedef struct s_game
 	t_tex				bonus_cuttable;
 	t_tex				bonus_wall;
 	t_tex				bonus_charmander;
-	t_tex				bonus_pokeball;
+	t_tex				bonus_pokeball_minimap;
+	t_tex				bonus_pokeball_map;
+	t_tex				bonus_team_rocket;
 
 	t_anim				cut;
 
@@ -181,6 +183,7 @@ typedef struct s_game
 	bool				right_rotate;
 	bool				bonus;
 	bool				debug_flag;
+	bool				finished;
 
 	float				player_angle;
 	t_coords			player_pos;
@@ -189,6 +192,7 @@ typedef struct s_game
 	t_anim_queue		*anim_head;
 
 	bool				pokeball;
+	struct timeval		game_end;
 }						t_game;
 
 #endif // STRUCTS_H

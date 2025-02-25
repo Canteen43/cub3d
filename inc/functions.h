@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:31:19 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/23 17:56:20 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:19:50 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,4 +109,6 @@ void		f_add_to_anim_queue(t_game *game, t_int_xy coords, t_anim *anim);
 void		f_draw_line_mapsafe(t_game *game, t_line line);
 bool		f_is_visible(t_game *game, t_coords coords);
 float		f_angle_diff(float alpha, float beta);
+t_int_xy	f_find_char_in_map(t_game *game, char c);
+void		f_check_game_end(t_game *game);
 #endif // FUNCTIONS_H

@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_setup_bonus_map.c                                :+:      :+:    :+:   */
+/*   f_find_char_in_map.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 18:34:47 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/25 16:36:45 by kweihman         ###   ########.fr       */
+/*   Created: 2025/02/25 13:58:07 by kweihman          #+#    #+#             */
+/*   Updated: 2025/02/25 14:08:15 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
 
-void	f_setup_bonus_map(t_game *game)
+t_int_xy f_find_char_in_map(t_game *game, char c)
 {
-	game->map = game->cubfile_line_by_line;
-	game->map_line_count = 0;
-	game->map_line_width = 0;
-	while (game->map[game->map_line_count])
-		game->map_line_count++;
-	while (game->map[0][game->map_line_width])
-		game->map_line_width++;
-	game->player_angle = PI / 2;
-	game->player_pos = (t_coords){1.5, game->map_line_count-2};
+	t_int_xy coords;
+
+	coords.y = 0;
+	while(coords.y < game->map_line_count)
+	{
+		coords.x = 0;
+		while(coords.x < game->map_line_width)
+		{
+			if (game->map[coords.y][coords.x] == c)
+				return (coords);
+			coords.x++;
+		}
+		coords.y++;
+	}
+	coords.x = -1;
+	coords.y = -1;
+	return (coords);
 }

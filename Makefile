@@ -56,6 +56,8 @@ SRC_FILES       += game/f_remove_anim.c
 SRC_FILES       += game/f_remove_from_respawn_list.c
 SRC_FILES       += game/f_remove_obstacle.c
 SRC_FILES       += game/f_is_visible.c
+SRC_FILES       += game/f_find_char_in_map.c
+SRC_FILES       += game/f_check_game_end.c
 
 SRC_FILES       += math/f_cosine_distance.c
 SRC_FILES       += math/f_distance.c

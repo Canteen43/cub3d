@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_remove_obstacle.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 18:47:45 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/25 13:21:45 by glevin           ###   ########.fr       */
+/*   Updated: 2025/02/25 14:36:01 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ void	f_remove_obstacle(t_game *game)
 	{
 		game->map[tile.y][tile.x] = '0';
 		game->pokeball = true;
+	}
+	else if (type == 'R')
+	{
+		f_add_to_anim_queue(game, tile, &game->cut);
+		game->finished = true;
+		gettimeofday(&game->game_end, NULL);
 	}
 	else if (type == 'C' && game->pokeball == true)
 	{
