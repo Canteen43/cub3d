@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:31:19 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/03 14:36:03 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:33:09 by glevin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@
 # define CORAL      0xFF7F50
 # define AQUA       0x00FFFF
 # define SKYBLUE	0x99CCFF
-# define POKEGRASS	0x50E890
+# define POKEGRASS	0x38B068
 
 #endif // COLORS_H

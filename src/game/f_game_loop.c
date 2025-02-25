@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_game_loop.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 12:22:18 by glevin            #+#    #+#             */
-/*   Updated: 2025/02/23 18:28:35 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/25 12:42:04 by glevin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	f_game_loop(t_game *game)
 	f_clear_image(game);
 	f_draw_walls(game);
 	f_draw_minimap(game);
-	if (game->bonus)
+	if (game->bonus && game->pokeball)
 		f_draw_charmander(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 	usleep(1000000 / FRAMES_PER_SECOND);

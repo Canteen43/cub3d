@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:31:19 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/23 18:26:47 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/25 12:42:25 by glevin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,8 @@ typedef struct s_game
 	t_obs_resp			*or_head;
 	t_img				*img_head;
 	t_anim_queue		*anim_head;
+
+	bool				pokeball;
 }						t_game;
 
 #endif // STRUCTS_H

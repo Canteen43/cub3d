@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:20:37 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/04 18:12:04 by kweihman         ###   ########.fr       */
+/*   Updated: 2025/02/25 12:05:06 by glevin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 
 // Sets how much the player turns with one button press. Unit is radians.
 // 0.05 equals 2.9 degrees.
-# define ANGLE_SPEED 0.05
+# define ANGLE_SPEED 0.09
 
 // Sets sleep between frame render.
 // Cave: Real value is lower since this assumes instant render.

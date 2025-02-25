@@ -76,6 +76,8 @@ static t_tex	*sf_determine_bonus_texture(t_game *game, t_int_xy tile)
 	type = game->map[tile.y][tile.x];
 	if (type == '1')
 		return (&game->bonus_wall);
+	else if (type == 'P')
+		return (&game->bonus_pokeball);
 	else
 		return (&game->bonus_cuttable);
 }
