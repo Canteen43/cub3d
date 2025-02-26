@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_init_mlx.c                                      :+:      :+:    :+:   */
+/*   f_key_press.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 12:12:45 by glevin            #+#    #+#             */
+/*   Created: 2025/01/18 12:15:12 by glevin            #+#    #+#             */
 /*   Updated: 2025/02/03 16:48:16 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
 
-void	f_init_mlx(t_game *game)
+int	f_key_press(int keycode, t_game *game)
 {
-	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3D");
-	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line,
-			&game->endian);
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-		f_load_dir_textures(game);
-	f_set_hooks(game);
+	if (keycode == XK_Escape)
+		f_graceful_exit(game, 0, NULL, NULL);
+	if (keycode == XK_w)
+		game->key_up = true;
+	if (keycode == XK_s)
+		game->key_down = true;
+	if (keycode == XK_a)
+		game->key_left = true;
+	if (keycode == XK_d)
+		game->key_right = true;
+	if (keycode == XK_Left)
+		game->left_rotate = true;
+	if (keycode == XK_Right)
+		game->right_rotate = true;
+	if (keycode == XK_Return)
+		f_debug_info(game);
+	if (keycode == XK_space && game->bonus)
+		f_remove_obstacle(game);
+	return (0);
 }

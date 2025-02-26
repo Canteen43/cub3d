@@ -20,6 +20,14 @@ void	f_init_mlx(t_game *game)
 	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line,
 			&game->endian);
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
+	if (!game->bonus)
 		f_load_dir_textures(game);
+	else
+		f_load_bonus_textures(game);
 	f_set_hooks(game);
+	if (game->bonus == true)
+	{
+		mlx_mouse_hide(game->mlx, game->win);
+		mlx_mouse_move(game->mlx, game->win, WIDTH / 2, HEIGHT / 2);
+	}
 }

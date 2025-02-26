@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_check_args.c                                     :+:      :+:    :+:   */
+/*   f_find_char_in_map.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/04 13:49:08 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/26 11:49:56 by glevin           ###   ########.fr       */
+/*   Created: 2025/02/25 13:58:07 by kweihman          #+#    #+#             */
+/*   Updated: 2025/02/25 17:10:22 by glevin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
 
-void	f_check_args(t_game *game, int argc, char **argv)
+t_int_xy	f_find_char_in_map(t_game *game, char c)
 {
-	size_t	len;
+	t_int_xy	coords;
 
-	if (argc != 2)
-		f_graceful_exit(game, 1, __func__, "Wrong nbr of args.");
-	len = f_strlen(argv[1]);
-	if (f_strcmp(".cub", argv[1] + len - 4))
-		f_graceful_exit(game, 1, __func__, "Arg has to end with '.cub'.");
-
+	coords.y = 0;
+	while (coords.y < game->map_line_count)
+	{
+		coords.x = 0;
+		while (coords.x < game->map_line_width)
+		{
+			if (game->map[coords.y][coords.x] == c)
+				return (coords);
+			coords.x++;
+		}
+		coords.y++;
+	}
+	coords.x = -1;
+	coords.y = -1;
+	return (coords);
 }

@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_init_mlx.c                                      :+:      :+:    :+:   */
+/*   f_load_dir_textures.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 12:12:45 by glevin            #+#    #+#             */
-/*   Updated: 2025/02/03 16:48:16 by kweihman         ###   ########.fr       */
+/*   Created: 2025/01/21 18:04:09 by kweihman          #+#    #+#             */
+/*   Updated: 2025/02/23 18:43:27 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
 
-void	f_init_mlx(t_game *game)
+void	f_load_dir_textures(t_game *game)
 {
-	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3D");
-	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line,
-			&game->endian);
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-		f_load_dir_textures(game);
-	f_set_hooks(game);
+	f_load_texture(game, &game->north);
+	f_load_texture(game, &game->east);
+	f_load_texture(game, &game->south);
+	f_load_texture(game, &game->west);
 }

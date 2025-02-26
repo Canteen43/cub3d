@@ -1,25 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_init_mlx.c                                      :+:      :+:    :+:   */
+/*   f_set_input_line_type.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 12:12:45 by glevin            #+#    #+#             */
+/*   Created: 2025/01/08 18:44:09 by kweihman          #+#    #+#             */
 /*   Updated: 2025/02/03 16:48:16 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
 
-void	f_init_mlx(t_game *game)
+t_line_type	f_set_input_line_type(t_game *game, char *line)
 {
-	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3D");
-	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line,
-			&game->endian);
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-		f_load_dir_textures(game);
-	f_set_hooks(game);
+	char		**words;
+	t_line_type	type;
+
+	if (*line == '\0')
+		return (EMPTY);
+	words = f_split(game, line, ' ');
+	if (f_strcmp(words[0], "NO") == 0)
+		type = NORTH;
+	else if (f_strcmp(words[0], "EA") == 0)
+		type = EAST;
+	else if (f_strcmp(words[0], "SO") == 0)
+		type = SOUTH;
+	else if (f_strcmp(words[0], "WE") == 0)
+		type = WEST;
+	else if (f_strcmp(words[0], "F") == 0)
+		type = FLOOR;
+	else if (f_strcmp(words[0], "C") == 0)
+		type = CEILING;
+	else if (f_is_map_line(line))
+		type = MAP;
+	else
+		type = WRONG;
+	return (type);
 }

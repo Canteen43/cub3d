@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_init_mlx.c                                      :+:      :+:    :+:   */
+/*   f_char_count.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 12:12:45 by glevin            #+#    #+#             */
+/*   Created: 2025/01/05 12:11:03 by kweihman          #+#    #+#             */
 /*   Updated: 2025/02/03 16:48:16 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
 
-void	f_init_mlx(t_game *game)
+/*Returns how many times char c occurs in str c. Return -1 if str is NULL.*/
+int	f_char_count(char *str, char c)
 {
-	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3D");
-	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line,
-			&game->endian);
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-		f_load_dir_textures(game);
-	f_set_hooks(game);
+	int	count;
+
+	count = 0;
+	if (!str)
+		return (-1);
+	while (*str)
+	{
+		if (*str == c)
+			count++;
+		str++;
+	}
+	return (count);
 }

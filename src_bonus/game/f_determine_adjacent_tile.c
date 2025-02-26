@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_init_mlx.c                                      :+:      :+:    :+:   */
+/*   f_determine_adjacent_tile.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 12:12:45 by glevin            #+#    #+#             */
+/*   Created: 2025/02/01 18:54:38 by kweihman          #+#    #+#             */
 /*   Updated: 2025/02/03 16:48:16 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
 
-void	f_init_mlx(t_game *game)
+t_int_xy	f_determine_adjacent_tile(t_game *game)
 {
-	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3D");
-	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line,
-			&game->endian);
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-		f_load_dir_textures(game);
-	f_set_hooks(game);
+	t_coords	grid_hit;
+	t_dir		dir;
+	t_int_xy	tile_coords;
+
+	grid_hit = f_next_grid_hit(game->player_pos, game->player_angle);
+	dir = f_determine_direction(game, grid_hit);
+	tile_coords = f_determine_tile_coords(game, grid_hit, dir);
+	return (tile_coords);
 }

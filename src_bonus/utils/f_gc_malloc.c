@@ -1,25 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_init_mlx.c                                      :+:      :+:    :+:   */
+/*   f_gc_malloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 12:12:45 by glevin            #+#    #+#             */
+/*   Created: 2024/11/17 15:16:46 by glevin            #+#    #+#             */
 /*   Updated: 2025/02/03 16:48:16 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
 
-void	f_init_mlx(t_game *game)
+// Function to add a node to the garbage collector list
+t_gnode	*f_gc_add_node(t_game *game, void *ptr)
 {
-	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3D");
-	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line,
-			&game->endian);
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-		f_load_dir_textures(game);
-	f_set_hooks(game);
+	t_gnode	*new_node;
+
+	new_node = (t_gnode *)malloc(sizeof(t_gnode));
+	if (!new_node)
+		return (NULL);
+	new_node->ptr = ptr;
+	new_node->next = game->gc_head;
+	game->gc_head = new_node;
+	return (new_node);
+}
+
+// Wrapper for malloc that integrates with garbage collector
+void	*f_gc_malloc(t_game *game, size_t size)
+{
+	void	*ptr;
+
+	ptr = malloc(size);
+	if (ptr == NULL)
+		return (NULL);
+	if (f_gc_add_node(game, ptr) == NULL)
+	{
+		free(ptr);
+		return (NULL);
+	}
+	return (ptr);
 }

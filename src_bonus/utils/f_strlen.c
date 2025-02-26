@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_check_args.c                                     :+:      :+:    :+:   */
+/*   f_strlen.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/04 13:49:08 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/26 11:49:56 by glevin           ###   ########.fr       */
+/*   Created: 2025/01/04 13:51:56 by kweihman          #+#    #+#             */
+/*   Updated: 2025/02/03 16:48:16 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
 
-void	f_check_args(t_game *game, int argc, char **argv)
+/* Returns the length of string s. Expects valid poiter.*/
+size_t	f_strlen(const char *s)
 {
 	size_t	len;
 
-	if (argc != 2)
-		f_graceful_exit(game, 1, __func__, "Wrong nbr of args.");
-	len = f_strlen(argv[1]);
-	if (f_strcmp(".cub", argv[1] + len - 4))
-		f_graceful_exit(game, 1, __func__, "Arg has to end with '.cub'.");
-
+	len = 0;
+	while (s[len] != '\0')
+		len++;
+	return (len);
 }

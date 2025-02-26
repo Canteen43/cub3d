@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_init_mlx.c                                      :+:      :+:    :+:   */
+/*   f_get_pixel.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 12:12:45 by glevin            #+#    #+#             */
+/*   Created: 2025/01/18 12:13:52 by glevin            #+#    #+#             */
 /*   Updated: 2025/02/03 16:48:16 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
 
-void	f_init_mlx(t_game *game)
+int	f_get_pixel(t_game *game, t_tex *tex, t_coords pos)
 {
-	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3D");
-	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line,
-			&game->endian);
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-		f_load_dir_textures(game);
-	f_set_hooks(game);
+	int	offset;
+	int	color;
+	int	x;
+	int	y;
+
+	x = pos.x * tex->width;
+	if (x < 0)
+		x = 0;
+	if (x >= tex->width)
+		x = tex->width - 1;
+	y = pos.y * tex->height;
+	if (y < 0)
+		y = 0;
+	if (y >= tex->width)
+		y = tex->height - 1;
+	(void)game;
+	offset = y * tex->size_line + (x * (tex->bpp / 8));
+	color = *(int *)((char *)tex->data + offset);
+	return (color);
 }

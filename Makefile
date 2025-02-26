@@ -20,14 +20,30 @@ LIBS			:= -lXext -lX11 -L$(MLX_DIR) -lmlx -lm
 # Include directories
 INCLUDES		:= -Iinc/ -I$(MLX_DIR)
 
-# Target executable
+# Target executable (bonus version if BONUS=1)
+ifeq ($(BONUS),1)
+TARGET			:= cub3D_bonus
+else
 TARGET			:= cub3D
+endif
 
-# Source files directory
-SRC_DIR			:= src/
+# Conditional directories for sources, objects, and dependencies
+ifeq ($(BONUS),1)
+	SRC_DIR		:= src_bonus/
+	OBJ_DIR		:= obj_bonus/
+	DEP_DIR		:= dep_bonus/
+else
+	SRC_DIR		:= src/
+	OBJ_DIR		:= obj/
+	DEP_DIR		:= dep/
+endif
 
-# Source files
-SRC_FILES       += main.c
+###########################
+###### SOURCE FILES #######
+###########################
+
+# Source files (common sources)
+SRC_FILES       := main.c
 
 SRC_FILES       += cleanup/f_gc_clean.c
 SRC_FILES       += cleanup/f_graceful_exit.c
@@ -85,8 +101,11 @@ SRC_FILES       += parse/f_set_input_line_type.c
 SRC_FILES       += parse/f_set_map.c
 SRC_FILES       += parse/f_set_map_dimensions.c
 SRC_FILES       += parse/f_set_texture_path.c
+# Bonus-specific files (only added when BONUS=1)
+ifeq ($(BONUS),1)
 SRC_FILES       += parse/f_setup_bonus.c
 SRC_FILES       += parse/f_setup_bonus_map.c
+endif
 
 SRC_FILES       += render/f_clear_image.c
 SRC_FILES       += render/f_draw_charmander.c
@@ -107,7 +126,10 @@ SRC_FILES       += setup/f_add_img_to_list.c
 SRC_FILES       += setup/f_init_main.c
 SRC_FILES       += setup/f_init_mlx.c
 SRC_FILES       += setup/f_load_anim.c
+# Bonus-specific file (only added when BONUS=1)
+ifeq ($(BONUS),1)
 SRC_FILES       += setup/f_load_bonus_textures.c
+endif
 SRC_FILES       += setup/f_load_dir_textures.c
 SRC_FILES       += setup/f_load_texture.c
 SRC_FILES       += setup/f_set_hooks.c
@@ -127,19 +149,12 @@ SRC_FILES       += utils/f_strjoin.c
 SRC_FILES       += utils/f_strlen.c
 SRC_FILES       += utils/f_strscmp.c
 
-# Object files directory
-OBJ_DIR			:= obj/
-
 # Object files
 OBJ_FILES		:= $(patsubst %.c, $(OBJ_DIR)%.o, $(SRC_FILES))
-
-# Dependency files directory
-DEP_DIR			:= dep/
 
 # Dependency files
 DEPENDS			:= $(patsubst %.o, $(DEP_DIR)%.d, $(OBJ_FILES))
 -include $(DEPENDS)
-
 
 ############################
 ###### SHELL COMMANDS ######
@@ -149,8 +164,6 @@ RM				:= /bin/rm -f
 MKDIR			:= /bin/mkdir -p
 TOUCH			:= /bin/touch
 
-
-
 ############################
 ###### DEBUG SETTINGS ######
 ############################
@@ -158,7 +171,6 @@ TOUCH			:= /bin/touch
 ifeq ($(DEBUG), 1)
 	CFLAGS		+= -g3 -O0
 endif
-
 
 ################################
 ###### TARGET COMPILATION ######
@@ -168,7 +180,7 @@ endif
 
 all: $(TARGET) ## Build this project
 
-# Compilation rule for object files
+# Rule for compiling object files from source files
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(MKDIR) $(@D)
 	@echo -n "[build] "
@@ -178,8 +190,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 $(TARGET): $(MLX_LIB) $(OBJ_FILES)
 	@echo -n "[link] "
 	$(CC) $(CFLAGS) -o $(TARGET) $(OBJ_FILES) $(INCLUDES) $(LIBS)
-	-@echo -n "🚀 $(MAGENTA)" && ls -lah $(TARGET) && echo -n "$(RESET)"
-
+	@echo -n "🚀 $(MAGENTA)" && ls -lah $(TARGET)
 
 ####################################
 ###### LOCAL LIBS COMPILATION ######
@@ -189,6 +200,12 @@ $(MLX_LIB):
 	@echo -n "[build] Minilibx library\n"
 	@$(MAKE) -C $(MLX_DIR)
 
+##############################
+###### BONUS TARGET RULE ######
+##############################
+
+bonus: ## Build bonus version with bonus_src and bonus-specific files
+	$(MAKE) BONUS=1
 
 ##############################
 ###### ADDITIONAL RULES ######
@@ -198,24 +215,27 @@ clean: ## Clean objects and dependencies
 	@echo -n "[clean] "
 	$(RM) $(OBJ_FILES)
 	@echo -n "[clean] "
-	$(RM) -r $(OBJ_DIR)
+	$(RM) -r $(OBJ_DIR) bonus_obj
 	@echo -n "[clean] "
 	$(RM) $(DEPENDS)
 	@echo -n "[clean] "
-	$(RM) -r $(DEP_DIR)
+	$(RM) -r $(DEP_DIR) bonus_dep
+
 
 fclean: clean ## Restore project to initial state
 	@echo -n "[fclean] "
-	$(RM) $(TARGET)
+	$(RM) $(TARGET) cub3D_bonus
+	$(RM) -r $(OBJ_DIR) obj_bonus
+	$(RM) -r $(DEP_DIR) dep_bonus
+
 
 re: fclean all ## Rebuild project
 
 help: ## Show help info
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | \
-		awk 'BEGIN {FS = ":.*?## "}; {printf "$(CYAN)%-30s$(RESET) %s\n", $$1, $$2}'
+		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: all re clean fclean help
-
+.PHONY: all re clean fclean help bonus
 
 ####################
 ###### COLORS ######
@@ -245,4 +265,4 @@ BG_MAGENTA	:= \033[45m
 BG_CYAN		:= \033[46m
 BG_WHITE	:= \033[47m
 
-# This was adapted from: https://github.com/tesla33io/awesome_makefile
+# Adapted from: https://github.com/tesla33io/awesome_makefile

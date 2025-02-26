@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_init_mlx.c                                      :+:      :+:    :+:   */
+/*   f_draw_line.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 12:12:45 by glevin            #+#    #+#             */
+/*   Created: 2025/01/26 16:53:25 by kweihman          #+#    #+#             */
 /*   Updated: 2025/02/03 16:48:16 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
 
-void	f_init_mlx(t_game *game)
+void	f_draw_line(t_game *game, t_line line)
 {
-	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3D");
-	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line,
-			&game->endian);
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-		f_load_dir_textures(game);
-	f_set_hooks(game);
+	t_coords	diff_vector;
+	int			longer_diff;
+	int			i;
+
+	diff_vector.x = line.end.x - line.start.x;
+	diff_vector.y = line.end.y - line.start.y;
+	longer_diff = fmaxf(fabsf(diff_vector.x), fabsf(diff_vector.y));
+	diff_vector.x /= longer_diff;
+	diff_vector.y /= longer_diff;
+	i = 0;
+	while (i < longer_diff)
+	{
+		f_put_pixel(line.start.x + i * diff_vector.x, line.start.y + i
+			* diff_vector.y, line.color, game);
+		i++;
+	}
 }

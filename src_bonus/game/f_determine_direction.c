@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_check_args.c                                     :+:      :+:    :+:   */
+/*   f_determine_direction.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/04 13:49:08 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/26 11:49:56 by glevin           ###   ########.fr       */
+/*   Created: 2025/02/01 18:53:13 by kweihman          #+#    #+#             */
+/*   Updated: 2025/02/24 11:00:41 by glevin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
 
-void	f_check_args(t_game *game, int argc, char **argv)
+t_dir	f_determine_direction(t_game *game, t_coords wall_hit)
 {
-	size_t	len;
-
-	if (argc != 2)
-		f_graceful_exit(game, 1, __func__, "Wrong nbr of args.");
-	len = f_strlen(argv[1]);
-	if (f_strcmp(".cub", argv[1] + len - 4))
-		f_graceful_exit(game, 1, __func__, "Arg has to end with '.cub'.");
-
+	if (f_is_round(wall_hit.x))
+	{
+		if (game->player_pos.x > wall_hit.x)
+			return (west);
+		else
+			return (east);
+	}
+	else
+	{
+		if (game->player_pos.y > wall_hit.y)
+			return (north);
+		else
+			return (south);
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_draw_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 17:31:38 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/26 11:54:40 by glevin           ###   ########.fr       */
+/*   Updated: 2025/02/25 13:40:17 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 // Static functions:
 static t_coords	sf_get_coords(t_game *game, t_int_xy pixel);
+static void		sf_draw_pokeball(t_game *game);
 
 void	f_draw_minimap(t_game *game)
 {
@@ -39,7 +40,8 @@ void	f_draw_minimap(t_game *game)
 		}
 		pixel.y++;
 	}
-
+	if (game->bonus)
+		sf_draw_pokeball(game);
 }
 
 static t_coords	sf_get_coords(t_game *game, t_int_xy pixel)
@@ -53,3 +55,13 @@ static t_coords	sf_get_coords(t_game *game, t_int_xy pixel)
 	return (coords);
 }
 
+static void	sf_draw_pokeball(t_game *game)
+{
+	t_rect	area;
+
+	area.width = game->bonus_pokeball_minimap.width / 2;
+	area.top_left.x = MINI_HEIGHT / 2 - area.width / 2;
+	area.height = game->bonus_pokeball_minimap.height / 2;
+	area.top_left.y = MINI_HEIGHT / 2 - area.height / 2;
+	f_draw_from_tex_to_area(game, &game->bonus_pokeball_minimap, area);
+}

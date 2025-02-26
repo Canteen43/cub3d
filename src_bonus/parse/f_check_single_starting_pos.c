@@ -1,25 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_init_mlx.c                                      :+:      :+:    :+:   */
+/*   f_check_single_starting_pos.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 12:12:45 by glevin            #+#    #+#             */
+/*   Created: 2025/01/12 13:05:33 by kweihman          #+#    #+#             */
 /*   Updated: 2025/02/03 16:48:16 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
 
-void	f_init_mlx(t_game *game)
+void	f_check_single_starting_pos(t_game *game)
 {
-	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3D");
-	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line,
-			&game->endian);
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-		f_load_dir_textures(game);
-	f_set_hooks(game);
+	int		i;
+	int		j;
+	bool	startpos_found;
+
+	i = 0;
+	j = 0;
+	startpos_found = false;
+	while (game->map[i])
+	{
+		while (game->map[i][j])
+		{
+			if (f_strchr("NESW", game->map[i][j]))
+			{
+				if (!startpos_found)
+					startpos_found = true;
+				else if (startpos_found)
+					f_graceful_exit(game, 1, __func__, "Multiple start pos.");
+			}
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	if (!startpos_found)
+		f_graceful_exit(game, 1, __func__, "No start pos found.");
 }

@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_init_mlx.c                                      :+:      :+:    :+:   */
+/*   f_import_cub_file.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 12:12:45 by glevin            #+#    #+#             */
+/*   Created: 2025/01/12 13:48:52 by kweihman          #+#    #+#             */
 /*   Updated: 2025/02/03 16:48:16 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
 
-void	f_init_mlx(t_game *game)
+void	f_import_cub_file(t_game *game, char **argv)
 {
-	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3D");
-	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line,
-			&game->endian);
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-		f_load_dir_textures(game);
-	f_set_hooks(game);
+	game->cubfile_fd = open(argv[1], O_RDONLY, NULL);
+	if (game->cubfile_fd == -1)
+		f_graceful_exit(game, 1, __func__, "Open() failed.");
+	game->entire_cubfile = f_readfile(game, game->cubfile_fd);
+	if (!game->entire_cubfile)
+		f_graceful_exit(game, 1, __func__, "Reading .cub-file failed.");
+	if (*game->entire_cubfile == '\0')
+		f_graceful_exit(game, 1, __func__, "Empty .cub-file.");
+	game->cubfile_line_by_line = f_splitlines(game, game->entire_cubfile);
 }

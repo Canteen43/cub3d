@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_init_mlx.c                                      :+:      :+:    :+:   */
+/*   f_add_to_anim_queue.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 12:12:45 by glevin            #+#    #+#             */
-/*   Updated: 2025/02/03 16:48:16 by kweihman         ###   ########.fr       */
+/*   Created: 2025/02/04 15:52:55 by kweihman          #+#    #+#             */
+/*   Updated: 2025/02/23 18:41:59 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
 
-void	f_init_mlx(t_game *game)
+void	f_add_to_anim_queue(t_game *game, t_int_xy coords, t_anim *anim)
 {
-	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3D");
-	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line,
-			&game->endian);
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-		f_load_dir_textures(game);
-	f_set_hooks(game);
+	t_anim_queue	*new;
+
+	new = f_gc_malloc(game, sizeof(t_anim_queue));
+	if (gettimeofday(&new->start, NULL))
+		f_graceful_exit(game, 1, __func__, "Gettimeofday() failed");
+	new->anim = anim;
+	new->coords = coords;
+	new->prev = NULL;
+	new->next = game->anim_head;
+	game->anim_head = new;
 }
