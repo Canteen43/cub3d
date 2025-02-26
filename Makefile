@@ -105,16 +105,16 @@ SRC_FILES       += parse/f_set_texture_path.c
 ifeq ($(BONUS),1)
 SRC_FILES       += parse/f_setup_bonus.c
 SRC_FILES       += parse/f_setup_bonus_map.c
+SRC_FILES       += render/f_draw_charmander.c
+SRC_FILES       += render/f_draw_minimap.c
 endif
 
 SRC_FILES       += render/f_clear_image.c
-SRC_FILES       += render/f_draw_charmander.c
 SRC_FILES       += render/f_draw_circle_full.c
 SRC_FILES       += render/f_draw_full_square.c
 SRC_FILES       += render/f_draw_from_tex_to_area.c
 SRC_FILES       += render/f_draw_image.c
 SRC_FILES       += render/f_draw_line.c
-SRC_FILES       += render/f_draw_minimap.c
 SRC_FILES       += render/f_draw_square.c
 SRC_FILES       += render/f_draw_walls.c
 SRC_FILES       += render/f_get_pixel.c
