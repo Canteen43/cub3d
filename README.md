@@ -23,7 +23,8 @@ This project is a Pokemon-themed implementation of the 42 school cub3D project, 
 
 ## Gameplay Snapshot
 
-*[Add your gameplay screenshot here]*
+![gameplay](https://github.com/user-attachments/assets/4ccd578a-2a17-4b6d-9799-dbd2d4d2ab36)
+
 
 ## Controls
 
