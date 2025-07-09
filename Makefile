@@ -6,7 +6,7 @@
 CC				:= clang
 
 # Compiler flags
-CFLAGS			:= -Wall -Werror -Wextra -pedantic -O3
+CFLAGS			:= -Wall -Werror -Wextra -O3
 
 # Path to the Minilibx directory
 MLX_DIR        := minilibx-linux/

@@ -15,6 +15,8 @@
 
 /*STANDARD HEADERS*/
 
+// For va_list, va_start, va_end
+# include <stdarg.h>
 // For open(), close()
 # include <fcntl.h>
 // For read(), write()
