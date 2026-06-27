@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_key_press.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glevin <glevin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 12:15:12 by glevin            #+#    #+#             */
-/*   Updated: 2025/02/26 11:49:48 by glevin           ###   ########.fr       */
+/*   Updated: 2026/06/27 15:18:14 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ int	f_key_press(int keycode, t_game *game)
 		game->right_rotate = true;
 	if (keycode == XK_Return)
 		f_debug_info(game);
+	if (keycode == XK_space && game->bonus)
+		f_remove_obstacle(game);
 	return (0);
 }

@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_graceful_exit.c                                  :+:      :+:    :+:   */
+/*   f_draw_charmander.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/11 17:41:41 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/04 11:30:44 by kweihman         ###   ########.fr       */
+/*   Created: 2025/02/02 11:51:47 by kweihman          #+#    #+#             */
+/*   Updated: 2026/06/27 15:18:14 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
 
-void	f_graceful_exit(t_game *game, int exit_code, const char *func,
-		char *message)
+void	f_draw_charmander(t_game *game)
 {
-	f_destroy_images(game);
-	if (game->img)
-		mlx_destroy_image(game->mlx, game->img);
-	if (game->win)
-		mlx_destroy_window(game->mlx, game->win);
-	if (exit_code)
-		f_print_error(func, message);
-	f_gc_clean(game);
-	exit(exit_code);
+	t_rect	area;
+
+	area.width = WIDTH * 0.33;
+	area.top_left.x = area.width;
+	area.height = HEIGHT * 0.33;
+	area.top_left.y = HEIGHT - area.height;
+	f_draw_from_tex_to_area(game, &game->bonus_charmander, area);
 }

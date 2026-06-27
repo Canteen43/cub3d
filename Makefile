@@ -14,8 +14,8 @@ MLX_DIR        := minilibx-linux/
 # Minilibx library file
 MLX_LIB        := $(MLX_DIR)/libmlx.a
 
-# Libraries to be linked (if any)
-LIBS			:= -lXext -lX11 -L$(MLX_DIR) -lmlx -lm
+# Libraries to be linked (own libs first, then system libs)
+LIBS			:= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 # Include directories
 INCLUDES		:= -Iinc/ -I$(MLX_DIR)
@@ -29,23 +29,13 @@ ifeq ($(UNAME), Darwin)
 	LIBS		+= -L/opt/X11/lib
 endif
 
-# Target executable (bonus version if BONUS=1)
-ifeq ($(BONUS),1)
-TARGET			:= cub3D_bonus
-else
+# Target executable (single binary; bonus mode is selected at runtime)
 TARGET			:= cub3D
-endif
 
-# Conditional directories for sources, objects, and dependencies
-ifeq ($(BONUS),1)
-	SRC_DIR		:= src_bonus/
-	OBJ_DIR		:= obj_bonus/
-	DEP_DIR		:= dep_bonus/
-else
-	SRC_DIR		:= src/
-	OBJ_DIR		:= obj/
-	DEP_DIR		:= dep/
-endif
+# Directories for sources, objects, and dependencies
+SRC_DIR			:= src/
+OBJ_DIR			:= obj/
+DEP_DIR			:= dep/
 
 ###########################
 ###### SOURCE FILES #######
@@ -110,13 +100,10 @@ SRC_FILES       += parse/f_set_input_line_type.c
 SRC_FILES       += parse/f_set_map.c
 SRC_FILES       += parse/f_set_map_dimensions.c
 SRC_FILES       += parse/f_set_texture_path.c
-# Bonus-specific files (only added when BONUS=1)
-ifeq ($(BONUS),1)
 SRC_FILES       += parse/f_setup_bonus.c
 SRC_FILES       += parse/f_setup_bonus_map.c
 SRC_FILES       += render/f_draw_charmander.c
 SRC_FILES       += render/f_draw_minimap.c
-endif
 
 SRC_FILES       += render/f_clear_image.c
 SRC_FILES       += render/f_draw_circle_full.c
@@ -135,10 +122,7 @@ SRC_FILES       += setup/f_add_img_to_list.c
 SRC_FILES       += setup/f_init_main.c
 SRC_FILES       += setup/f_init_mlx.c
 SRC_FILES       += setup/f_load_anim.c
-# Bonus-specific file (only added when BONUS=1)
-ifeq ($(BONUS),1)
 SRC_FILES       += setup/f_load_bonus_textures.c
-endif
 SRC_FILES       += setup/f_load_dir_textures.c
 SRC_FILES       += setup/f_load_texture.c
 SRC_FILES       += setup/f_set_hooks.c
@@ -210,13 +194,6 @@ $(MLX_LIB):
 	@$(MAKE) -C $(MLX_DIR)
 
 ##############################
-###### BONUS TARGET RULE ######
-##############################
-
-bonus: ## Build bonus version with bonus_src and bonus-specific files
-	$(MAKE) BONUS=1
-
-##############################
 ###### ADDITIONAL RULES ######
 ##############################
 
@@ -224,18 +201,18 @@ clean: ## Clean objects and dependencies
 	@echo -n "[clean] "
 	$(RM) $(OBJ_FILES)
 	@echo -n "[clean] "
-	$(RM) -r $(OBJ_DIR) bonus_obj
+	$(RM) -r $(OBJ_DIR)
 	@echo -n "[clean] "
 	$(RM) $(DEPENDS)
 	@echo -n "[clean] "
-	$(RM) -r $(DEP_DIR) bonus_dep
+	$(RM) -r $(DEP_DIR)
 
 
 fclean: clean ## Restore project to initial state
 	@echo -n "[fclean] "
-	$(RM) $(TARGET) cub3D_bonus
-	$(RM) -r $(OBJ_DIR) obj_bonus
-	$(RM) -r $(DEP_DIR) dep_bonus
+	$(RM) $(TARGET)
+	$(RM) -r $(OBJ_DIR)
+	$(RM) -r $(DEP_DIR)
 
 
 re: fclean all ## Rebuild project
@@ -244,7 +221,7 @@ help: ## Show help info
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: all re clean fclean help bonus
+.PHONY: all re clean fclean help
 
 ####################
 ###### COLORS ######
