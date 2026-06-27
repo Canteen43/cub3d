@@ -20,6 +20,15 @@ LIBS			:= -lXext -lX11 -L$(MLX_DIR) -lmlx -lm
 # Include directories
 INCLUDES		:= -Iinc/ -I$(MLX_DIR)
 
+# Detect the operating system to locate X11.
+# - Linux: X11 headers and libraries are on the default search path.
+# - macOS: X11 is provided by XQuartz, installed under /opt/X11
+UNAME			:= $(shell uname)
+ifeq ($(UNAME), Darwin)
+	INCLUDES	+= -I/opt/X11/include
+	LIBS		+= -L/opt/X11/lib
+endif
+
 # Target executable (bonus version if BONUS=1)
 ifeq ($(BONUS),1)
 TARGET			:= cub3D_bonus
