@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:16:57 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/04 13:51:23 by kweihman         ###   ########.fr       */
+/*   Updated: 2026/06/28 13:56:51 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	f_load_anim(t_game *game, t_anim *anim, t_anim params, char *path)
 {
 	int		i;
-	int		current_len;
+	int		buf_size;
 	char	*current_path;
 
 	anim->nbr_frames = params.nbr_frames;
@@ -24,9 +24,9 @@ void	f_load_anim(t_game *game, t_anim *anim, t_anim params, char *path)
 	i = 0;
 	while (i < params.nbr_frames)
 	{
-		current_len = f_strlen(path) + 8;
-		current_path = f_gc_malloc(game, sizeof(char) *(current_len + 1));
-		sprintf(current_path, "%s_%03d.xpm", path, i);
+		buf_size = f_strlen(path) + 8 + 1;
+		current_path = f_gc_malloc(game, buf_size);
+		snprintf(current_path, buf_size, "%s_%03d.xpm", path, i);
 		anim->frames[i].path = current_path;
 		f_load_texture(game, &anim->frames[i]);
 		i++;
