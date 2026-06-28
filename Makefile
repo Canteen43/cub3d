@@ -165,6 +165,10 @@ ifeq ($(DEBUG), 1)
 	CFLAGS		+= -g3 -O0
 endif
 
+ifeq ($(ASAN), 1)
+	CFLAGS		+= -fsanitize=address -fno-omit-frame-pointer -g3 -O1
+endif
+
 ################################
 ###### TARGET COMPILATION ######
 ################################
