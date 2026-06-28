@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 13:35:13 by kweihman          #+#    #+#             */
-/*   Updated: 2025/02/03 16:48:16 by kweihman         ###   ########.fr       */
+/*   Updated: 2026/06/28 20:14:14 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	f_set_config_data(t_game *game)
 		else if (type == WRONG)
 			f_graceful_exit(game, 1, __func__, "Invalid line encountered.");
 		else if (type == MAP && !f_is_config_complete(game))
-			f_graceful_exit(game, 1, __func__, "Map line before config over."); 
+			f_graceful_exit(game, 1, __func__, "Map line before config over.");
 		else if (type == MAP && f_is_config_complete(game))
 			break ;
 		i++;
