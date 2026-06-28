@@ -62,7 +62,7 @@ static int	sf_current_frame(t_game *game, t_anim_queue *current)
 	duration = current->anim->duration_ms;
 	gettimeofday(&now, NULL);
 	time_passed = f_time_diff_ms(&now, &current->start);
-	if (time_passed > duration)
+	if (time_passed >= duration)
 	{
 		game->map[current->coords.y][current->coords.x] = '0';
 		f_remove_anim(game, current);
