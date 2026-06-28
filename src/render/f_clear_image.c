@@ -14,14 +14,5 @@
 
 void	f_clear_image(t_game *game)
 {
-	int	y;
-	int	x;
-
-	y = -1;
-	while (++y < HEIGHT)
-	{
-		x = -1;
-		while (++x < WIDTH)
-			f_put_pixel(x, y, 0, game);
-	}
+	f_bzero(game->data, game->size_line * HEIGHT);
 }
