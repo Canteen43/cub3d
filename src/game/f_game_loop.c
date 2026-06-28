@@ -6,7 +6,7 @@
 /*   By: kweihman <kweihman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 12:22:18 by glevin            #+#    #+#             */
-/*   Updated: 2026/06/27 15:18:14 by kweihman         ###   ########.fr       */
+/*   Updated: 2026/06/28 20:49:44 by kweihman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 int	f_game_loop(t_game *game)
 {
 	f_move_player(game);
-	f_handle_respawns(game);
+	if (game->bonus)
+		f_handle_respawns(game);
 	f_clear_image(game);
 	f_draw_walls(game);
 	if (game->bonus)
