@@ -24,8 +24,8 @@ macOS has no X11, which mlx depends on. The workaround:
 3. Point to XQuartz's display by running the game with: `DISPLAY=:0 ./cub3D maps/bonus.cub`
 
 ## Core vs Bonus
-- The core game follows the project instructions laid out in en.subject.pdf.
-- The bonus game follows the bonus instrucions from en.subject.pdf PLUS our own ideas for a pokemon-themed experience.
+- The core game follows the project instructions laid out in en.subject.pdf. This includes following the 42 style guide "Norminette" (e.g. no globals, no functions over 25 lines).
+- The bonus game follows the bonus instructions from en.subject.pdf PLUS our own ideas for a pokemon-themed experience.
 
 ## Acknowledgements
 
